@@ -1,6 +1,6 @@
 <?php
 
-public class User{
+class User{
     public $email;
     public $pwd;
 }
