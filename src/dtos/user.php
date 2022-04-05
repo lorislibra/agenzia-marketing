@@ -6,7 +6,7 @@ class User{
     private $role;
     private $states;
 
-    function __construct($id, $email, $pwd, $role, $states){
+    function __construct(int $id, string $email, string $pwd, string $role, array $states){
         $this->id = $id;
         $this->email = $email;
         $this->pws = $pwd;
@@ -14,15 +14,15 @@ class User{
         $this->states = array($states);
     }
 
-    public function get_id(){
+    public function get_id(): int{
         return $this->id;
     }
 
-    public function get_email(){
+    public function get_email(): string{
         return $this->email;
     }
 
-    public function set_email($new_email, $pwd_confirm){
+    public function set_email(string $new_email, string $pwd_confirm): bool{
         $trm_new_email = trim($new_email);
         
         if($this->pwd == $pwd_confirm && !empty($trm_new_email)){
@@ -34,11 +34,11 @@ class User{
         return false;
     }
 
-    public function check_pwd($pwd_confirm){ // Check if the password is correct
+    public function check_pwd(string $pwd_confirm): bool{ // Check if the password is correct
         return ($this->pwd == $pwd_confirm);
     }
 
-    public function set_pwd($new_pwd, $old_pwd){
+    public function set_pwd(string $new_pwd, string $old_pwd): bool{
         if($this->pwd == $old_pwd){
             $this->pwd = $new_pwd;
 
@@ -48,11 +48,11 @@ class User{
         return false;
     }
 
-    public function get_role(){
+    public function get_role(): string{
         return $this->role;
     }
 
-    public function set_role($new_role, $pwd_confirm){
+    public function set_role(string $new_role, string $pwd_confirm): bool{
         $trm_new_role = trim($new_role);
 
         if($this->pwd == $pwd_confirm && !empty($trm_new_role)){
@@ -64,11 +64,11 @@ class User{
         return false;
     }
 
-    public function get_states(){
+    public function get_states(): array{
         return $this->states;
     }
 
-    public function set_states($new_states, $pwd_confirm){
+    public function set_states(array $new_states, string $pwd_confirm): bool{
         $trm_new_states = array_map(function($item){ return trim($item); }, array($new_states));
 
         if($this->pwd == $pwd_confirm && !empty($new_states)){
