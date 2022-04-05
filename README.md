@@ -33,3 +33,11 @@
 - dto & database classes
 - product page
 - graphics
+
+---
+
+#### Roles:
+0) dev
+1) national admin
+2) state_group admin
+3) state admin 
