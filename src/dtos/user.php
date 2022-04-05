@@ -34,7 +34,8 @@ class User{
         return false;
     }
 
-    public function check_pwd(string $pwd_confirm): bool{ // Check if the password is correct
+    // Check if the password is correct
+    public function check_pwd(string $pwd_confirm): bool{
         return ($this->pwd == $pwd_confirm);
     }
 
