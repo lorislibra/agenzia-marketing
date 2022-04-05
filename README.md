@@ -9,12 +9,12 @@
 ---
 
 to push update:
-git add .
-git commit -m "message"
-git push
+- git add .
+- git commit -m "message"
+- git push
 
 to get update:
-git pull
+- git pull
 
 --- 
 
