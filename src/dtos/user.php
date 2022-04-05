@@ -34,8 +34,8 @@ class User{
         return false;
     }
 
-    public function check_pwd($pwd_confirm){ // Controlla se la password e' corretta
-        return ($pwd == $pwd_confirm);
+    public function check_pwd($pwd_confirm){ // Check if the password is correct
+        return ($this->pwd == $pwd_confirm);
     }
 
     public function set_pwd($new_pwd, $old_pwd){
