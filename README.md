@@ -33,6 +33,3 @@
 - dto & database classes
 - product page
 - graphics
-
----
-
