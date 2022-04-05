@@ -1,8 +1,6 @@
 <?php
 require "./env.php";
 
-// mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 $con = new mysqli($_CONFIG_HOST, $_CONFIG_USERNAME, $_CONFIG_PASSWORD, $_CONFIG_DB_NAME, $_CONFIG_PORT);
 if ($con->connect_error){
     die ($con->connect_error);
@@ -20,7 +18,6 @@ if ($con->multi_query($query)){
         }
     }
 }
-
 
 $con->close();
 ?>
