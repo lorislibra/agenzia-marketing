@@ -14,15 +14,15 @@ class User{
         $this->states = array($states);
     }
 
-    public function get_id(): int{
+    public function get_id(): int {
         return $this->id;
     }
 
-    public function get_email(): string{
+    public function get_email(): string {
         return $this->email;
     }
 
-    public function set_email(string $new_email, string $pwd_confirm): bool{
+    public function set_email(string $new_email, string $pwd_confirm): bool {
         $trm_new_email = trim($new_email);
         
         if($this->pwd == $pwd_confirm && !empty($trm_new_email)){
@@ -35,11 +35,11 @@ class User{
     }
 
     // Check if the password is correct
-    public function check_pwd(string $pwd_confirm): bool{
+    public function check_pwd(string $pwd_confirm): bool {
         return ($this->pwd == $pwd_confirm);
     }
 
-    public function set_pwd(string $new_pwd, string $old_pwd): bool{
+    public function set_pwd(string $new_pwd, string $old_pwd): bool {
         if($this->pwd == $old_pwd){
             $this->pwd = $new_pwd;
 
@@ -53,7 +53,7 @@ class User{
         return $this->role;
     }
 
-    public function set_role(string $new_role, string $pwd_confirm): bool{
+    public function set_role(string $new_role, string $pwd_confirm): bool {
         $trm_new_role = trim($new_role);
 
         if($this->pwd == $pwd_confirm && !empty($trm_new_role)){
@@ -65,11 +65,11 @@ class User{
         return false;
     }
 
-    public function get_states(): array{
+    public function get_states(): array {
         return $this->states;
     }
 
-    public function set_states(array $new_states, string $pwd_confirm): bool{
+    public function set_states(array $new_states, string $pwd_confirm): bool {
         $trm_new_states = array_map(function($item){ return trim($item); }, array($new_states));
 
         if($this->pwd == $pwd_confirm && !empty($new_states)){
