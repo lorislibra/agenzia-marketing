@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS user_state(
 
 CREATE TABLE IF NOT EXISTS user(
     id INT NOT NULL AUTO_INCREMENT,
-    email VARCHAR(320) NOT NULL,
+    email VARCHAR(320) NOT NULL UNIQUE,
     password VARCHAR(32) NOT NULL,
     role_id INT NOT NULL,
     PRIMARY KEY(id)
@@ -51,3 +51,7 @@ ADD CONSTRAINT FK_userId
 FOREIGN KEY (user_id) REFERENCES user(id),
 ADD CONSTRAINT FK_userState
 FOREIGN KEY (state_id) REFERENCES state(id);
+
+/* EXAMPLE ROWS */
+
+INSERT INTO user (email, password, role_id) VALUES ("test@gmail.com", "test", 1);
