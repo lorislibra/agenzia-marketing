@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS 
-user_region, role, region, user, 
-item, product, sell_point,
-orders, reservation, cart 
+user_region, item, sell_point, user,
+role, region, product, reservation, cart, cart_item
 CASCADE;
 
 CREATE TABLE IF NOT EXISTS role(
@@ -78,7 +77,7 @@ CREATE TABLE IF NOT EXISTS cart(
     PRIMARY KEY(id)
 );
 
-ALTER TABLE user_state
+ALTER TABLE user_region
 ADD CONSTRAINT FK_user_id
 FOREIGN KEY (user_id) REFERENCES user(id),
 ADD CONSTRAINT FK_user_region
