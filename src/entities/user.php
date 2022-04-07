@@ -4,7 +4,8 @@ require_once "base.php";
 require_once "region.php";
 
 // User class that reflec user table in the database
-class User {
+class User
+{
     public static $table = "user";
 
     public int $id;
@@ -13,7 +14,8 @@ class User {
     public int $role_id;
     public array $regions;
 
-    function __construct(int $id, string $email, string $password, int $role_id, array $regions){
+    function __construct(int $id, string $email, string $password, int $role_id, array $regions)
+    {
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
@@ -21,7 +23,8 @@ class User {
         $this->regions = $regions;
     }
 
-    public static function array_from_statement(PDOStatement $statement): array {
+    public static function array_from_statement(PDOStatement $statement): array
+    {
         $list = array();
 
         while ($result = $statement->fetch(PDO::FETCH_NUM)) {
@@ -38,10 +41,10 @@ class User {
                 get_column($statement, $result, Region::$table, "name")
             );
 
-            if ($region->id){
+            if ($region->id) {
                 if (array_key_exists($user->id, $list)){
                     $user = $list[$user->id];
-                }else{
+                } else {
                     $list[$user->id] = $user;
                 }
                 array_push($user->regions, $region);
@@ -51,10 +54,11 @@ class User {
         return $list;
     }
 
-    public static function from_statement(PDOStatement $statement): ?User {
+    public static function from_statement(PDOStatement $statement): ?User
+    {
         $users = User::array_from_statement($statement);
 
-        if (count($users)){
+        if (count($users)) {
             return $users[array_key_first($users)];
         }
         return null;

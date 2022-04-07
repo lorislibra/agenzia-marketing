@@ -1,8 +1,7 @@
 <?php
 
-use PhpOption\None;
-
-function get_column_index(PDOStatement $statement, string $table, string $column): ?int {
+function get_column_index(PDOStatement $statement, string $table, string $column): ?int
+{
     $lenght = $statement->columnCount();
     for ($i=0; $i < $lenght; $i++) { 
         $meta = $statement->getColumnMeta($i);
@@ -13,7 +12,8 @@ function get_column_index(PDOStatement $statement, string $table, string $column
     return null;
 }
 
-function get_column(PDOStatement $statement, array $result, string $table, string $column) {
+function get_column(PDOStatement $statement, array $result, string $table, string $column)
+{
     if (($index = get_column_index($statement, $table, $column)) !== null){
         return $result[$index];
     }

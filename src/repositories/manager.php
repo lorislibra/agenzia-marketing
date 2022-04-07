@@ -4,11 +4,13 @@ require_once "src/config.php";
 
 // https://phpdelusions.net/pdo
 
-class DbManager {
+class DbManager
+{
 
     private PDO $connection;
 
-    public static function build_connection(string $host, string $port, string $user, string $passw, string $db_name): PDO {
+    public static function build_connection(string $host, string $port, string $user, string $passw, string $db_name): PDO
+    {
         $dsn = "mysql:host=$host;port=$port;dbname=$db_name;charset=utf8mb4";
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -18,7 +20,8 @@ class DbManager {
         return new PDO($dsn, $user, $passw, $options);
     }
 
-    public static function build_connection_from_env(): PDO {
+    public static function build_connection_from_env(): PDO
+    {
         $host = $_ENV["DB_HOST"];
         $port = $_ENV["DB_PORT"];
         $user = $_ENV["DB_USER"];
@@ -28,11 +31,13 @@ class DbManager {
         return DbManager::build_connection($host, $port, $user, $passw, $db_name);
     }
 
-    public function __construct(PDO $connection) {
+    public function __construct(PDO $connection)
+    {
         $this->connection = $connection;
     }
 
-    public function get_connection(): PDO {
+    public function get_connection(): PDO
+    {
         return $this->connection;
     }
 }
