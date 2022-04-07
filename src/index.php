@@ -6,8 +6,16 @@ require_once "src/repositories/manager.php";
 $connection = DbManager::build_connection_from_env();
 $userRepo = new UserRepo($connection);
 
-foreach ($userRepo->get_by_email_password("test@gmail.com", "test") as $value) {
-    var_dump($value);
+if ($user = $userRepo->get_by_email_password("dev@dev.com", "dev")){
+    print_r($user);
+}else{
+    echo("no user\n");
+}
+
+if ($users = $userRepo->get_all()){
+    print_r($users);
+}else{
+    echo("no user\n");
 }
 
 ?>

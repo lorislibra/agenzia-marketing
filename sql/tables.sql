@@ -79,7 +79,9 @@ CREATE TABLE IF NOT EXISTS cart(
 
 ALTER TABLE user_region
 ADD CONSTRAINT FK_user_id
-FOREIGN KEY (user_id) REFERENCES user(id),
+FOREIGN KEY (user_id) REFERENCES user(id);
+
+ALTER TABLE user_region
 ADD CONSTRAINT FK_user_region
 FOREIGN KEY (region_id) REFERENCES region(id);
 
@@ -97,13 +99,36 @@ FOREIGN KEY (region_id) REFERENCES region(id);
 
 /* DEFAULT VALUES */
 INSERT INTO role (id, name) VALUES 
-(0, "developer"),
-(1, "national administrator"),
-(2, "state group administrator"),
-(3, "state administrator");
+(1, "developer"),
+(2, "national administrator"),
+(3, "state group administrator"),
+(4, "state administrator");
 
-/* EXAMPLE ROWS */
+INSERT INTO region (id, name) VALUES
+(1, "Basilicata"),
+(2, "Abruzzo"),
+(3, "Calabria"),
+(4, "Campania"),
+(5, "Emilia Romagna"),
+(6, "Friuli Venezia Giulia"),
+(7, "Liguria"),
+(8, "Lazio"),
+(9, "Lombardia"),
+(10, "Marche"),
+(11, "Molise"),
+(12, "Piemonte"),
+(13, "Puglia"),
+(14, "Sardegna"),
+(15, "Sicilia"),
+(16, "Toscana"),
+(17, "Trentino Alto Adige"),
+(18, "Umbria"),
+(19, "Valle d'Aosta"),
+(20, "Veneto");
 
-/* DEV USER */
-INSERT INTO user (email, password, role_id)
-VALUES ("dev@dev.com", "dev", 0); /* change with hash of password */
+INSERT INTO user (email, password, role_id) VALUES 
+("dev@dev.com", "dev", 1); /* change with hash of password */
+
+INSERT INTO user_region (user_id, region_id) VALUES 
+(1, 20),
+(1, 19);
