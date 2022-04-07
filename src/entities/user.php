@@ -1,6 +1,7 @@
 <?php
 
 require_once "base.php";
+require_once "region.php";
 
 // User class that reflec user table in the database
 class User {
@@ -22,33 +23,39 @@ class User {
 
     public static function array_from_statement(PDOStatement $statement): array {
         $list = array();
+
         while ($result = $statement->fetch(PDO::FETCH_NUM)) {
-            
-            $id = get_column($statement, $result, User::$table, "id");
-            $email = get_column($statement, $result, User::$table, "email");
-            $password = get_column($statement, $result, User::$table, "password");
-            $role_id = get_column($statement, $result, User::$table, "role_id");
+            $user = new User(
+                get_column($statement, $result, User::$table, "id"),
+                get_column($statement, $result, User::$table, "email"),
+                get_column($statement, $result, User::$table, "password"),
+                get_column($statement, $result, User::$table, "role_id"),
+                array()
+            );
 
-            $region_id = get_column($statement, $result, "region", "id");
-            $region_name = get_column($statement, $result, "region", "name");
+            $region = new Region(
+                get_column($statement, $result, Region::$table, "id"),
+                get_column($statement, $result, Region::$table, "name")
+            );
 
-            if ($region_id){
-                if (array_key_exists($id, $list)){
-                    $user = $list[$id];
-                    array_push($user->regions, [$region_id, $region_name]);
+            if ($region->id){
+                if (array_key_exists($user->id, $list)){
+                    $user = $list[$user->id];
                 }else{
-                    $user = new User($id, $email, $password, $role_id, array([$region_id, $region_name]));
-                    array_push($list, $user);
+                    $list[$user->id] = $user;
                 }
+                array_push($user->regions, $region);
             }
         }
+
         return $list;
     }
 
     public static function from_statement(PDOStatement $statement): ?User {
         $users = User::array_from_statement($statement);
+
         if (count($users)){
-            return $users[0];
+            return $users[array_key_first($users)];
         }
         return null;
     }

@@ -12,10 +12,12 @@ if ($user = $userRepo->get_by_email_password("dev@dev.com", "dev")){
     echo("no user\n");
 }
 
+echo str_repeat("-", 50) . "\n";
+
 if ($users = $userRepo->get_all()){
     print_r($users);
 }else{
-    echo("no user\n");
+    echo("no users\n");
 }
 
 ?>
