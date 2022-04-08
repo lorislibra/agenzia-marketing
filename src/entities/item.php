@@ -13,9 +13,6 @@ class Item
     public string $category;
     public product $product;
 
-    
-    
-    
     function __construct(int $id, int $quantity, int $stock, string $category) {
         $this->id = $id;
         $this->quantity = $quantity;

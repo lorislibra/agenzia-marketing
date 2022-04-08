@@ -9,8 +9,6 @@ class Product
     public string $category;
     public string $name;
     public float $price;
-
-    
     
     function __construct(string $sku, string $brand, string $category, string $name, float $price) {
         $this->sku = $sku;

@@ -30,7 +30,8 @@ class ProdutRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM product
-        WHERE sku=:sku;");
+        WHERE sku=:sku;
+        ");
 
         if ($stmt->execute(["sku" => $sku])) {
             $products = $this->parse_fetch($stmt);
