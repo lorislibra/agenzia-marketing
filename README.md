@@ -31,6 +31,16 @@ to get update:
 
 ---
 
+#### Pages:
+- login
+- orders
+- dashboard
+- cart
+- stocks
+- items
+
+---
+
 #### Libralato:
 - building database
 - utils function
