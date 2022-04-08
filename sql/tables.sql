@@ -129,6 +129,12 @@ INSERT INTO region (id, name) VALUES
 INSERT INTO user (email, password, role_id) VALUES 
 ("dev@dev.com", "dev", 1); /* change with hash of password */
 
+INSERT INTO user (email, password, role_id) VALUES 
+("dev1@dev.com", "dev", 1); /* change with hash of password */
+
+INSERT INTO user (email, password, role_id) VALUES 
+("dev2@dev.com", "dev", 1); /* change with hash of password */
+
 INSERT INTO user_region (user_id, region_id) VALUES 
 (1, 20),
 (1, 19);

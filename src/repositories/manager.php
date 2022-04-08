@@ -1,6 +1,7 @@
 <?php
 
 require_once "src/config.php";
+require_once "src/repositories/metadata.php";
 
 // https://phpdelusions.net/pdo
 
@@ -43,23 +44,10 @@ class DbManager
         return $this->connection;
     }
 
-    // get an array with with table and column linked with their position in the row
-    public static function get_indexes_array(PDOStatement $statement): array 
-    {
-        $list = array();
-
-        for ($i=0; $i < $statement->columnCount(); $i++) { 
-            $meta = $statement->getColumnMeta($i);
-            $list[[$meta["table"], $meta["name"]]] = $i;
-        }
-
-        return $list;
-    }
-
     // get specific column from a row
-    public static function get_column(array $indexes, array $result, string $table, string $column)
+    public static function get_column(QueryMetadata $metadata, array $result, string $table, string $column)
     {
-        return $result[$indexes[[$table, $column]]];
+        return $result[$metadata->get($table, $column)];
     }
 
 }
