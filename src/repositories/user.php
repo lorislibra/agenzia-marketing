@@ -6,6 +6,7 @@ require_once "src/entities/user.php";
 class UserRepo extends DbManager
 {
 
+    // get a user by its id
     public function get_by_id(int $id): ?User
     {
         $query = $this->get_connection()->prepare("
@@ -21,6 +22,7 @@ class UserRepo extends DbManager
         return null;
     }
 
+    // get a user by its email
     public function get_by_email(string $email): ?User
     {
         $query = $this->get_connection()->prepare("
@@ -36,6 +38,7 @@ class UserRepo extends DbManager
         return null;
     }
 
+    // get a user by its email and password
     public function get_by_email_password(string $email, string $password): ?User
     {
         $query = $this->get_connection()->prepare("
@@ -52,6 +55,7 @@ class UserRepo extends DbManager
         return null;
     }
 
+    // get all users
     public function get_all(): ?array
     {
         $query = $this->get_connection()->prepare("

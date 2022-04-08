@@ -14,11 +14,13 @@ class SignInDto
         $this->password = $password;
     }
 
+    // parse from an array
     public static function from_array(array $array): self
     {
         return new self($array["email"], $array["password"]);
     }
 
+    // check if the dto is valid
     public function validate(array $errors): bool
     {
         return false;

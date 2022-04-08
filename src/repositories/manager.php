@@ -9,6 +9,7 @@ class DbManager
 
     private PDO $connection;
 
+    // build a pdo connection from arguments
     public static function build_connection(string $host, string $port, string $user, string $passw, string $db_name): PDO
     {
         $dsn = "mysql:host=$host;port=$port;dbname=$db_name;charset=utf8mb4";
@@ -20,6 +21,7 @@ class DbManager
         return new PDO($dsn, $user, $passw, $options);
     }
 
+    // build a pdo connection from env vars
     public static function build_connection_from_env(): PDO
     {
         $host = $_ENV["DB_HOST"];
@@ -40,6 +42,26 @@ class DbManager
     {
         return $this->connection;
     }
+
+    // get an array with with table and column linked with their position in the row
+    public static function get_indexes_array(PDOStatement $statement): array 
+    {
+        $list = array();
+
+        for ($i=0; $i < $statement->columnCount(); $i++) { 
+            $meta = $statement->getColumnMeta($i);
+            $list[[$meta["table"], $meta["name"]]] = $i;
+        }
+
+        return $list;
+    }
+
+    // get specific column from a row
+    public static function get_column(array $indexes, array $result, string $table, string $column)
+    {
+        return $result[$indexes[[$table, $column]]];
+    }
+
 }
 
 ?>

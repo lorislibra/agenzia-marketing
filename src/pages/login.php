@@ -8,6 +8,7 @@ require_once "src/dtos/signin.php";
 $connection = DbManager::build_connection_from_env();
 $userRepo = new UserRepo($connection);
 
+// check if the method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dto = SignInDto::from_array($_POST);
 
