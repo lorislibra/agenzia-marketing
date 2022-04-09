@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS sell_point (
 CREATE TABLE IF NOT EXISTS cart_item (
     user_id INT NOT NULL, 
     item_id INT NOT NULL,
+    quantity INT NOT NULL,
     PRIMARY KEY(user_id, item_id)
 );
 
@@ -76,6 +77,7 @@ CREATE TABLE IF NOT EXISTS reservation(
 CREATE TABLE IF NOT EXISTS reservation_item(
     reservation_id INT NOT NULL,
     item_id INT NOT NULL,
+    quantity INT NOT NULL,
     PRIMARY KEY(reservation_id, item_id)
 );
 
