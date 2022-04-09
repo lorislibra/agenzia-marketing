@@ -2,6 +2,7 @@
 
 require_once "manager.php";
 require_once "src/entities/item.php";
+require_once "src/entities/product.php";
 
 class ItemRepo extends DbManager
 {
@@ -34,26 +35,23 @@ class ItemRepo extends DbManager
             $list[$item->id] = $item;
             
         }
+
         return $list;
     }
+    
+    #region VERIFIED
+    #endregion
 
-
-
-
-
-
-
-
-
-
-
+    #region DONE
+    
     // get an item by its id
     public function get_by_id(int $id): ?Product
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
-        LEFT JOIN product ON item.product_sku = product.sku;
-        WHERE item.id = :id");
+        LEFT JOIN product ON item.product_sku = product.sku
+        WHERE item.id = :id;
+        ");
 
         if ($stmt->execute(["id" => $id])) {
             $items = $this->parse_fetch($stmt);
@@ -72,8 +70,9 @@ class ItemRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
-        LEFT JOIN product ON item.product_sku = product.sku;
-        WHERE product.sku = :sku");
+        LEFT JOIN product ON item.product_sku = product.sku
+        WHERE product.sku = :sku;
+        ");
 
         if ($stmt->execute(["sku" => $sku])) {
             $items = $this->parse_fetch($stmt);
@@ -102,6 +101,14 @@ class ItemRepo extends DbManager
 
         return null;
     }
+
+    #endregion
+
+    #region PARTIAL
+    #endregion
+
+    #region TODO
+    #endregion
 }
 
 ?>

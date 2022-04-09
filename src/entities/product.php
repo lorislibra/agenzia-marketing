@@ -1,5 +1,10 @@
 <?php
 
+
+require_once "src/repositories/manager.php";
+require_once "src/repositories/metadata.php";
+
+
 class Product
 {
     public static $table = "product";

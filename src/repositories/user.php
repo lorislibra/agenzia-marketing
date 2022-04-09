@@ -2,6 +2,7 @@
 
 require_once "manager.php";
 require_once "src/entities/user.php";
+require_once "src/entities/region.php";
 
 class UserRepo extends DbManager
 {
@@ -51,7 +52,8 @@ class UserRepo extends DbManager
         SELECT * FROM user
         LEFT JOIN user_region ON user.id=user_region.user_id 
         LEFT JOIN region ON user_region.region_id=region.id
-        WHERE id=:id");
+        WHERE id=:id;
+        ");
 
         if ($stmt->execute(["id" => $id])) {
             $users = $this->parse_fetch($stmt);
@@ -72,7 +74,8 @@ class UserRepo extends DbManager
         SELECT * FROM user
         LEFT JOIN user_region ON user.id=user_region.user_id 
         LEFT JOIN region ON user_region.region_id=region.id 
-        WHERE email=:email");
+        WHERE email=:email;
+        ");
 
         if ($stmt->execute(["email" => $email])) {
             $users = $this->parse_fetch($stmt);
