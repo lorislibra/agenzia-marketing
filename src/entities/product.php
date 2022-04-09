@@ -1,9 +1,6 @@
 <?php
 
-
 require_once "src/repositories/manager.php";
-require_once "src/repositories/metadata.php";
-
 
 class Product
 {
@@ -36,7 +33,7 @@ class Product
         $name = DbManager::get_column($metadata, $row, self::$table, "name");
         $price = DbManager::get_column($metadata, $row, self::$table, "price");
 
-        if ($sku && $brand && $category && $name && $price) {
+        if ($sku !== null && $brand !== null && $category !== null && $name !== null && $price !== null) {
             return new self($sku, $brand, $category, $name, $price);
         }
 

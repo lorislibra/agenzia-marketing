@@ -1,9 +1,6 @@
 <?php
 
-
 require_once "src/repositories/manager.php";
-require_once "src/repositories/metadata.php";
-
 
 class Region
 {
@@ -27,7 +24,7 @@ class Region
         $id = DbManager::get_column($metadata, $row, self::$table, "id");
         $name = DbManager::get_column($metadata, $row, self::$table, "name");
 
-        if ($id && $name) {
+        if ($id !== null && $name !== null) {
             return new self($id, $name);
         }
 

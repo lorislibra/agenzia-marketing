@@ -26,7 +26,6 @@ class UserRepo extends DbManager
                 $region = null;
             }
             
-
             // check if the user is in the list
             if (array_key_exists($user->id, $list)){
                 // get the user from the list

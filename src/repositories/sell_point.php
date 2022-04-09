@@ -65,7 +65,7 @@ class SellPointRepo extends DbManager
     }
 
     // get the sell_points of a certain region by id
-    public function get_by_region(int $id): ?User
+    public function get_by_region(int $id): ?Product
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM sell_point

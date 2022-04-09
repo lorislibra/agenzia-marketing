@@ -1,7 +1,10 @@
 DROP TABLE IF EXISTS 
-user_region, item, sell_point, user,
-role, region, product, reservation, cart, cart_item
+user_region, reservation_item, cart_item,
+reservation, sell_point, item, product,
+user, region, role
 CASCADE;
+
+/* ---------------------------------------------------------- */
 
 CREATE TABLE IF NOT EXISTS role(
     id INT NOT NULL,
@@ -26,15 +29,6 @@ CREATE TABLE IF NOT EXISTS user(
     email VARCHAR(320) NOT NULL UNIQUE,
     password VARCHAR(32) NOT NULL,
     role_id INT NOT NULL,
-    PRIMARY KEY(id)
-);
-
-CREATE TABLE IF NOT EXISTS reservation(
-    id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    status INT NOT NULL,
-    sell_point_id INT NOT NULL,
-    cart_id INT NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -64,62 +58,73 @@ CREATE TABLE IF NOT EXISTS sell_point (
 );
 
 CREATE TABLE IF NOT EXISTS cart_item (
-    cart_id INT NOT NULL, 
+    user_id INT NOT NULL, 
     item_id INT NOT NULL,
-    shipping_status INT NOT NULL,
-    PRIMARY KEY(cart_id, item_sku)
+    PRIMARY KEY(user_id, item_id)
 );
 
-CREATE TABLE IF NOT EXISTS cart(
+CREATE TABLE IF NOT EXISTS reservation(
     id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     status INT NOT NULL,
+    sell_point_id INT NOT NULL,
+    date_order DATE NOT NULL,
+    date_delivery DATE NOT NULL,
     PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS reservation_item(
+    reservation_id INT NOT NULL,
+    item_id INT NOT NULL,
+    PRIMARY KEY(reservation_id, item_id)
+);
+
+/* -------------------------------------------------------------- */
+
 ALTER TABLE user_region
-ADD CONSTRAINT FK_user_id
+ADD CONSTRAINT FK_user_region_user_id
 FOREIGN KEY (user_id) REFERENCES user(id),
-ADD CONSTRAINT FK_user_region
+ADD CONSTRAINT FK_user_region_region_id
 FOREIGN KEY (region_id) REFERENCES region(id);
-
-ALTER TABLE cart
-ADD CONSTRAINT FK_cart_user_id
-FOREIGN KEY (user_id) REFERENCES user(id);
-
-ALTER TABLE cart_item
-ADD CONSTRAINT cart_item_item_id
-FOREIGN KEY (item_id) REFERENCES item(id),
-ADD CONSTRAINT cart_item_cart_id
-FOREIGN KEY (cart_id) REFERENCES cart(id)
-
-
-ALTER TABLE reservation
-ADD CONSTRAINT reservation_user_id
-FOREIGN KEY (item_id) REFERENCES user(id),
-ADD CONSTRAINT reservation_sell_point_id
-FOREIGN KEY (sell_point_id) REFERENCES sell_point(id),
-ADD CONSTRAINT reservation_cart_id
-FOREIGN KEY (cart_id) REFERENCES cart(id)
 
 ALTER TABLE user
-ADD CONSTRAINT FK_role_id
+ADD CONSTRAINT FK_user_role_id
 FOREIGN KEY (role_id) REFERENCES role(id);
 
-ALTER TABLE item
-ADD CONSTRAINT FK_product_sku
-FOREIGN KEY (product_sku) REFERENCES product(sku);
+ALTER TABLE cart_item
+ADD CONSTRAINT FK_cart_item_idem_id
+FOREIGN KEY (item_id) REFERENCES item(id),
+ADD CONSTRAINT FK_cart_item_user_id
+FOREIGN KEY (user_id) REFERENCES user(id);
 
 ALTER TABLE sell_point
-ADD CONSTRAINT FK_sell_point_region
+ADD CONSTRAINT FK_sell_point_region_id
 FOREIGN KEY (region_id) REFERENCES region(id);
+
+ALTER TABLE item
+ADD CONSTRAINT FK_item_product_sku
+FOREIGN KEY (product_sku) REFERENCES product(sku);
+
+ALTER TABLE reservation
+ADD CONSTRAINT FK_reservation_user_id
+FOREIGN KEY (user_id) REFERENCES user(id),
+ADD CONSTRAINT FK_reservation_sell_point_id
+FOREIGN KEY (sell_point_id) REFERENCES sell_point(id);
+
+ALTER TABLE reservation_item
+ADD CONSTRAINT FK_reservation_item_reservation_id
+FOREIGN KEY (reservation_id) REFERENCES reservation(id),
+ADD CONSTRAINT FK_reservation_item_item_id
+FOREIGN KEY (item_id) REFERENCES item(id);
+
+/* -------------------------------------------------------------- */
 
 /* DEFAULT VALUES */
 INSERT INTO role (id, name) VALUES 
 (1, "developer"),
-(2, "national administrator"),
-(3, "state group administrator"),
-(4, "state administrator");
+(2, "warehouse"),
+(3, "group administrator"),
+(4, "region administrator");
 
 INSERT INTO region (id, name) VALUES
 (1, "Basilicata"),
@@ -144,14 +149,11 @@ INSERT INTO region (id, name) VALUES
 (20, "Veneto");
 
 INSERT INTO user (email, password, role_id) VALUES 
-("dev@dev.com", "dev", 1); /* change with hash of password */
-
-INSERT INTO user (email, password, role_id) VALUES 
-("dev1@dev.com", "dev", 1); /* change with hash of password */
-
-INSERT INTO user (email, password, role_id) VALUES 
-("dev2@dev.com", "dev", 1); /* change with hash of password */
+("dev1@dev.com", "dev", 1),
+("dev2@dev.com", "dev", 1),
+("dev3@dev.com", "dev", 1);
 
 INSERT INTO user_region (user_id, region_id) VALUES 
-(1, 20),
-(1, 19);
+(1, 20), (1, 19), (1, 18), (1, 17), (1, 16), (1, 15), (1, 14), (1, 13),
+(1, 12), (1, 11), (1, 10), (1, 9), (1, 8), (1, 7), (1, 6), (1, 5),
+(1, 4), (1, 3), (1, 2), (1, 1);

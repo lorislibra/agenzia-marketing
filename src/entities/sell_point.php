@@ -3,7 +3,6 @@
 use PhpOption\None;
 
 require_once "src/repositories/manager.php";
-require_once "src/repositories/metadata.php";
 require_once "region.php";
 
 // SellPoint class that reflec sell_point table in the database
@@ -32,7 +31,7 @@ class SellPoint
         $id = DbManager::get_column($metadata, $row, self::$table, "id");
         $address = DbManager::get_column($metadata, $row, self::$table, "address");
 
-        if ($id && $address) {
+        if ($id !== null && $address !== null) {
             return new self($id, $address, null);
         }
 

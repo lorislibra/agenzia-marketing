@@ -8,7 +8,11 @@ echo "Connected!\n";
 $query_string = file_get_contents($argv[1]);
 echo "File loaded!\n";
 
-$res = $connection->exec($query_string);
-print_r($connection->errorInfo());
+try {
+    $res = $connection->exec($query_string);
+} catch (Throwable $th) {
+    echo $th->getMessage() . "\n";
+}
+
 
 ?>
