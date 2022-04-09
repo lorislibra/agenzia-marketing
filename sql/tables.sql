@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS sell_point (
 
 CREATE TABLE IF NOT EXISTS cart_item (
     cart_id INT NOT NULL, 
-    item_sku INT NOT NULL,
+    item_id INT NOT NULL,
     shipping_status INT NOT NULL,
     PRIMARY KEY(cart_id, item_sku)
 );
@@ -79,11 +79,28 @@ CREATE TABLE IF NOT EXISTS cart(
 
 ALTER TABLE user_region
 ADD CONSTRAINT FK_user_id
-FOREIGN KEY (user_id) REFERENCES user(id);
-
-ALTER TABLE user_region
+FOREIGN KEY (user_id) REFERENCES user(id),
 ADD CONSTRAINT FK_user_region
 FOREIGN KEY (region_id) REFERENCES region(id);
+
+ALTER TABLE cart
+ADD CONSTRAINT FK_cart_user_id
+FOREIGN KEY (user_id) REFERENCES user(id);
+
+ALTER TABLE cart_item
+ADD CONSTRAINT cart_item_item_id
+FOREIGN KEY (item_id) REFERENCES item(id),
+ADD CONSTRAINT cart_item_cart_id
+FOREIGN KEY (cart_id) REFERENCES cart(id)
+
+
+ALTER TABLE reservation
+ADD CONSTRAINT reservation_user_id
+FOREIGN KEY (item_id) REFERENCES user(id),
+ADD CONSTRAINT reservation_sell_point_id
+FOREIGN KEY (sell_point_id) REFERENCES sell_point(id),
+ADD CONSTRAINT reservation_cart_id
+FOREIGN KEY (cart_id) REFERENCES cart(id)
 
 ALTER TABLE user
 ADD CONSTRAINT FK_role_id
