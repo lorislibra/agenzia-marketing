@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS item(
 
 CREATE TABLE IF NOT EXISTS sell_point (
     id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL,
     region_id INT NOT NULL,
     address VARCHAR(50) NOT NULL,
     PRIMARY KEY(id)
@@ -159,3 +160,12 @@ INSERT INTO user_region (user_id, region_id) VALUES
 (1, 20), (1, 19), (1, 18), (1, 17), (1, 16), (1, 15), (1, 14), (1, 13),
 (1, 12), (1, 11), (1, 10), (1, 9), (1, 8), (1, 7), (1, 6), (1, 5),
 (1, 4), (1, 3), (1, 2), (1, 1);
+
+INSERT INTO sell_point (id, name, address, region_id) VALUES
+(1, "iper", "via roma 1, castelfranco veneto, 35010", 20); 
+
+INSERT INTO product (sku, brand, category, name, price) VALUES 
+("CCL1", "coca-cola", "bevanda", "coca cola light", 1.5);
+
+INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
+(1, "CCL1", 30, 100, "cartonato");
