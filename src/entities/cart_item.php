@@ -8,12 +8,12 @@ class CartItem
 {
     public static $table = "cart_item";
 
-    public ?Item $item;
-    public ?User $user_id;
-    public int $user;
+    public Item $item;
+    public ?User $user;
+    public int $user_id;
     public int $quantity;
 
-    function __construct(?Item $item, ?User $user, int $user_id, int $quantity) {
+    function __construct(Item $item, ?User $user, int $user_id, int $quantity) {
         $this->item = $item;
         $this->user_id = $user_id;
         $this->quantity = $quantity;
@@ -30,8 +30,10 @@ class CartItem
         $quantity = DbManager::get_column($metadata, $row, self::$table, "quantity");
         $user_id = DbManager::get_column($metadata, $row, self::$table, "user_id");
 
-        if ($quantity !== null) {
-            return new self(null, null, $user_id, $quantity);
+        $item = Item::build_from_row($metadata, $row);
+
+        if ($quantity !== null && $user_id !== null) {
+            return new self($item, null, $user_id, $quantity);
         }
 
         throw new MissingColumnError();
