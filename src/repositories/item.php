@@ -45,7 +45,7 @@ class ItemRepo extends DbManager
     #region DONE
     
     // get an item by its id
-    public function get_by_id(int $id): ?Product
+    public function get_by_id(int $id): ?Item
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
@@ -66,7 +66,7 @@ class ItemRepo extends DbManager
     }
 
     // get the items of a certain product by sku
-    public function get_by_sku(int $sku): ?User
+    public function get_by_sku(int $sku): array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
