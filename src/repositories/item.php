@@ -2,6 +2,7 @@
 
 require_once("manager.php");
 require_once("src/entities/item.php");
+require_once("src/entities/cart_item.php");
 require_once("src/entities/product.php");
 
 class ItemRepo extends DbManager
@@ -31,8 +32,8 @@ class ItemRepo extends DbManager
                 $item->product = $product;
             }
 
-            $quantity = DbManager::get_column($metadata, $row, CartItem::$table, "quantity");
-            $user_id = DbManager::get_column($metadata, $row, CartItem::$table, "user_id");
+            $quantity = $this::get_column($metadata, $row, CartItem::$table, "quantity");
+            $user_id = $this::get_column($metadata, $row, CartItem::$table, "user_id");
             
             // if the row contain cart_item table result return CartItem objects
             if ($quantity !== null && $user_id !== null) {
