@@ -15,9 +15,18 @@
 
         $html_code = '
                     <div class="lateral_menu">
-                        <h1 class="lm_title">Menu title</h1>
+                        ' . add_header() . '
                         ' . $lm_html_links . '
                     </div>
+                    ';
+
+        return $html_code;
+    }
+
+    // Return the header of the lateral menu
+    function add_header(){
+        $html_code = '
+                    <h1 class="lm_title">Menu title</h1>
                     ';
 
         return $html_code;
