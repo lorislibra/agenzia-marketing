@@ -26,14 +26,25 @@ class ItemRepo extends DbManager
                 $product = null;
             }
 
-              // if the product is in the row, make it the item "product" field
-              if ($product) {
+            // if the product is in the row, make it the item "product" field
+            if ($product) {
                 $item->product = $product;
             }
 
-            // add the item in the list
-            $list[$item->id] = $item;
+            $quantity = DbManager::get_column($metadata, $row, CartItem::$table, "quantity");
+            $user_id = DbManager::get_column($metadata, $row, CartItem::$table, "user_id");
             
+            // if the row contain cart_item table result return CartItem objects
+            if ($quantity !== null && $user_id !== null) {
+                $cart_item = new CartItem($item, null, $user_id, $quantity);
+                
+                // add cart_item in the list
+                $list[$cart_item->item->id] = $cart_item;
+                continue;
+            }
+
+            // add the item in the list
+            $list[$item->id] = $item; 
         }
 
         return $list;
@@ -95,6 +106,23 @@ class ItemRepo extends DbManager
         ");
 
         if ($stmt->execute()) {
+            $items = $this->parse_fetch($stmt);
+            return $items;
+        }
+
+        return null;
+    }
+
+    public function get_all_item_in_cart(int $user_id): array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM cart_item
+        LEFT JOIN item ON item.id = cart_item.item_id
+        LEFT JOIN product ON item.product_sku = product.sku
+        WHERE cart_item.user_id = :user_id;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id])) {
             $items = $this->parse_fetch($stmt);
             return $items;
         }

@@ -26,7 +26,6 @@ class SellPointRepo extends DbManager
                 $region = null;
             }
             
-
             // if the region is in the row, make it the sell_point "region" field
             if ($region) {
                 $sell_point->region = $region;

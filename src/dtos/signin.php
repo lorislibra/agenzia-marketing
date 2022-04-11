@@ -23,8 +23,15 @@ class SignInDto
     // check if the dto is valid
     public function validate(array $errors): bool
     {
-        return false;
-    } 
+        $is_valid = true;
+        $len = strlen($this->password);
+        if ($len > 7) {
+            array_push($errors, $len);
+            $is_valid = false;
+        }
+
+        return $is_valid;
+    }
 }
 
 ?>
