@@ -32,13 +32,17 @@ class Item
         $quantity = DbManager::get_column($metadata, $row, self::$table, "quantity");
         $stock = DbManager::get_column($metadata, $row, self::$table, "stock");
         $category = DbManager::get_column($metadata, $row, self::$table, "category");
+        try {
+            $product = Product::build_from_row($metadata, $row);
+        } catch (MissingColumnError $e) { 
+            $product = null;
+        }
 
         if ($id !== null && $quantity !== null && $stock !== null && $category !== null) {
-            return new self($id, $quantity, $stock, $category, null);
+            return new self($id, $quantity, $stock, $category, $product);
         }
 
         throw new MissingColumnError();
-        
     }
 }
 

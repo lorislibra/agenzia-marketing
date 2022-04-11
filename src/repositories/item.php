@@ -20,18 +20,7 @@ class ItemRepo extends DbManager
             // build the temp item from the row
             $item = Item::build_from_row($metadata, $row);
 
-            try {
-                // build the temp product from the row
-                $product = Product::build_from_row($metadata, $row);
-            } catch (MissingColumnError $e) { 
-                $product = null;
-            }
-
-            // if the product is in the row, make it the item "product" field
-            if ($product) {
-                $item->product = $product;
-            }
-
+            // cart item below
             $quantity = $this::get_column($metadata, $row, CartItem::$table, "quantity");
             $user_id = $this::get_column($metadata, $row, CartItem::$table, "user_id");
             
