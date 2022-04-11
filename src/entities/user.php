@@ -35,11 +35,7 @@ class User
         $password = DbManager::get_column($metadata, $row, self::$table, "password");
         $role_id = DbManager::get_column($metadata, $row, self::$table, "role_id");
 
-        if ($id !== null && $email !== null && $password !== null && $role_id !== null) {
-            return new self($id, $email, $password, $role_id, array());
-        }
-
-        return new MissingColumnError();
+        return new self($id, $email, $password, $role_id, array());
     }
 }
 

@@ -38,7 +38,7 @@ class ItemRepo extends DbManager
             // if the row contain cart_item table result return CartItem objects
             if ($quantity !== null && $user_id !== null) {
                 $cart_item = new CartItem($item, null, $user_id, $quantity);
-                
+
                 // add cart_item in the list
                 $list[$cart_item->item->id] = $cart_item;
                 continue;

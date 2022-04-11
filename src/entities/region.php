@@ -24,11 +24,7 @@ class Region
         $id = DbManager::get_column($metadata, $row, self::$table, "id");
         $name = DbManager::get_column($metadata, $row, self::$table, "name");
 
-        if ($id !== null && $name !== null) {
-            return new self($id, $name);
-        }
-
-        throw new MissingColumnError();
+        return new self($id, $name);
     }
 }
 

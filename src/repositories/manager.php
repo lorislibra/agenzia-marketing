@@ -47,7 +47,12 @@ class DbManager
     // get specific column from a row
     public static function get_column(QueryMetadata $metadata, array $result, string $table, string $column)
     {
-        return $result[$metadata->get($table, $column)];
+        $index = $metadata->get($table, $column);
+        if ($index !== null) {
+            return $result[$index];
+        }
+        
+        throw new MissingColumnError();
     }
 
 }

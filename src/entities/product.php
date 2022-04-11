@@ -33,11 +33,7 @@ class Product
         $name = DbManager::get_column($metadata, $row, self::$table, "name");
         $price = DbManager::get_column($metadata, $row, self::$table, "price");
 
-        if ($sku !== null && $brand !== null && $category !== null && $name !== null && $price !== null) {
-            return new self($sku, $brand, $category, $name, $price);
-        }
-
-        throw new MissingColumnError();
+        return new self($sku, $brand, $category, $name, $price);
     }
 }
 

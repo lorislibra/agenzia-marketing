@@ -40,7 +40,12 @@ class QueryMetadata
 
     public function get(string $table, string $column) 
     {
-        return $this->indexes[$this->format_index_key($table, $column)];
+        $key = $this->format_index_key($table, $column);
+        if (array_key_exists($key, $this->indexes)){
+            return $this->indexes[$key];
+        }
+
+        return null;
     }
 
 }

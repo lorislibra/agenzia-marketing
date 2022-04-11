@@ -31,11 +31,7 @@ class SellPoint
         $id = DbManager::get_column($metadata, $row, self::$table, "id");
         $address = DbManager::get_column($metadata, $row, self::$table, "address");
 
-        if ($id !== null && $address !== null) {
-            return new self($id, $address, null);
-        }
-
-        return new MissingColumnError();
+        return new self($id, $address, null);
     }
 }
 

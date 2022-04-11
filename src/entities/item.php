@@ -33,11 +33,7 @@ class Item
         $stock = DbManager::get_column($metadata, $row, self::$table, "stock");
         $category = DbManager::get_column($metadata, $row, self::$table, "category");
 
-        if ($id !== null && $quantity !== null && $stock !== null && $category !== null) {
-            return new self($id, $quantity, $stock, $category, null);
-        }
-
-        throw new MissingColumnError();
+        return new self($id, $quantity, $stock, $category, null);
         
     }
 }

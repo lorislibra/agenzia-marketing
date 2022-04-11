@@ -29,14 +29,10 @@ class CartItem
     {
         $quantity = DbManager::get_column($metadata, $row, self::$table, "quantity");
         $user_id = DbManager::get_column($metadata, $row, self::$table, "user_id");
-
+        
         $item = Item::build_from_row($metadata, $row);
 
-        if ($quantity !== null && $user_id !== null) {
-            return new self($item, null, $user_id, $quantity);
-        }
-
-        throw new MissingColumnError();
+        return new self($item, null, $user_id, $quantity);
         
     }
 }
