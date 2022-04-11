@@ -2,8 +2,8 @@
 
 use PhpOption\None;
 
-require_once "src/repositories/manager.php";
-require_once "region.php";
+require_once("src/repositories/manager.php");
+require_once("region.php");
 
 // SellPoint class that reflec sell_point table in the database
 class SellPoint

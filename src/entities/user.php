@@ -1,6 +1,6 @@
 <?php
 
-require_once "src/repositories/manager.php";
+require_once("src/repositories/manager.php");
 
 
 // User class that reflec user table in the database

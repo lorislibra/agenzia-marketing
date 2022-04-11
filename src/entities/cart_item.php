@@ -1,8 +1,8 @@
 <?php
 
-require_once "src/repositories/manager.php";
-require_once "user.php";
-require_once "item.php";
+require_once("src/repositories/manager.php");
+require_once("user.php");
+require_once("item.php");
 
 class CartItem
 {

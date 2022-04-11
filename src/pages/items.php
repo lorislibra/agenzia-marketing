@@ -1,5 +1,5 @@
 <?php
-    require_once "src/template/lateral_menu.php";
+    require_once("src/template/lateral_menu.php");
 ?>
 
 <HTML>
@@ -12,7 +12,7 @@
     <body>
 
     <?php
-        echo show_lateral_menu();
+        echo(show_lateral_menu());
     ?>
 
     </body>

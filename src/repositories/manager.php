@@ -1,7 +1,7 @@
 <?php
 
-require_once "src/config.php";
-require_once "src/repositories/metadata.php";
+require_once("src/config.php");
+require_once("src/repositories/metadata.php");
 
 // https://phpdelusions.net/pdo
 

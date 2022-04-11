@@ -1,8 +1,8 @@
 <?php
 
-require_once "manager.php";
-require_once "src/entities/user.php";
-require_once "src/entities/region.php";
+require_once("manager.php");
+require_once("src/entities/user.php");
+require_once("src/entities/region.php");
 
 class UserRepo extends DbManager
 {

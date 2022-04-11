@@ -1,7 +1,7 @@
 <?php
 
-require_once "src/repositories/manager.php";
-require_once "product.php";
+require_once("src/repositories/manager.php");
+require_once("product.php");
 
 class Item
 {

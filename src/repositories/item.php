@@ -1,8 +1,8 @@
 <?php
 
-require_once "manager.php";
-require_once "src/entities/item.php";
-require_once "src/entities/product.php";
+require_once("manager.php");
+require_once("src/entities/item.php");
+require_once("src/entities/product.php");
 
 class ItemRepo extends DbManager
 {

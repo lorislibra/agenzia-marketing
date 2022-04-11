@@ -1,7 +1,7 @@
 <?php
 
-require_once "src/repositories/item.php";
-require_once "test.php";
+require_once("src/repositories/item.php");
+require_once("test.php");
 
 $item_repo = new ItemRepo($connection);
 
