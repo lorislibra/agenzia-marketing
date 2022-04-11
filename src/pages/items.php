@@ -2,9 +2,8 @@
     //require_once "src/middleware/session.php";
     //require_once "src/repositories/manager.php";
     //require_once "src/repositories/user.php";
-    require_once "../../src/template/lateral_menu.php";
+    require_once "src/template/lateral_menu.php";
 
-    //middle_ware_need_login();
 ?>
 
 <HTML>
