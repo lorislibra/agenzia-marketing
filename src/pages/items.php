@@ -1,8 +1,10 @@
 <?php
-    require_once "src/middleware/session.php";
-    require_once "src/repositories/manager.php";
-    require_once "src/repositories/user.php";
-    require_once "src/template/lateral_menu.php";
+    //require_once "src/middleware/session.php";
+    //require_once "src/repositories/manager.php";
+    //require_once "src/repositories/user.php";
+    require_once "../../src/template/lateral_menu.php";
+
+    //middle_ware_need_login();
 ?>
 
 <HTML>
@@ -15,12 +17,7 @@
     <body>
 
     <?php
-        if(/*is_logged()*/true){
-            echo show_lateral_menu();
-        }
-        else{
-            header("login.php");
-        }
+        echo show_lateral_menu();
     ?>
 
     </body>
