@@ -12,11 +12,11 @@ if ($session->is_logged()){
     header("location: dashboard.php");
 }
 
-$connection = DbManager::build_connection_from_env();
-$userRepo = new UserRepo($connection);
-
 // check if the method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $connection = DbManager::build_connection_from_env();
+    $userRepo = new UserRepo($connection);
+
     $dto = SignInDto::from_array($_POST);
 
     if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
