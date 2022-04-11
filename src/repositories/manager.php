@@ -25,11 +25,11 @@ class DbManager
     // build a pdo connection from env vars
     public static function build_connection_from_env(): PDO
     {
-        $host = $_ENV["DB_HOST"];
-        $port = $_ENV["DB_PORT"];
-        $user = $_ENV["DB_USER"];
-        $passw = $_ENV["DB_PASSW"];
-        $db_name = $_ENV["DB_NAME"];
+        $host = getenv("DB_HOST");
+        $port = getenv("DB_PORT");
+        $user = getenv("DB_USER");
+        $passw = getenv("DB_PASSW");
+        $db_name = getenv("DB_NAME");
 
         return DbManager::build_connection($host, $port, $user, $passw, $db_name);
     }
