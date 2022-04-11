@@ -33,7 +33,6 @@ class CartItem
         $item = Item::build_from_row($metadata, $row);
 
         return new self($item, null, $user_id, $quantity);
-        
     }
 }
 
