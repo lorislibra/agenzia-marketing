@@ -20,27 +20,12 @@ class ItemRepo extends DbManager
             // build the temp item from the row
             $item = Item::build_from_row($metadata, $row);
 
-            // if the row contain cart_item table result return CartItem objects
-            try {
-                $quantity = $this::get_column($metadata, $row, CartItem::$table, "quantity");
-                $user_id = $this::get_column($metadata, $row, CartItem::$table, "user_id");
-                $cart_item = new CartItem($item, null, $user_id, $quantity);
-
-                // add cart_item in the list
-                $list[$cart_item->item->id] = $cart_item;
-            } catch (MissingColumnError $e) {
-                // add the item in the list
-                $list[$item->id] = $item; 
-            }            
+            // add the item in the list
+            $list[$item->id] = $item;           
         }
 
         return $list;
     }
-    
-    #region VERIFIED
-    #endregion
-
-    #region DONE
     
     // get an item by its id
     public function get_by_id(int $id): ?Item
@@ -116,14 +101,6 @@ class ItemRepo extends DbManager
 
         return null;
     }
-
-    #endregion
-
-    #region PARTIAL
-    #endregion
-
-    #region TODO
-    #endregion
 }
 
 ?>

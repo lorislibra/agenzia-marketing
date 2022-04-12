@@ -19,18 +19,6 @@ class SellPointRepo extends DbManager
             // build the temp sell_point from the row
             $sell_point = SellPoint::build_from_row($metadata, $row);
 
-            try {
-                // build the temp region from the row
-                $region = Region::build_from_row($metadata, $row);
-            } catch (MissingColumnError $e) { 
-                $region = null;
-            }
-            
-            // if the region is in the row, make it the sell_point "region" field
-            if ($region) {
-                $sell_point->region = $region;
-            }
-
             // add the sell_point in the list
             $list[$sell_point->id] = $sell_point;
         }
@@ -38,10 +26,6 @@ class SellPointRepo extends DbManager
         return $list;
     }
 
-    #region VERIFIED
-    #endregion
-
-    #region DONE
     // get a sell_point by its id
     public function get_by_id(int $id): ?SellPoint
     {
@@ -99,13 +83,6 @@ class SellPointRepo extends DbManager
 
         return null;
     }
-    #endregion
-
-    #region PARTIAL
-    #endregion
-
-    #region TODO
-    #endregion
 }
 
 ?>

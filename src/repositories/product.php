@@ -26,10 +26,6 @@ class ProdutRepo extends DbManager
     }
 
     
-    #region VERIFIED
-    #endregion
-
-    #region DONE
      // get a product by its sku
      public function get_by_sku(int $sku): ?Product
      {
@@ -64,14 +60,6 @@ class ProdutRepo extends DbManager
  
          return null;
      }
-    #endregion
-
-    #region PARTIAL
-    #endregion
-
-    #region TODO
-    #endregion
-
    
 }
 
