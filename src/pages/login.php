@@ -5,7 +5,6 @@ require_once("src/repositories/manager.php");
 require_once("src/repositories/user.php");
 require_once("src/dtos/signin.php");
 
-
 $session = new SessionManager();
 
 if ($session->is_logged()){
