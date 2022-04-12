@@ -5,7 +5,7 @@
     function show_lateral_menu(): string
     {
         $lm_links = array(
-            array("icon_url" => "https://img.icons8.com/ios/344/link--v1.png", "link_url" => "login.php", "link_text" => "Login")
+            array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/login-rounded-right.png", "link_url" => "login.php", "link_text" => "Login")
         );
 
         $lm_html_links = '';
@@ -15,8 +15,12 @@
 
         $html_code = '
                     <div class="lateral_menu">
-                        ' . add_header() . '
-                        ' . $lm_html_links . '
+                        <div class="lm_header">
+                            ' . add_header() . '
+                        </div>
+                        <div class="lm_body">
+                            ' . $lm_html_links . '
+                        </div>
                     </div>
                     ';
 
@@ -26,7 +30,7 @@
     // Return the header of the lateral menu
     function add_header(){
         $html_code = '
-                    <h1 class="lm_title">Menu title</h1>
+                    <img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
                     ';
 
         return $html_code;
@@ -38,6 +42,7 @@
         $img_html_code = '
                         <img class="lm_link_img" src="' . $icon_url . '" alt="' . $link_text . '_icon">
                         ';
+        $link_text = '<p class="lm_link_text">' . $link_text . '</p>';
         $link_text = (!empty($icon_url)) ? $img_html_code . $link_text : $link_text;
         $html_code = '
                     <a class="lm_link" href="' . $link_url . '">' . $link_text . '</a>
