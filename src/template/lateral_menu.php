@@ -2,15 +2,20 @@
     /* lm = lateral_menu*/
 
     // Return the html code of the lateral menu
-    function show_lateral_menu(): string
+    function show_lateral_menu(string $opened_section): string
     {
         $lm_links = array(
-            array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/login-rounded-right.png", "link_url" => "login.php", "link_text" => "Login")
+            array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/dog-house.png", "link_url" => "login.php", "link_text" => "Home"),
+            array("icon_url" => "https://img.icons8.com/wired/344/ffffff/circled-user.png", "link_url" => "login.php", "link_text" => "Account"),
+            array("icon_url" => "https://img.icons8.com/wired/344/ffffff/bulleted-list.png", "link_url" => "login.php", "link_text" => "Items"),
+            array("icon_url" => "https://img.icons8.com/ios-glyphs/344/ffffff/shopping-cart--v1.png", "link_url" => "login.php", "link_text" => "Cart")
         );
 
         $lm_html_links = '';
         foreach($lm_links as $lm_link){
-            $lm_html_links .= add_link($lm_link["icon_url"], $lm_link["link_url"], $lm_link["link_text"]);
+            if($lm_link["link_text"] != $opened_section){
+                $lm_html_links .= add_link($lm_link["icon_url"], $lm_link["link_url"], $lm_link["link_text"]);
+            }
         }
 
         $html_code = '

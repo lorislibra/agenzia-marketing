@@ -12,7 +12,7 @@
     <body>
 
     <?php
-        echo(show_lateral_menu());
+        echo(show_lateral_menu("Items"));
     ?>
 
     </body>
