@@ -5,9 +5,9 @@
     function show_lateral_menu(string $opened_section): string
     {
         $lm_links = array(
-            array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/dog-house.png", "link_url" => "login.php", "link_text" => "Home"),
+            array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/dog-house.png", "link_url" => "index.php", "link_text" => "Home"),
             array("icon_url" => "https://img.icons8.com/wired/344/ffffff/circled-user.png", "link_url" => "login.php", "link_text" => "Account"),
-            array("icon_url" => "https://img.icons8.com/wired/344/ffffff/bulleted-list.png", "link_url" => "login.php", "link_text" => "Items"),
+            array("icon_url" => "https://img.icons8.com/wired/344/ffffff/bulleted-list.png", "link_url" => "items.php", "link_text" => "Items"),
             array("icon_url" => "https://img.icons8.com/ios-glyphs/344/ffffff/shopping-cart--v1.png", "link_url" => "login.php", "link_text" => "Cart")
         );
 
