@@ -175,3 +175,6 @@ INSERT INTO cart_item (user_id, item_id, quantity) VALUES
 
 INSERT INTO reservation (id, user_id, status, sell_point_id, date_order, date_delivery) VALUES
 (1, 1, 1, 1, "2022-04-08 19:25:14", "2022-04-08 19:25:14");
+
+INSERT INTO reservation_item (reservation_id, item_id, quantity) VALUES
+(1, 1, 2);
