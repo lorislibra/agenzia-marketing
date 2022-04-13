@@ -37,11 +37,11 @@
     margin-top: 2%;
     padding-top: 4%;
     padding-bottom: 4%;
-    box-shadow: 0px 10px 38px -20px #000000;
+    color: #ffffff;
 }
 
 .lm_link:visited{
-    color: white;
+    color: #ffffff;
 }
 
 .lm_link:hover{
