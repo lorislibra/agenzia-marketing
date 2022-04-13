@@ -22,9 +22,12 @@ echo "Connected to $ftp_host, for user $ftp_user\n";
 
 $files = rglob("src/*");
 array_push($files, ".env");
+array_push($files, "src/pages/.user.ini");
 
 ftp_mkdir($ftp, $ftp_project_path);
 ftp_mkdir($ftp, "$ftp_project_path/src");
+
+var_dump($files);
 
 foreach ($files as $filename) {
     $remote_path = $ftp_project_path . "/" . $filename;

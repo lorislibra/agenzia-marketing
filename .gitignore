@@ -1,4 +1,6 @@
 .env
 
+src/pages/.user.ini
+
 build/
 vendor/
