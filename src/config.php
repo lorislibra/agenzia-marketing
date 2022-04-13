@@ -1,53 +1,46 @@
 <?php
 
-class DotEnv
+function load_env(string $path) :void
 {
-    /**
-     * The directory where the .env file can be located.
-     *
-     * @var string
-     */
-    protected $path;
-
-    public function __construct(string $path)
-    {
-        if(!file_exists($path)) {
-            throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
-        }
-        $this->path = $path;
+    if(!file_exists($path)) {
+        throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
     }
 
-    public function load() :void
-    {
-        if (!is_readable($this->path)) {
-            throw new \RuntimeException(sprintf('%s file is not readable', $this->path));
+    if (!is_readable($path)) {
+        throw new \RuntimeException(sprintf('%s file is not readable', $path));
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+
+        if (strpos(trim($line), '#') === 0) {
+            continue;
         }
 
-        $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim(trim($value), "\"");
 
-            if (strpos(trim($line), '#') === 0) {
-                continue;
-            }
-
-            list($name, $value) = explode('=', $line, 2);
-            $name = trim($name);
-            $value = trim(trim($value), "\"");
-
-            if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
-                putenv(sprintf('%s=%s', $name, $value));
-                $_ENV[$name] = $value;
-                $_SERVER[$name] = $value;
-            }
+        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
+            putenv(sprintf('%s=%s', $name, $value));
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
         }
     }
 }
 
-try { 
-    (new DotEnv('.env'))->load(); 
-} catch (\Throwable $th) {
-    (new DotEnv('../../.env'))->load();
-}
+$dir = __DIR__;
 
+while (1) {
+    if (file_exists("$dir/.env")) {
+        load_env("$dir/.env");
+        break;
+    }
+    if (str_ends_with($dir, "agenzia-marketing") || count(explode("/", $dir)) == 1) {
+        break;
+    }
+
+    $dir = dirname($dir);
+}
 
 ?>

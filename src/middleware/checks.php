@@ -9,7 +9,7 @@ function need_logged()
     global $session;
 
     if (!$session->is_logged()) {
-        header("location: login.php");
+        header("location: /login.php");
         exit();
     }
 }
@@ -21,7 +21,7 @@ function need_warehouse()
     need_logged($session);
 
     if (!$session->get_user()->role->important_than(Role::Warehouse)) {
-        header("location: dashboard.php");
+        header("location: /dashboard.php");
         exit();
     }
 }
@@ -31,7 +31,7 @@ function redirect_if_logged()
     global $session;
 
     if ($session->is_logged()) {
-        header("location: dashboard.php");
+        header("location: /dashboard.php");
         exit();
     }
     

@@ -16,9 +16,9 @@ if (is_post()) {
 
     if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
         $session->set_user($user);
-        header("location: dashboard.php");
+        header("location: /dashboard.php");
     } else {
-        header("location: login.php");
+        header("location: /login.php");
     }
 
     exit();
