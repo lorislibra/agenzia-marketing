@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS reservation(
     user_id INT NOT NULL,
     status INT NOT NULL,
     sell_point_id INT NOT NULL,
-    date_order DATE NOT NULL,
-    date_delivery DATE NOT NULL,
+    date_order TIMESTAMP NOT NULL,
+    date_delivery TIMESTAMP NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -172,3 +172,6 @@ INSERT INTO item (id, product_sku, quantity, stock, category) VALUES
 
 INSERT INTO cart_item (user_id, item_id, quantity) VALUES 
 (1, 1, 3);
+
+INSERT INTO reservation (id, user_id, status, sell_point_id, date_order, date_delivery) VALUES
+(1, 1, 1, 1, "2022-04-08 19:25:14", "2022-04-08 19:25:14");

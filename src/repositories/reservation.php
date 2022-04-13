@@ -3,18 +3,18 @@
 require_once("manager.php");
 require_once("src/entities/reservation.php");
 
-class Reservation extends DbManager
+class ReservationRepo extends DbManager
 {
 
     public function parse_fetch(PDOStatement $statement): array
     {
         $list = array();
+
         // metadata of the query result
         $metadata = new QueryMetadata($statement);
 
         // iterate over rows
         while ($row = $statement->fetch(PDO::FETCH_NUM)) {
-            
             // build the temp reservation from the row
             $reservation = Reservation::build_from_row($metadata, $row);
 
@@ -26,21 +26,31 @@ class Reservation extends DbManager
     }
     
     // get a reservation by its id
-    public function get_by_id(int $id): ?Item
+    public function get_by_id(int $id): ?Reservation
     {
         $stmt = $this->get_connection()->prepare("
-        SELECT * 
-        FROM reservation
+        SELECT * FROM reservation
         WHERE reservation.id = :id;
         ");
 
         if ($stmt->execute(["id" => $id])) {
-            $items = $this->parse_fetch($stmt);
+            $reservations = $this->parse_fetch($stmt);
+            return $this->get_first_element($reservations);
+        }
+        
+        return null;
+    }
 
-            // if there are more than 0 items return the first
-            if (count($items)) {
-                return $items[array_key_first($items)];
-            }
+    // get a reservation by its id
+    public function get_all(): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM reservation
+        ");
+
+        if ($stmt->execute()) {
+            $reservations = $this->parse_fetch($stmt);
+            return $reservations;
         }
         
         return null;

@@ -37,18 +37,14 @@ class SellPointRepo extends DbManager
 
         if ($stmt->execute(["id" => $id])) {
             $sell_points = $this->parse_fetch($stmt);
-
-            // if there are more than 0 sell_points return the first
-            if (count($sell_points)) {
-                return $sell_points[array_key_first($sell_points)];
-            }
+            $this->get_first_element($sell_points);
         }
         
         return null;
     }
 
     // get the sell_points of a certain region by id
-    public function get_by_region(int $id): array
+    public function get_by_region(int $id): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM sell_point
@@ -58,11 +54,7 @@ class SellPointRepo extends DbManager
 
         if ($stmt->execute(["id" => $id])) {
             $sell_points = $this->parse_fetch($stmt);
-
-            // if there are more than 0 sell_points return the first
-            if (count($sell_points)) {
-                return $sell_points[array_key_first($sell_points)];
-            }
+            return $sell_points;
         }
         
         return null;

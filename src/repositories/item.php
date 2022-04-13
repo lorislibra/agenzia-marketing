@@ -37,18 +37,14 @@ class ItemRepo extends DbManager
 
         if ($stmt->execute(["id" => $id])) {
             $items = $this->parse_fetch($stmt);
-
-            // if there are more than 0 items return the first
-            if (count($items)) {
-                return $items[array_key_first($items)];
-            }
+            $this->get_first_element($items);
         }
         
         return null;
     }
 
     // get the items of a certain product by sku
-    public function get_by_sku(int $sku): array
+    public function get_by_sku(int $sku): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
@@ -58,11 +54,7 @@ class ItemRepo extends DbManager
 
         if ($stmt->execute(["sku" => $sku])) {
             $items = $this->parse_fetch($stmt);
-
-            // if there are more than 0 items return the first
-            if (count($items)) {
-                return $items[array_key_first($items)];
-            }
+            return $items;
         }
         
         return null;
@@ -77,23 +69,6 @@ class ItemRepo extends DbManager
         ");
 
         if ($stmt->execute()) {
-            $items = $this->parse_fetch($stmt);
-            return $items;
-        }
-
-        return null;
-    }
-
-    public function get_all_item_in_cart(int $user_id): array
-    {
-        $stmt = $this->get_connection()->prepare("
-        SELECT * FROM cart_item
-        LEFT JOIN item ON item.id = cart_item.item_id
-        LEFT JOIN product ON item.product_sku = product.sku
-        WHERE cart_item.user_id = :user_id;
-        ");
-
-        if ($stmt->execute(["user_id" => $user_id])) {
             $items = $this->parse_fetch($stmt);
             return $items;
         }

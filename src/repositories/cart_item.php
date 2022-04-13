@@ -21,15 +21,14 @@ class CartItemRepo extends DbManager
             $cart_item = CartItem::build_from_row($metadata, $row);
 
             // add the cart_item in the list
-            $list[$cart_item->user_id][$cart_item->item->id] = $cart_item; 
-                       
+            $list[$cart_item->user_id][$cart_item->item->id] = $cart_item;      
         }
 
         return $list;
     }
 
     // get cart_items of a user by its id
-    public function get_by_user_id(int $user_id): array
+    public function get_by_user_id(int $user_id): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM cart_item

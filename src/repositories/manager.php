@@ -55,6 +55,14 @@ class DbManager
         throw new MissingColumnError();
     }
 
+    public function get_first_element(array $list): ?object
+    {
+        if (count($list)) {
+            return $list[array_key_first($list)];
+        }
+        return null;
+    }
+
 }
 
 ?>

@@ -26,40 +26,36 @@ class ProdutRepo extends DbManager
     }
 
     
-     // get a product by its sku
-     public function get_by_sku(int $sku): ?Product
-     {
-         $stmt = $this->get_connection()->prepare("
-         SELECT * FROM product
-         WHERE sku=:sku;
-         ");
- 
-         if ($stmt->execute(["sku" => $sku])) {
-             $products = $this->parse_fetch($stmt);
-             
-             // if there are more than 0 products return the first
-             if (count($products)) {
-                 return $products[array_key_first($products)];
-             }
-         }
-         
-         return null;
-     }
- 
-     // get all products
-     public function get_all(): ?array
-     {
-         $stmt = $this->get_connection()->prepare("
-         SELECT * FROM product;
-         ");
- 
-         if ($stmt->execute()) {
-             $products = $this->parse_fetch($stmt);
-             return $products;
-         }
- 
-         return null;
-     }
+    // get a product by its sku
+    public function get_by_sku(int $sku): ?Product
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM product
+        WHERE sku=:sku;
+        ");
+
+        if ($stmt->execute(["sku" => $sku])) {
+            $products = $this->parse_fetch($stmt);
+            $this->get_first_element($products);
+        }
+        
+        return null;
+    }
+
+    // get all products
+    public function get_all(): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM product;
+        ");
+
+        if ($stmt->execute()) {
+            $products = $this->parse_fetch($stmt);
+            return $products;
+        }
+
+        return null;
+    }
    
 }
 

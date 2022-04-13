@@ -56,11 +56,7 @@ class UserRepo extends DbManager
 
         if ($stmt->execute(["id" => $id])) {
             $users = $this->parse_fetch($stmt);
-
-            // if there are more than 0 users return the first
-            if (count($users)) {
-                return $users[array_key_first($users)];
-            }
+            $this->get_first_element($users);
         }
         
         return null;
@@ -78,11 +74,7 @@ class UserRepo extends DbManager
 
         if ($stmt->execute(["email" => $email])) {
             $users = $this->parse_fetch($stmt);
-
-            // if there are more than 0 users return the first
-            if (count($users)) {
-                return $users[array_key_first($users)];
-            }
+            $this->get_first_element($users);
         }
 
         return null;
@@ -100,11 +92,7 @@ class UserRepo extends DbManager
 
         if ($stmt->execute(["email" => $email, "password" => $password])) {
             $users = $this->parse_fetch($stmt);
-
-            // if there are more than 0 users return the first
-            if (count($users)) {
-                return $users[array_key_first($users)];
-            }
+            $this->get_first_element($users);
         }
 
         return null;
