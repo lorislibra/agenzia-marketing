@@ -1,18 +1,14 @@
 <?php
 
-require_once("src/middleware/session.php");
+require_once("src/middleware/checks.php");
 require_once("src/repositories/manager.php");
 require_once("src/repositories/user.php");
 require_once("src/dtos/signin.php");
 
-$session = new SessionManager();
+redirect_if_logged();
 
-if ($session->is_logged()) {
-    header("location: dashboard.php");
-}
-
-// check if the method is POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// POST handler
+if (is_post()) {
     $connection = DbManager::build_connection_from_env();
     $userRepo = new UserRepo($connection);
 
@@ -25,7 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location: login.php");
     }
 
-    return;
+    exit();
+}
+
+if (is_get()) {
+    echo "login please";
 }
 
 ?>
