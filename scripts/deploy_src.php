@@ -23,13 +23,20 @@ echo "Connected to $ftp_host, for user $ftp_user\n";
 $files = rglob("src/*");
 array_push($files, ".env");
 
+ftp_mkdir($ftp, "$ftp_project_path/src");
+
 foreach ($files as $filename) {
+    $remote_path = $ftp_project_path . "/" . $filename;
     if (!is_dir($filename)) {
-        if (!$upload = ftp_put($ftp, $ftp_project_path . "/" . basename($filename) , $filename, FTP_BINARY)) {
+        if (!$upload = ftp_put($ftp, $remote_path , $filename, FTP_BINARY)) {
             echo ("FTP $filename upload has failed!\n");
         } else {
             echo("Uploaded $filename\n");
         }
+    } else if ($res = ftp_mkdir($ftp, $remote_path)) {
+        echo("Directory $remote_path created\n");
+    } else {
+        echo("Error creating directory $remote_path\n");
     }
 }
 

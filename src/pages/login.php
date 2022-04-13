@@ -7,7 +7,7 @@ require_once("src/dtos/signin.php");
 
 $session = new SessionManager();
 
-if ($session->is_logged()){
+if ($session->is_logged()) {
     header("location: dashboard.php");
 }
 
@@ -21,10 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
         $session->set_user($user);
         header("location: dashboard.php");
-    }else{
+    } else {
         header("location: login.php");
     }
-    
+
     return;
 }
 

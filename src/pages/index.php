@@ -7,7 +7,7 @@ require_once("src/dtos/signin.php");
 
 $session = new SessionManager();
 
-if ($session->is_logged()){
+if ($session->is_logged()) {
     header("location: dashboard.php");
 } else {
     header("location: login.php");
