@@ -23,6 +23,7 @@ echo "Connected to $ftp_host, for user $ftp_user\n";
 $files = rglob("src/*");
 array_push($files, ".env");
 
+ftp_mkdir($ftp, $ftp_project_path);
 ftp_mkdir($ftp, "$ftp_project_path/src");
 
 foreach ($files as $filename) {
