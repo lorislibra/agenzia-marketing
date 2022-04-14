@@ -1,5 +1,19 @@
 <?php
+    require_once("src/pages/index.php");
+    require_once("src/repositories/item.php");
+
     function show_items(){
-        echo "ITEMS";
+        global $connection;
+
+        $item_repo = new ItemRepo($connection);
+        $items = $item_repo->get_all();
+
+        foreach($items as $item){
+            show_item($item->product->name);
+        }
+    }
+
+    function show_item(string $name){
+        echo $name;
     }
 ?>
