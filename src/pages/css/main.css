@@ -108,6 +108,7 @@
     background-color: #ffffff;
     margin-top: 40px;
     margin-left: 40px;
+    overflow: hidden;
 }
 
 .ib_image{
@@ -116,6 +117,10 @@
     width: 100%;
     object-fit: cover;
     z-index: 1;
+}
+
+.ib_image:hover{
+    transform: scale(1.5);
 }
 
 .ib_name{
