@@ -3,6 +3,11 @@
     user-select: none;  
 }
 
+@keyframes zoom{
+    from {transform: scale(1);}
+    to {transform: scale(1.5);}
+}
+
 .lateral_menu{
     display: block;
     position: absolute;
@@ -83,6 +88,7 @@
     font-family: Verdana, sans-serif;
     background-color: #ffffff;
     z-index: 9;
+    overflow-y: auto;
 }
 
 .items_head{
@@ -94,10 +100,13 @@
 
 .items_list{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     position: relative;
-    width: 100%;
+    width: calc(100% - 40px);
     height: 80%;
-    background-color: aquamarine;
+    background-color: #ffffff;
+    margin: 20px;
 }
 
 .item_box{
@@ -106,8 +115,7 @@
     height: 340px;
     width: 240px;
     background-color: #ffffff;
-    margin-top: 40px;
-    margin-left: 40px;
+    margin: 20px;
     overflow: hidden;
 }
 
@@ -117,6 +125,7 @@
     width: 100%;
     object-fit: cover;
     z-index: 1;
+    transition: transform 1s;
 }
 
 .ib_image:hover{
