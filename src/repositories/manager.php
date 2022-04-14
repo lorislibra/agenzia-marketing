@@ -1,7 +1,7 @@
 <?php
 
 require_once("src/config.php");
-require_once("src/repositories/metadata.php");
+require_once("metadata.php");
 
 // https://phpdelusions.net/pdo
 
@@ -49,9 +49,11 @@ class DbManager
     {
         $index = $metadata->get($table, $column);
         if ($index !== null) {
-            return $result[$index];
+            if (($column_value = $result[$index]) !== null) {
+                return $column_value;
+            }
         }
-        
+
         throw new MissingColumnError();
     }
 

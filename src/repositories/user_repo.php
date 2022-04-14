@@ -15,7 +15,6 @@ class UserRepo extends DbManager
 
         // iterate over rows
         while ($row = $statement->fetch(PDO::FETCH_NUM)) {
-            
             // build the temp user from the row
             $user = User::build_from_row($metadata, $row);
 
@@ -113,6 +112,18 @@ class UserRepo extends DbManager
         }
 
         return null;
+    }
+
+    public function count(): int
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(id) FROM user;
+        ");
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn(0);
+        }
+
+        return 0;
     }
 }
 

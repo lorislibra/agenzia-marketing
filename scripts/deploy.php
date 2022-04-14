@@ -20,7 +20,7 @@ if (!$ftp || !ftp_login($ftp, $ftp_user, $ftp_passw)) {
 
 echo "Connected to $ftp_host, for user $ftp_user\n";
 
-$files = rglob("src/*");
+$files = rglob("src/*", GLOB_NOSORT);
 array_push($files, ".env");
 array_push($files, "src/pages/.user.ini");
 

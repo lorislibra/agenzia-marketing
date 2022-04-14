@@ -3,6 +3,10 @@
 require_once("manager.php");
 require_once("src/entities/reservation.php");
 
+enum Status
+{
+}
+
 class ReservationRepo extends DbManager
 {
 

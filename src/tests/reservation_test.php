@@ -1,6 +1,6 @@
 <?php
 
-require_once("src/repositories/reservation.php");
+require_once("src/repositories/reservation_repo.php");
 require_once("test.php");
 
 $reservation_repo = new ReservationRepo($connection);

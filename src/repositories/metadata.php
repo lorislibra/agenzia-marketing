@@ -42,7 +42,8 @@ class QueryMetadata
     {
         $key = $this->format_index_key($table, $column);
         if (array_key_exists($key, $this->indexes)){
-            return $this->indexes[$key];
+            $value = $this->indexes[$key];
+            return $value;
         }
 
         return null;

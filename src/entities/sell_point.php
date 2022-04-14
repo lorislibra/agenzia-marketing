@@ -30,11 +30,13 @@ class SellPoint
     {
         $id = DbManager::get_column($metadata, $row, self::$table, "id");
         $address = DbManager::get_column($metadata, $row, self::$table, "address");
+        
         try {
             $region = Region::build_from_row($metadata, $row);
         } catch (MissingColumnError $e) { 
             $region = null;
         }
+
         return new self($id, $address, $region);
     }
 }

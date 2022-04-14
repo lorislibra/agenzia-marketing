@@ -1,6 +1,8 @@
 <?php
-    require_once("src/template/lateral_menu.php");
-    require_once("src/template/items_template.php");
+
+require_once("src/template/lateral_menu.php");
+require_once("src/template/items_template.php");
+
 ?>
 
 <html>

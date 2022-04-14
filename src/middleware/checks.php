@@ -1,8 +1,8 @@
 <?php
 
 require_once("session.php");
-require_once("src/entities/user.php");
 require_once("request.php");
+require_once("src/entities/user.php");
 
 function need_logged()
 {

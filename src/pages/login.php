@@ -2,7 +2,7 @@
 
 require_once("src/middleware/checks.php");
 require_once("src/repositories/manager.php");
-require_once("src/repositories/user.php");
+require_once("src/repositories/user_repo.php");
 require_once("src/dtos/signin.php");
 
 redirect_if_logged();

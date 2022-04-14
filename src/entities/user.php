@@ -47,7 +47,7 @@ class User
         $password = DbManager::get_column($metadata, $row, self::$table, "password");
         $role_id = DbManager::get_column($metadata, $row, self::$table, "role_id");
 
-        $role = new Role($role_id);
+        $role = Role::from($role_id);
         return new self($id, $email, $password, $role, array());
     }
 }

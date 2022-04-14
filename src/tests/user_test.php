@@ -1,6 +1,6 @@
 <?php
 
-require_once("src/repositories/user.php");
+require_once("src/repositories/user_repo.php");
 require_once("test.php");
 
 $user_repo = new UserRepo($connection);
@@ -20,5 +20,11 @@ if ($users = $user_repo->get_all()) {
 } else {
     echo("no users\n");
 }
+
+line();
+
+echo("users count\n");
+$users = $user_repo->count();
+var_dump($users);
 
 ?>
