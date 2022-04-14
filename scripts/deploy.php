@@ -26,8 +26,9 @@ $files = array();
 array_push($files, "src", ".env");
 
 if (count($argv) > 1 && $argv[1] == "pages") {
-    array_push($files, "src/pages");
+    array_push($files, "src/pages", "src/templates");
     array_push($files, ...rglob("src/pages/*", GLOB_NOSORT));
+    array_push($files, ...rglob("src/templates/*", GLOB_NOSORT));
 } else {
     array_push($files, ...rglob("src/*", GLOB_NOSORT));    
 }
