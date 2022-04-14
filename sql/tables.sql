@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS product(
     brand VARCHAR(30) NOT NULL,
     category VARCHAR(30) NOT NULL,
     name VARCHAR(30) NOT NULL,
+    image VARCHAR(200) NOT NULL,
     price FLOAT NOT NULL,
     PRIMARY KEY(sku)
 );
@@ -164,8 +165,8 @@ INSERT INTO user_region (user_id, region_id) VALUES
 INSERT INTO sell_point (id, name, address, region_id) VALUES
 (1, "iper", "via roma 1, castelfranco veneto, 35010", 20); 
 
-INSERT INTO product (sku, brand, category, name, price) VALUES 
-("CCL1", "coca-cola", "bevanda", "coca cola light", 1.5);
+INSERT INTO product (sku, brand, category, name, image, price) VALUES 
+("CCL1", "coca-cola", "bevanda", "coca cola light", "https://m.media-amazon.com/images/I/51+Z8aLOwLL._AC_SX342_.jpg", 1.5);
 
 INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
 (1, "CCL1", 30, 100, "cartonato");
