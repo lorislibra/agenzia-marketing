@@ -28,4 +28,5 @@ if (is_get()) {
     echo "login please";
 }
 
+var_dump($_ENV);
 ?>

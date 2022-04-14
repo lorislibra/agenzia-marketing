@@ -15,7 +15,7 @@ function show_items(array $items){
 function show_item(Item $item){
     $html_code = '
                 <div class="item_box">
-                    
+                
                 </div>
                 ';
     
