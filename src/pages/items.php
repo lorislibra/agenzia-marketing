@@ -1,7 +1,5 @@
 <?php
-
-require_once("src/template/lateral_menu.php");
-
+    require_once("src/template/lateral_menu.php");
 ?>
 
 <html>
@@ -12,8 +10,14 @@ require_once("src/template/lateral_menu.php");
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
+        <?php echo(show_lateral_menu("Items")); ?>
+        <div class="body_main">
+            <div class="items_head">
 
-    <?php echo(show_lateral_menu("Items")); ?>
-
+            </div>
+            <div class="items_list">
+                <?php //echo(show_items()); ?>
+            </div>
+        </div>
     </body>
 </html>

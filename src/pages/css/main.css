@@ -71,3 +71,12 @@
     transform: translateY(40%);
     width: 60%;
 }
+
+.body_main{
+    display: block;
+    height: 100%;
+    width: calc(100% - 220px);
+    font-family: Verdana, sans-serif;
+    float: right;
+    background-color: aqua;
+}
