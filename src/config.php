@@ -25,7 +25,6 @@ function load_env(string $path) :void
             putenv(sprintf('%s=%s', $name, $value));
             $_ENV[$name] = $value;
             $_SERVER[$name] = $value;
-            var_dump($value);
         }
     }
 }
@@ -40,7 +39,6 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 }
 
 while (1) {
-    var_dump($dir);
     if (file_exists($dir . $separator . ".env")) {
         load_env($dir . $separator . ".env");
         break;

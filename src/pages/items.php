@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require_once("src/template/lateral_menu.php");
 require_once("src/template/items_template.php");
 require_once("src/repositories/item_repo.php");
