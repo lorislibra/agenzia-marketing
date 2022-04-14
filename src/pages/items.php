@@ -1,5 +1,13 @@
 <?php
 
+/*
+
+TO DO:
+    - Add filters
+    - Let the user make an order
+
+*/
+
 require_once("src/template/lateral_menu.php");
 require_once("src/template/items_template.php");
 require_once("src/repositories/item_repo.php");
@@ -13,7 +21,7 @@ $items = $item_repo->get_all();
 
 <html>
     <head>
-        <title>Items</title>
+        <title>Showcase</title>
 
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/main.css">
