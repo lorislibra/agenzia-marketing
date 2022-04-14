@@ -19,6 +19,7 @@ class Product
         $this->category = $category;
         $this->name = $name;
         $this->price = $price;
+        $this->image = $image;
     }
 
     public static function check_row_column(QueryMetadata $metadata): bool 

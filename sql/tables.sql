@@ -165,7 +165,7 @@ INSERT INTO user_region (user_id, region_id) VALUES
 INSERT INTO sell_point (id, name, address, region_id) VALUES
 (1, "iper", "via roma 1, castelfranco veneto, 35010", 20); 
 
-INSERT INTO product (sku, brand, category, name, iamge, price) VALUES 
+INSERT INTO product (sku, brand, category, name, image, price) VALUES 
 ("CCL1", "coca-cola", "bevanda", "coca cola light", "https://m.media-amazon.com/images/I/51+Z8aLOwLL._AC_SX342_.jpg", 1.5);
 
 INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
