@@ -104,7 +104,6 @@
     flex-wrap: wrap;
     position: relative;
     width: calc(100% - 40px);
-    height: 80%;
     background-color: #ffffff;
     margin: 20px;
 }
