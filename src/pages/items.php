@@ -2,6 +2,12 @@
 
 require_once("src/template/lateral_menu.php");
 require_once("src/template/items_template.php");
+require_once("src/repositories/item_repo.php");
+
+$connection = DbManager::build_connection_from_env();
+
+$item_repo = new ItemRepo($connection);
+$items = $item_repo->get_all();
 
 ?>
 
@@ -20,7 +26,7 @@ require_once("src/template/items_template.php");
                 <!-- filtri -->
             </div>
             <div class="items_list">
-                <?php echo(show_items()); ?>
+                <?php echo(show_items($items)); ?>
             </div>
         </div>
     </body>

@@ -31,12 +31,20 @@ function load_env(string $path) :void
 
 $dir = __DIR__;
 
+$separator = "";
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    $separator = "/";
+} else {
+    $separator = "\\";
+}
+
 while (1) {
-    if (file_exists("$dir/.env")) {
-        load_env("$dir/.env");
+    if (file_exists($dir . $separator . ".env")) {
+        load_env($dir . $separator . ".env");
         break;
     }
-    if (str_ends_with($dir, "agenzia-marketing") || count(explode("/", $dir)) == 1) {
+
+    if (str_ends_with($dir, "agenzia-marketing") || count(explode($separator, $dir)) == 1) {
         break;
     }
 
