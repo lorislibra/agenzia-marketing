@@ -18,10 +18,10 @@ function show_item(Item $item){
     $product = $item->product;
 
     $html_code = '
-                <div class="item_box">
+                <a class="item_box" onclick="open_order_window()" href="#order_window">
                     <img class="ib_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
                     <span class="ib_name">€' . number_format($product->price, 2) . '<br>' . strtoupper($product->name) . '</span>
-                </div>
+                </a>
                 ';
     
     return $html_code;
