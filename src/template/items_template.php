@@ -1,6 +1,5 @@
 <?php
 
-require_once("src/pages/index.php");
 require_once("src/repositories/item_repo.php");
 
 function show_items(){
