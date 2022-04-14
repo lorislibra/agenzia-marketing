@@ -8,6 +8,12 @@ function show_items(array $items){
     if($items != null){
         foreach($items as $item){
             $html_code .= show_item($item);
+            $html_code .= show_item($item);
+            $html_code .= show_item($item);
+            $html_code .= show_item($item);
+            $html_code .= show_item($item);
+            $html_code .= show_item($item);
+            $html_code .= show_item($item);
         }
     }
 
