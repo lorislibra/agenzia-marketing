@@ -36,9 +36,9 @@ if (is_post()) {
 function show_errors(): string 
 {
     global $session;
-    $error_html = "";
+    $error_html = '';
     foreach ($session->get_login_errors() as $error) {
-        $error_html .= "<p>$error</p>";
+        $error_html .= '<p class="login_errors">' .$error . '</p>';
     }
     return $error_html;
 }
@@ -52,7 +52,7 @@ function show_errors(): string
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body>
+    <body style="background-image: url(https://peroni.it/wp-content/uploads/2021/04/family-2021-desktop.jpg);">
         <div class="login_section">
             <img class="logo" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
             <form class="login_form" method="POST" action="">

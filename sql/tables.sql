@@ -166,10 +166,10 @@ INSERT INTO sell_point (id, name, address, region_id) VALUES
 (1, "iper", "via roma 1, castelfranco veneto, 35010", 20); 
 
 INSERT INTO product (sku, brand, category, name, image, price) VALUES 
-("CCL1", "coca-cola", "bevanda", "coca cola light", "https://m.media-amazon.com/images/I/51+Z8aLOwLL._AC_SX342_.jpg", 1.5);
+("PRN1", "Peroni", "Bevanda", "Peroni", "https://peroni.it/wp-content/uploads/2019/09/peroni-33-feat.jpg", 1.5);
 
 INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
-(1, "CCL1", 30, 100, "cartonato");
+(1, "PRN1", 30, 100, "cartonato");
 
 INSERT INTO cart_item (user_id, item_id, quantity) VALUES 
 (1, 1, 3);

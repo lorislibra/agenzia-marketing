@@ -8,15 +8,6 @@
     to {transform: scale(1.5);}
 }
 
-.body{
-    filter: blur(0px);
-}
-
-.body_blurred >*:not(.order_window){
-    filter: blur(2px);
-    pointer-events: none;
-}
-
 .lateral_menu{
     display: block;
     position: absolute;
@@ -163,6 +154,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 20px -8px #000000;
     width: 40%;
     height: 50%;
     background-color: #ba161f;
@@ -181,4 +174,50 @@
     display: block;
     height: 70%;
     margin-top: 5%;
+    justify-content: center;
+}
+
+.login_input, .login_button{
+    box-shadow: 0px 0px 20px -8px #000000;
+}
+
+.login_input{
+    font-family: Verdana, sans-serif;
+    font-size: medium;
+    border: 0px;
+    border-radius: 4px 4px 4px 4px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 5%;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.login_input:focus{
+    outline: 0px;
+}
+
+
+.login_button{
+    font-family: Verdana, sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    color: #ba161f;
+    padding: 10px;
+    border: 0px;
+    background-color: #ffffff;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 20px;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.login_errors{
+    font-family: Verdana, sans-serif;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0px 0px 4px #000000;
 }
