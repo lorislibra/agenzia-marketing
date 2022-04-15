@@ -12,6 +12,11 @@ button{
     cursor: pointer;
 }
 
+.body_blurred >*:not(.order_window){
+    filter: blur(2px);
+    pointer-events: none;
+}
+
 .lateral_menu{
     display: block;
     position: absolute;
@@ -191,7 +196,7 @@ button{
     justify-content: center;
 }
 
-.login_input, .login_button{
+.login_input, .login_button, .order_button{
     box-shadow: 0px 0px 20px -8px #000000;
 }
 
@@ -214,19 +219,32 @@ button{
 }
 
 
-.login_button{
+.login_button, .order_button{
     font-family: Verdana, sans-serif;
     font-size: medium;
     font-weight: bold;
-    color: #ba161f;
-    padding: 10px;
     border: 0px;
-    background-color: #ffffff;
-    width: 30%;
-    margin-left: 35%;
-    margin-right: 35%;
     margin-bottom: 20px;
     border-radius: 15px 15px 15px 15px;
+}
+
+.login_button{
+    color: #ba161f;
+    background-color: #ffffff;
+    width: 30%;
+    padding: 10px;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+.order_button{
+    position: absolute;
+    bottom: 2%;
+    right: 4%;
+    color: #ffffff;
+    background-color: #ba161f;
+    width: 20%;
+    padding: 15px;
 }
 
 .login_errors{
@@ -234,4 +252,17 @@ button{
     color: #ffffff;
     text-align: center;
     text-shadow: 0px 0px 4px #000000;
+}
+
+.order_window{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+    z-index: 15;
+    box-shadow: 0px 0px 50px -8px rgba(0, 0, 0, 0.73);
 }
