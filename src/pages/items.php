@@ -31,6 +31,7 @@ function make_order(): string
                                     <p class="order_info" style="top: 42%;">Products per item: <b>' . $item->quantity . '</b></p>
                                     <button id="btn_sub" class="order_number_add_sub" style="left: 34.2%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
                                     <button id="btn_add" class="order_number_add_sub" style="left: 59%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
+                                    <a class="close_order_window" href="items.php">x</a>
                                     <form method="POST" action="cart.php">
                                         <input type="hidden" name="item" value="' . $item_id . '">
                                         <input id="order_number_input" type="number" name="order_number" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">

@@ -132,7 +132,7 @@ button{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     position: relative;
     width: calc(100% - 40px);
     background-color: #ffffff;
@@ -173,6 +173,8 @@ button{
     padding-bottom: 10px;
     font-weight: bold;
     color: #ffffff;
+    text-align: left;
+    font-size: medium;
     text-shadow: 0px 0px 5px #000000;
     z-index: 2;
 }
@@ -299,7 +301,7 @@ button{
     height: 88%;
     width: 22%;
     top: 6%;
-    left: 4%;
+    left: 2%;
     object-fit: cover;
     z-index: 16;
     border-radius: 15px 15px 15px 15px;
@@ -327,6 +329,21 @@ button{
 
 #order_number_input:focus{
     outline: 0px;
+}
+
+.close_order_window{
+    font-family: Verdana, sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+    color: #000000;
+    position: absolute;
+    top: 1%;
+    right: 1.4%;
+    text-decoration: none;
+}
+
+.close_order_window:visited{
+    color: #000000;
 }
 
 .order_window{

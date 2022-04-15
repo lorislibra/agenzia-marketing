@@ -166,10 +166,26 @@ INSERT INTO sell_point (id, name, address, region_id) VALUES
 (1, "iper", "via roma 1, castelfranco veneto, 35010", 20); 
 
 INSERT INTO product (sku, brand, category, name, image, price) VALUES 
-("PRN1", "Peroni", "Bevanda", "Peroni", "https://peroni.it/wp-content/uploads/2019/09/peroni-33-feat.jpg", 1.5);
+("PRN1", "Peroni", "Bevanda", "Peroni", "https://peroni.it/wp-content/uploads/2019/09/peroni-33-feat.jpg", 1.5),
+("PRC1", "Peroni", "Bevanda", "Peroni cruda", "https://peroni.it/wp-content/uploads/2021/04/peroni-cruda-33-feat.jpg", 1.4),
+("PCL1", "Peroni", "Bevanda", "Peroni chill lemon", "https://peroni.it/wp-content/uploads/2019/09/peroni-chill-lemon-feat.jpg", 1.6),
+("PSG1", "Peroni", "Bevanda", "Peroni senza glutine", "https://peroni.it/wp-content/uploads/2019/09/peroni-senza-glutine-feat.jpg", 1.3),
+("PRB1", "Peroni", "Bevanda", "Peroni gr bianca", "https://peroni.it/wp-content/uploads/2021/04/pgr-bianca-feat.jpg", 1.7),
+("PRD1", "Peroni", "Bevanda", "Peroni gr doppio malto", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-doppio-malto-feat.jpg", 1.8),
+("PRR1", "Peroni", "Bevanda", "Peroni gr rossa", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-rossa-feat.jpg", 2.1),
+("PRM1", "Peroni", "Bevanda", "Peroni gr puro malto", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-puro-malto-feat.jpg", 1.2),
+("PNC1", "Peroni", "Bevanda", "Peroncino", "https://peroni.it/wp-content/uploads/2019/10/454x626__cGFVLpn.jpg", 3.0);
 
 INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
-(1, "PRN1", 30, 100, "cartonato");
+(1, "PRN1", 30, 100, "cartonato"),
+(2, "PRC1", 29, 101, "cartonato"),
+(3, "PCL1", 31, 99, "cartonato"),
+(4, "PSG1", 28, 102, "cartonato"),
+(5, "PRB1", 32, 98, "cartonato"),
+(6, "PRD1", 27, 103, "cartonato"),
+(7, "PRR1", 33, 97, "cartonato"),
+(8, "PRM1", 26, 104, "cartonato"),
+(9, "PNC1", 34, 96, "cartonato");
 
 INSERT INTO cart_item (user_id, item_id, quantity) VALUES 
 (1, 1, 3);
