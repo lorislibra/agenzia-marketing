@@ -14,12 +14,9 @@ if (is_post()) {
 
     $dto = SignInDto::from_array($_POST);
 
-    echo $dto->email;
-    echo " " . $dto->password;
-
     if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
         $session->set_user($user);
-        header("location: /dashboard.php");
+        header("Location: /dashboard.php");
     }
 }
 
@@ -35,7 +32,7 @@ if (is_post()) {
     <body>
         <div class="login_section">
             <img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
-            <form method="POST" action="">
+            <form method="POST" action="" autocomplete="off">
                 <input type="text" name="email" placeholder="Email" autocomplete="off">
                 <input type="password" name="password" placeholder="Password" autocomplete="off">
                 <input type="submit" value="LOGIN">
