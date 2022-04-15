@@ -16,6 +16,7 @@ class UserRepo extends DbManager
         // iterate over rows
         while ($row = $statement->fetch(PDO::FETCH_NUM)) {
             // build the temp user from the row
+            var_dump($row);
             $user = User::build_from_row($metadata, $row);
 
             try {
@@ -91,7 +92,7 @@ class UserRepo extends DbManager
 
         if ($stmt->execute(["email" => $email, "password" => $password])) {
             $users = $this->parse_fetch($stmt);
-            $this->get_first_element($users);
+            return $this->get_first_element($users);
         }
 
         return null;

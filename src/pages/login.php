@@ -16,8 +16,12 @@ if (is_post()) {
 
     if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
         $session->set_user($user);
-        header("Location: /dashboard.php");
+        header("location: /dashboard.php");
+    } else {
+        header("location: /login.php");
     }
+
+    exit();
 }
 
 ?>
@@ -32,7 +36,7 @@ if (is_post()) {
     <body>
         <div class="login_section">
             <img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
-            <form method="POST" action="" autocomplete="off">
+            <form method="POST" action="">
                 <input type="text" name="email" placeholder="Email" autocomplete="off">
                 <input type="password" name="password" placeholder="Password" autocomplete="off">
                 <input type="submit" value="LOGIN">

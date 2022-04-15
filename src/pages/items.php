@@ -3,6 +3,9 @@
 require_once("src/templates/lateral_menu.php");
 require_once("src/templates/items_template.php");
 require_once("src/repositories/item_repo.php");
+require_once("src/middleware/checks.php");
+
+need_logged();
 
 $connection = DbManager::build_connection_from_env();
 
