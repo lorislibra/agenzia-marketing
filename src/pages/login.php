@@ -18,10 +18,16 @@ if (is_post()) {
         $session->set_user($user);
         header("location: /dashboard.php");
     } else {
+        $session->add_login_error("invalid email or password");
         header("location: /login.php");
     }
 
     exit();
+}
+
+function show_errors(): string 
+{
+    $session->
 }
 
 ?>
@@ -41,10 +47,11 @@ if (is_post()) {
                 <input type="password" name="password" placeholder="Password" autocomplete="off">
                 <input type="submit" value="LOGIN">
             </form>
+            <p></p>
         </div>
 
         <script>
-            if(window.history.replaceState){
+            if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
         </script>
