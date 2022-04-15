@@ -3,16 +3,14 @@
 require_once("src/templates/lateral_menu.php");
 require_once("src/templates/items_template.php");
 require_once("src/repositories/item_repo.php");
+require_once("src/middleware/checks.php");
+
+need_logged();
 
 $connection = DbManager::build_connection_from_env();
 
 $item_repo = new ItemRepo($connection);
 $items = $item_repo->get_all();
-
-function is_selected(string $order_value)
-{
-    return !empty($_POST["content_order"]) && $_POST["content_order"] == $order_value;
-}
 
 ?>
 
