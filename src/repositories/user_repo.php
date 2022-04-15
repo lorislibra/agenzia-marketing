@@ -3,6 +3,7 @@
 require_once("manager.php");
 require_once("src/entities/user.php");
 require_once("src/entities/region.php");
+require_once("src/dtos/signin.php");
 
 class UserRepo extends DbManager
 {
@@ -81,7 +82,7 @@ class UserRepo extends DbManager
     }
 
     // get a user by its email and password
-    function get_by_email_password(string $email, string $password): ?User
+    function get_by_email_password(SignInDto $user): ?User
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM user  
@@ -90,7 +91,7 @@ class UserRepo extends DbManager
         WHERE email=:email AND password=:password;
         ");
 
-        if ($stmt->execute(["email" => $email, "password" => $password])) {
+        if ($stmt->execute(["email" => $user->email, "password" => $user->password])) {
             $users = $this->parse_fetch($stmt);
             return $this->get_first_element($users);
         }

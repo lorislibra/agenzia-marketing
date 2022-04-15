@@ -9,16 +9,25 @@ redirect_if_logged();
 
 // POST handler
 if (is_post()) {
+    // validate input and redirect if errors
+    $user_dto = SignInDto::from_array($_POST);
+    $errors = array();
+    if (!$user_dto->validate($errors)) {
+        var_dump($errors);
+        $session->add_login_errors(...$errors);
+        header("location: /login.php");
+        exit();
+    }
+
+    // check user in the db
     $connection = DbManager::build_connection_from_env();
     $userRepo = new UserRepo($connection);
 
-    $dto = SignInDto::from_array($_POST);
-
-    if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
+    if ($user = $userRepo->get_by_email_password($user_dto)) {
         $session->set_user($user);
         header("location: /dashboard.php");
     } else {
-        $session->add_login_error("invalid email or password");
+        $session->add_login_errors("Invalid email or password");
         header("location: /login.php");
     }
 
@@ -27,7 +36,12 @@ if (is_post()) {
 
 function show_errors(): string 
 {
-    $session->
+    global $session;
+    $error_html = "";
+    foreach ($session->get_login_errors() as $error) {
+        $error_html .= "<p>$error</p>";
+    }
+    return $error_html;
 }
 
 ?>
@@ -46,10 +60,9 @@ function show_errors(): string
                 <input class="login_input" type="text" name="email" placeholder="Email" autocomplete="off">
                 <input class="login_input" type="password" name="password" placeholder="Password" autocomplete="off">
                 <input class="login_button" type="submit" value="LOGIN">
+                <?php echo(show_errors()); ?>
             </form>
-            <p></p>
         </div>
-
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);

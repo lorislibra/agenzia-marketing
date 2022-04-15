@@ -153,9 +153,9 @@ INSERT INTO region (id, name) VALUES
 (20, "Veneto");
 
 INSERT INTO user (id, email, password, role_id) VALUES 
-(1, "dev1@dev.com", "dev", 1),
-(2, "dev2@dev.com", "dev", 1),
-(3, "dev3@dev.com", "dev", 1);
+(1, "dev1@dev.com", "ciao1234", 1),
+(2, "dev2@dev.com", "ciao1234", 1),
+(3, "dev3@dev.com", "ciao1234", 1);
 
 INSERT INTO user_region (user_id, region_id) VALUES 
 (1, 20), (1, 19), (1, 18), (1, 17), (1, 16), (1, 15), (1, 14), (1, 13),

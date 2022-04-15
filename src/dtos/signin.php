@@ -21,12 +21,17 @@ class SignInDto
     }
 
     // check if the dto is valid
-    function validate(array $errors): bool
+    function validate(array &$errors): bool
     {
         $is_valid = true;
-        $len = strlen($this->password);
-        if ($len > 7) {
-            array_push($errors, $len);
+
+        if (strlen($this->password) < 8) {
+            array_push($errors, "password is too short");
+            $is_valid = false;
+        }
+
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            array_push($errors, "email is not valid");
             $is_valid = false;
         }
 

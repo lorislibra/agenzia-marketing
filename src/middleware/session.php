@@ -5,7 +5,9 @@ class SessionManager
     function __construct()
     {
         session_start();
-        $_SESSION["login_errors"] = array();
+        if (!isset($_SESSION["login_errors"])) {
+            $_SESSION["login_errors"] = array();
+        }
     }
 
     function is_logged(): bool
@@ -26,16 +28,15 @@ class SessionManager
         return null;
     }
 
-    function add_login_error(string ...$error) {
-        array_push($_SESSION["login_errors"], $error);
+    function add_login_errors(string ...$error) {
+        array_push($_SESSION["login_errors"], ...$error);
     }
 
     function get_login_errors(): Generator
     {
         while (!empty($_SESSION["login_errors"])) {
-            yield array_pop($_SERVER["login_errors"]);
+            yield array_shift($_SESSION["login_errors"]);      
         }
-        return null;
     }
 
     function logout()
