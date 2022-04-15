@@ -18,12 +18,12 @@ class QueryMetadata
         }
     }
 
-    public function format_index_key(string $table, string $column): string 
+    function format_index_key(string $table, string $column): string 
     {
         return $table . "_" . $column;
     }
 
-    public function exists(string $table, array $columns): bool 
+    function exists(string $table, array $columns): bool 
     {
         foreach ($columns as $column) {
             if (!$this->exist($table, $column)) {
@@ -33,12 +33,12 @@ class QueryMetadata
         return true;
     }
 
-    public function exist(string $table, string $column): bool 
+    function exist(string $table, string $column): bool 
     {
         return array_key_exists($this->format_index_key($table, $column), $this->indexes);
     }
 
-    public function get(string $table, string $column) 
+    function get(string $table, string $column) 
     {
         $key = $this->format_index_key($table, $column);
         if (array_key_exists($key, $this->indexes)){

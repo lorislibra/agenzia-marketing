@@ -34,12 +34,12 @@ class DbManager
         return DbManager::build_connection($host, $port, $user, $passw, $db_name);
     }
 
-    public function __construct(PDO $connection)
+    function __construct(PDO $connection)
     {
         $this->connection = $connection;
     }
 
-    public function get_connection(): PDO
+    function get_connection(): PDO
     {
         return $this->connection;
     }
@@ -57,7 +57,7 @@ class DbManager
         throw new MissingColumnError();
     }
 
-    public function get_first_element(array $list): ?object
+    function get_first_element(array $list): ?object
     {
         if (count($list)) {
             return $list[array_key_first($list)];

@@ -7,7 +7,7 @@ require_once("src/entities/region.php");
 class UserRepo extends DbManager
 {
 
-    public function parse_fetch(PDOStatement $statement): array
+    function parse_fetch(PDOStatement $statement): array
     {
         $list = array();
         // metadata of the query result
@@ -45,7 +45,7 @@ class UserRepo extends DbManager
     }
 
     // get a user by its id
-    public function get_by_id(int $id): ?User
+    function get_by_id(int $id): ?User
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM user
@@ -63,7 +63,7 @@ class UserRepo extends DbManager
     }
 
     // get a user by its email
-    public function get_by_email(string $email): ?User
+    function get_by_email(string $email): ?User
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM user
@@ -81,7 +81,7 @@ class UserRepo extends DbManager
     }
 
     // get a user by its email and password
-    public function get_by_email_password(string $email, string $password): ?User
+    function get_by_email_password(string $email, string $password): ?User
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM user  
@@ -99,7 +99,7 @@ class UserRepo extends DbManager
     }
 
     // get all users
-    public function get_all(): ?array
+    function get_all(): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM user
@@ -115,7 +115,7 @@ class UserRepo extends DbManager
         return null;
     }
 
-    public function count(): int
+    function count(): int
     {
         $stmt = $this->get_connection()->prepare("
         SELECT COUNT(id) FROM user;

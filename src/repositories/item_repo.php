@@ -7,7 +7,7 @@ require_once("src/entities/product.php");
 class ItemRepo extends DbManager
 {
 
-    public function parse_fetch(PDOStatement $statement): array
+    function parse_fetch(PDOStatement $statement): array
     {
         $list = array();
         // metadata of the query result
@@ -27,7 +27,7 @@ class ItemRepo extends DbManager
     }
     
     // get an item by its id
-    public function get_by_id(int $id): ?Item
+    function get_by_id(int $id): ?Item
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
@@ -44,7 +44,7 @@ class ItemRepo extends DbManager
     }
 
     // get the items of a certain product by sku
-    public function get_by_sku(int $sku): ?array
+    function get_by_sku(int $sku): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
@@ -61,7 +61,7 @@ class ItemRepo extends DbManager
     }
 
     // get all items
-    public function get_all(): ?array
+    function get_all(): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item

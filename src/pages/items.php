@@ -9,12 +9,9 @@ $connection = DbManager::build_connection_from_env();
 $item_repo = new ItemRepo($connection);
 $items = $item_repo->get_all();
 
-function is_selected(string $order_value){
-    if(!empty($_POST["content_order"]) && $_POST["content_order"] == $order_value){
-        return true;
-    }
-
-    return false;
+function is_selected(string $order_value)
+{
+    return !empty($_POST["content_order"]) && $_POST["content_order"] == $order_value;
 }
 
 ?>
@@ -34,7 +31,7 @@ function is_selected(string $order_value){
             </div>
         </div>
         <script>
-            if(window.history.replaceState){
+            if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
         </script>

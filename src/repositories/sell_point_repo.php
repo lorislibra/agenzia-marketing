@@ -7,7 +7,7 @@ require_once("src/entities/region.php");
 class SellPointRepo extends DbManager
 {
 
-    public function parse_fetch(PDOStatement $statement): array
+    function parse_fetch(PDOStatement $statement): array
     {
         $list = array();
         // metadata of the query result
@@ -27,7 +27,7 @@ class SellPointRepo extends DbManager
     }
 
     // get a sell_point by its id
-    public function get_by_id(int $id): ?SellPoint
+    function get_by_id(int $id): ?SellPoint
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM sell_point
@@ -44,7 +44,7 @@ class SellPointRepo extends DbManager
     }
 
     // get the sell_points of a certain region by id
-    public function get_by_region(int $id): ?array
+    function get_by_region(int $id): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM sell_point
@@ -61,7 +61,7 @@ class SellPointRepo extends DbManager
     }
 
     // get all sell_points
-    public function get_all(): ?array
+    function get_all(): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM sell_point

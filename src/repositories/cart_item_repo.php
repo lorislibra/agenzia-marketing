@@ -8,7 +8,7 @@ require_once("src/entities/product.php");
 class CartItemRepo extends DbManager
 {
 
-    public function parse_fetch(PDOStatement $statement): array
+    function parse_fetch(PDOStatement $statement): array
     {
         $list = array();
         // metadata of the query result
@@ -28,7 +28,7 @@ class CartItemRepo extends DbManager
     }
 
     // get cart_items of a user by its id
-    public function get_by_user_id(int $user_id): ?array
+    function get_by_user_id(int $user_id): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM cart_item

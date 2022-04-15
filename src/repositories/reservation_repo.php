@@ -10,7 +10,7 @@ enum Status
 class ReservationRepo extends DbManager
 {
 
-    public function parse_fetch(PDOStatement $statement): array
+    function parse_fetch(PDOStatement $statement): array
     {
         $list = array();
 
@@ -30,7 +30,7 @@ class ReservationRepo extends DbManager
     }
     
     // get a reservation by its id
-    public function get_by_id(int $id): ?Reservation
+    function get_by_id(int $id): ?Reservation
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
@@ -46,7 +46,7 @@ class ReservationRepo extends DbManager
     }
 
     // get a reservation by its id
-    public function get_all(): ?array
+    function get_all(): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
