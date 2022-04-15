@@ -8,7 +8,6 @@ $connection = DbManager::build_connection_from_env();
 
 $item_repo = new ItemRepo($connection);
 $items = $item_repo->get_all();
-header("Location: items.php");
 
 function is_selected(string $order_value){
     if(!empty($_POST["content_order"]) && $_POST["content_order"] == $order_value){
@@ -27,15 +26,13 @@ function is_selected(string $order_value){
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body class="body" id="body">
+    <body>
         <?php echo(show_lateral_menu("Items")); ?>
         <div class="body_main">
             <div class="items_list">
                 <?php echo(show_items($items)); ?>
             </div>
         </div>
-        <div id="order_window"></div>
-
         <script>
             if(window.history.replaceState){
                 window.history.replaceState(null, null, window.location.href);
