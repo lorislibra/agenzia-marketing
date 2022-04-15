@@ -58,7 +58,7 @@ function show_errors(): string
             <form class="login_form" method="POST" action="">
                 <input class="login_input" type="text" name="email" placeholder="Email" autocomplete="off">
                 <input class="login_input" type="password" name="password" placeholder="Password" autocomplete="off">
-                <input class="login_button" type="submit" value="LOGIN">
+                <button class="login_button" type="submit">LOGIN</button>
                 <?php echo(show_errors()); ?>
             </form>
         </div>
