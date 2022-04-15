@@ -45,7 +45,7 @@ function show_errors(): string
 
 ?>
 
-<html>
+<html lang="en">
     <head>
         <title>Login</title>
 

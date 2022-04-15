@@ -18,14 +18,22 @@ function make_order(): string
 
     if(!empty($_GET["item"])){
         $item_id = $_GET["item"];
-        $selected_item = $item_repo->get_by_id($item_id);
+        $item = $item_repo->get_by_id($item_id);
+        $product = $item->product;
 
-        if($selected_item != null){
+        if($item != null){
             $make_order_html = '
                                 <div class="order_window">
-                                    <form method="GET" action="cart.php">
+                                    <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
+                                    <p class="order_info" style="top: 6%;">Name: <b>' . $product->name . '</b></p>
+                                    <p class="order_info" style="top: 18%;">Brand: <b>' . $product->brand . '</b></p>
+                                    <p class="order_info" style="top: 30%;">Item price: <b>€' . number_format($product->price * $item->quantity, 2) . '</b></p>
+                                    <p class="order_info" style="top: 42%;">Products per item: <b>' . $item->quantity . '</b></p>
+                                    ' . $item->stock . '
+                                    <form method="POST" action="cart.php">
+                                        <input class="order_number_input" type="number" name="order_number" min="1" max="' . $item->stock . '">
                                         <button class="order_button">
-                                            ORDER
+                                            ADD TO CART
                                         </button>
                                     </form>
                                 </div>
@@ -42,7 +50,7 @@ function make_order(): string
 
 ?>
 
-<html>
+<html lang="en">
     <head>
         <title>Showcase</title>
 
