@@ -35,11 +35,11 @@ if (is_post()) {
     </head>
     <body>
         <div class="login_section">
-            <img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
-            <form method="POST" action="">
-                <input type="text" name="email" placeholder="Email" autocomplete="off">
-                <input type="password" name="password" placeholder="Password" autocomplete="off">
-                <input type="submit" value="LOGIN">
+            <img class="logo" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
+            <form class="login_form" method="POST" action="">
+                <input class="login_input" type="text" name="email" placeholder="Email" autocomplete="off">
+                <input class="login_input" type="password" name="password" placeholder="Password" autocomplete="off">
+                <input class="login_button" type="submit" value="LOGIN">
             </form>
         </div>
 
