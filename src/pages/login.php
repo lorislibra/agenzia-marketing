@@ -14,13 +14,14 @@ if (is_post()) {
 
     $dto = SignInDto::from_array($_POST);
 
-    echo $dto->email;
-    echo " " . $dto->password;
-
     if ($user = $userRepo->get_by_email_password($dto->email, $dto->password)) {
         $session->set_user($user);
         header("location: /dashboard.php");
+    } else {
+        header("location: /login.php");
     }
+
+    exit();
 }
 
 ?>
