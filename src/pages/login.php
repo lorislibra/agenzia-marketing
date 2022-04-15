@@ -52,7 +52,7 @@ function show_errors(): string
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body style="background-image: url(https://peroni.it/wp-content/uploads/2021/04/family-2021-desktop.jpg);">
+    <body style="background-image: url(https://peroni.it/wp-content/uploads/2021/04/family-2021-desktop.jpg); background-repeat: no-repeat; background-size: cover;">
         <div class="login_section">
             <img class="logo" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
             <form class="login_form" method="POST" action="">
