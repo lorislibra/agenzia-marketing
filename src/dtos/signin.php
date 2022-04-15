@@ -26,7 +26,7 @@ class SignInDto
         $is_valid = true;
 
         if (strlen($this->password) < 8) {
-            array_push($errors, "password is too short");
+            array_push($errors, "password is short");
             $is_valid = false;
         }
 

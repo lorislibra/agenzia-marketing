@@ -13,8 +13,7 @@ if (is_post()) {
     $user_dto = SignInDto::from_array($_POST);
     $errors = array();
     if (!$user_dto->validate($errors)) {
-        var_dump($errors);
-        $session->add_login_errors(...$errors);
+        $session->add_login_errors("Invalid email or password");
         header("location: /login.php");
         exit();
     }
