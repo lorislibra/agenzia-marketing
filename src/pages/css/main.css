@@ -56,10 +56,6 @@
     color: #ffffff;
 }
 
-.lm_link:visited{
-    color: #ffffff;
-}
-
 .lm_link:hover{
     background-color: #ba161f;
     opacity: 0.9;
@@ -70,13 +66,19 @@
     opacity: 0.8;
 }
 
+.hidden_submit{
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    color: #ffffff;
+}
+
 .lm_link_img{
     display: inline;
     position: relative;
     left: 0px;
     width: 14%;
-    padding-left: 15%;
-    padding-right: 5%;
     aspect-ratio: 1 / 1;
 }
 
@@ -86,7 +88,8 @@
     float: right;
     transform: translateY(40%);
     width: 60%;
-    font-size: 1vw;
+    font-size: 16px;
+    color: #ffffff;
 }
 
 .body_main{
@@ -152,4 +155,30 @@
     color: #ffffff;
     text-shadow: 0px 0px 5px #000000;
     z-index: 2;
+}
+
+.login_section{
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 50%;
+    background-color: #ba161f;
+}
+
+.logo{
+    height: 20%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    width: 100%;
+    object-fit: scale-down;
+    justify-content: center;
+}
+
+.login_form{
+    display: block;
+    height: 70%;
+    margin-top: 5%;
 }
