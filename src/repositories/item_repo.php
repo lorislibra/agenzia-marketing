@@ -80,7 +80,7 @@ class ItemRepo extends DbManager
     function remove_stock(int $item_id, int $quantity): bool
     {
         $stmt = $this->get_connection()->prepare("
-        UPDATE TABLE item
+        UPDATE item
         SET stock = stock - :quantity
         WHERE id = :id
         ");

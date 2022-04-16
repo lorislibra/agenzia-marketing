@@ -31,7 +31,7 @@ function add_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
         throw new Exception("not enough items");
     }
 
-    if (!$cart_item_repo->add_cart_item($user_id, $dto)) {
+    if (!$cart_item_repo->add_or_update_cart_item($user_id, $dto)) {
         $connection->rollBack();
         throw new Exception("error adding to cart");
     }
@@ -48,17 +48,18 @@ if (is_post()) {
     try {
         $dto = AddToCartDto::from_array($_POST);
     } catch (ValidateDtoError $e) {
+        $session->add_error("cart", "invalid add to cart");
         header("location: /items.php");
         exit();
     }
-    
+
     $user = $session->get_user();
     $connection = DbManager::build_connection_from_env();
 
     try {
         add_cart_item_tx($connection, $user->id, $dto);
     } catch (Exception $e) {
-        $session->add_error("cart", "error adding to the cart");
+        $session->add_error("cart", $e->getMessage());
     }
 
     header("location: /cart.php");
@@ -77,7 +78,7 @@ if (is_post()) {
     <body>
         <?php echo(show_lateral_menu("Cart")); ?>
         <div class="body_main">
-            
+        <?php echo($session->get_error("cart")); ?>
         </div>
         <script>
             if (window.history.replaceState) {
