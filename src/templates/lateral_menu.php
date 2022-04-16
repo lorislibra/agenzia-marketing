@@ -14,8 +14,8 @@ function show_lateral_menu(string $opened_section): string
     );
 
     $lm_html_links = '';
-    foreach($lm_links as $lm_link){
-        if($lm_link["link_text"] != $opened_section){
+    foreach($lm_links as $lm_link) {
+        if ($lm_link["link_text"] != $opened_section) {
             $lm_html_links .= add_link($lm_link["icon_url"], $lm_link["link_url"], $lm_link["link_text"], $lm_link["method"]);
         }
     }
@@ -35,7 +35,8 @@ function show_lateral_menu(string $opened_section): string
 }
 
 // Return the header of the lateral menu
-function add_header(){
+function add_header()
+{
     $html_code = '
                 <img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
                 ';

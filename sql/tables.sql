@@ -177,16 +177,16 @@ INSERT INTO product (sku, brand, category, name, image, price) VALUES
 ("PRM1", "Peroni", "Bevanda", "Peroni gr puro malto", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-puro-malto-feat.jpg", 1.2),
 ("PNC1", "Peroni", "Bevanda", "Peroncino", "https://peroni.it/wp-content/uploads/2019/10/454x626__cGFVLpn.jpg", 3.0);
 
-INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
-(1, "PRN1", 30, 100, "cartonato"),
-(2, "PRC1", 29, 101, "cartonato"),
-(3, "PCL1", 31, 99, "cartonato"),
-(4, "PSG1", 28, 102, "cartonato"),
-(5, "PRB1", 32, 98, "cartonato"),
-(6, "PRD1", 27, 103, "cartonato"),
-(7, "PRR1", 33, 97, "cartonato"),
-(8, "PRM1", 26, 104, "cartonato"),
-(9, "PNC1", 34, 96, "cartonato");
+INSERT INTO item (id, product_sku, quantity, stock, image, category) VALUES 
+(1, "PRN1", 30, 100, "", "cartonato"),
+(2, "PRC1", 29, 101, "", "cartonato"),
+(3, "PCL1", 31, 99, "", "cartonato"),
+(4, "PSG1", 28, 102, "", "cartonato"),
+(5, "PRB1", 32, 98, "", "cartonato"),
+(6, "PRD1", 27, 103, "", "cartonato"),
+(7, "PRR1", 33, 97, "", "cartonato"),
+(8, "PRM1", 26, 104, "", "cartonato"),
+(9, "PNC1", 34, 96, "", "cartonato");
 
 INSERT INTO cart_item (user_id, item_id, quantity) VALUES 
 (1, 1, 3);

@@ -1,15 +1,14 @@
-*{
+* {
     margin: 0px;
     user-select: none;  
 }
 
-@keyframes zoom{
-    from {transform: scale(1);}
-    to {transform: scale(1.5);}
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.5); }
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -18,16 +17,21 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-button{
+button {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 .body_blurred >*:not(.order_window){
     filter: blur(6px);
+=======
+.body_blurred >*:not(.order_window) {
+    filter: blur(2px);
+>>>>>>> 7efae762b64ea67c4442e080f40ea18e924166db
     pointer-events: none;
 }
 
-.lateral_menu{
+.lateral_menu {
     display: block;
     position: absolute;
     height: 100%;
@@ -40,6 +44,7 @@ button{
     z-index: 10;
 }
 
+<<<<<<< HEAD
 .back_img_login{
     position: absolute;
     background-image: url(https://peroni.it/wp-content/uploads/2021/04/family-2021-desktop.jpg);
@@ -54,11 +59,14 @@ button{
 }
 
 .lm_header{
+=======
+.lm_header {
+>>>>>>> 7efae762b64ea67c4442e080f40ea18e924166db
     height: 25%;
     background-color: #ba161f;
 }
 
-.lm_title{
+.lm_title {
     text-align: center;
     position: relative;
     top: 50%;
@@ -67,11 +75,11 @@ button{
     transform: translateY(-50%);
 }
 
-.lm_body{
+.lm_body {
     height: 75%;
 }
 
-.lm_link{
+.lm_link {
     display: block;
     width: 100%;
     padding-top: 4%;
@@ -79,17 +87,17 @@ button{
     color: #ffffff;
 }
 
-.lm_link:hover{
+.lm_link:hover {
     background-color: #ba161f;
     opacity: 0.9;
 }
 
-.lm_link:active{
+.lm_link:active {
     background-color: #9e131a;
     opacity: 0.8;
 }
 
-.hidden_submit{
+.hidden_submit {
     position: relative;
     width: 100%;
     background-color: transparent;
@@ -97,14 +105,14 @@ button{
     color: #ffffff;
 }
 
-.hidden_input_btn{
+.hidden_input_btn {
     background-color: transparent;
     width: 100%;
     height: 100%;
     border: 0px;
 }
 
-.lm_link_img{
+.lm_link_img {
     display: inline;
     position: relative;
     left: 0px;
@@ -112,7 +120,7 @@ button{
     aspect-ratio: 1 / 1;
 }
 
-.lm_link_text{
+.lm_link_text {
     display: block;
     position: relative;
     float: right;
@@ -122,7 +130,7 @@ button{
     color: #ffffff;
 }
 
-.body_main{
+.body_main {
     display: block;
     position: absolute;
     height: 100%;
@@ -134,14 +142,14 @@ button{
     overflow-y: auto;
 }
 
-.items_head{
+.items_head {
     position: relative;
     width: 100%;
     height: 20%;
     background-color: aqua;
 }
 
-.items_list{
+.items_list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -152,7 +160,7 @@ button{
     margin: 20px;
 }
 
-.item_box{
+.item_box {
     display: block;
     position: relative;
     height: 340px;
@@ -163,7 +171,7 @@ button{
     cursor: pointer;
 }
 
-.ib_image{
+.ib_image {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -174,11 +182,11 @@ button{
     transition: transform 1s;
 }
 
-.ib_image:hover{
+.ib_image:hover {
     transform: scale(1.5);
 }
 
-.ib_name{
+.ib_name {
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -192,7 +200,7 @@ button{
     z-index: 2;
 }
 
-.login_section{
+.login_section {
     position: absolute;
     display: block;
     top: 50%;
@@ -205,7 +213,7 @@ button{
     background-color: #ba161f;
 }
 
-.logo{
+.logo {
     height: 20%;
     margin-top: 4%;
     margin-bottom: 2.5%;
@@ -214,18 +222,22 @@ button{
     justify-content: center;
 }
 
-.login_form{
+.login_form {
     display: block;
     height: 70%;
     margin-top: 5%;
     justify-content: center;
 }
 
+<<<<<<< HEAD
 .login_input, .login_button{
+=======
+.login_input, .login_button, .order_button, .order_number_add_sub {
+>>>>>>> 7efae762b64ea67c4442e080f40ea18e924166db
     box-shadow: 0px 0px 20px -8px #000000;
 }
 
-.login_input{
+.login_input {
     font-family: Verdana, sans-serif;
     font-size: medium;
     border: 0px;
@@ -239,12 +251,12 @@ button{
     padding-bottom: 10px;
 }
 
-.login_input:focus{
+.login_input:focus {
     outline: 0px;
 }
 
 
-.login_button, .order_button, .order_number_add_sub{
+.login_button, .order_button, .order_number_add_sub {
     font-family: Verdana, sans-serif;
     font-size: medium;
     font-weight: bold;
@@ -253,7 +265,7 @@ button{
     border-radius: 15px 15px 15px 15px;
 }
 
-.login_button{
+.login_button {
     color: #ba161f;
     background-color: #ffffff;
     width: 30%;
@@ -262,15 +274,15 @@ button{
     margin-right: 35%;
 }
 
-.login_button:hover{
+.login_button:hover {
     background-color: #f0eded;
 }
 
-.login_button:active{
+.login_button:active {
     background-color: #bfbdbd;
 }
 
-.order_button{
+.order_button {
     position: absolute;
     bottom: calc(4% - 20px);
     right: 4%;
@@ -281,7 +293,7 @@ button{
     z-index: 20;
 }
 
-.order_number_add_sub{
+.order_number_add_sub {
     position: absolute;
     bottom: calc(4% - 20px);
     color: #ffffff;
@@ -289,27 +301,27 @@ button{
     padding: 15px;
 }
 
-.order_number_add_sub:disabled{
+.order_number_add_sub:disabled {
     opacity: 0.6;
     cursor: default;
 }
 
-.order_button:hover, .order_number_add_sub:hover{
+.order_button:hover, .order_number_add_sub:hover {
     background-color: #ba161f;
 }
 
-.order_button:active, .order_number_add_sub:active{
+.order_button:active, .order_number_add_sub:active {
     background-color: #9e131a;
 }
 
-.login_errors{
+.login_errors {
     font-family: Verdana, sans-serif;
     color: #ffffff;
     text-align: center;
     text-shadow: 0px 0px 4px #000000;
 }
 
-.order_image{
+.order_image {
     position: absolute;
     height: 88%;
     width: 22%;
@@ -320,7 +332,7 @@ button{
     border-radius: 6px 6px 6px 6px;
 }
 
-.order_info{
+.order_info {
     font-family: Verdana, sans-serif;
     font-size: large;
     color: #000000;
@@ -328,7 +340,7 @@ button{
     left: 30%;
 }
 
-#order_number_input{
+#order_number_input {
     font-family: Verdana, sans-sarif;
     font-size: medium;
     position: absolute;
@@ -340,11 +352,11 @@ button{
     border-radius: 10px 10px 10px 10px;
 }
 
-#order_number_input:focus{
+#order_number_input:focus {
     outline: 0px;
 }
 
-.close_order_window{
+.close_order_window {
     font-family: Verdana, sans-serif;
     font-size: x-large;
     font-weight: bold;
@@ -355,11 +367,11 @@ button{
     text-decoration: none;
 }
 
-.close_order_window:visited{
+.close_order_window:visited {
     color: #000000;
 }
 
-.order_window{
+.order_window {
     position: absolute;
     overflow: hidden;
     top: 50%;

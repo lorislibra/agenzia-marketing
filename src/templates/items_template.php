@@ -19,7 +19,7 @@ function show_item(Item $item){
 
     $html_code = '
                 <form class="item_box" method="GET" action="">
-                    <button class="hidden_input_btn" name="item" value="' . $item->id . '">
+                    <button class="hidden_input_btn" name="id" value="' . $item->id . '">
                         <img class="ib_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
                         <span class="ib_name">€' . number_format($product->price, 2) . '<br>' . strtoupper($product->name) . '</span>
                     </button>
