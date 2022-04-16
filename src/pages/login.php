@@ -41,7 +41,7 @@ function show_error(): string
     global $session;
 
     if ($error = $session->get_error("login")) {
-        return '<p class="login_errors">' .$error . '</p>';
+        return '<p class="login_errors">' . $error . '</p>';
     }
 
     return "";

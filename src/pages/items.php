@@ -39,7 +39,7 @@ function make_order(): string
                                 <button id="btn_add" class="order_number_add_sub" style="left: 53.4%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
                                 <a class="close_order_window" href="items.php">✕</a>
                                 <form method="POST" action="cart.php">
-                                    <input type="hidden" name="item_id" value="' . $item->id . '">
+                                    <input type="hidden" name="id" value="' . $item->id . '">
                                     <input id="order_number_input" type="number" name="quantity" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
                                     <button class="order_button">
                                         ADD TO CART
@@ -63,7 +63,7 @@ function make_order(): string
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body <?php if(!empty($_GET["item"])) { echo 'class="body_blurred"'; } ?>>
+    <body <?php if(!empty($_GET["id"])) { echo 'class="body_blurred"'; } ?>>
         <?php echo(show_lateral_menu("Items")); ?>
         <div class="body_main">
             <div class="items_list">
