@@ -46,9 +46,56 @@ class CartItemRepo extends DbManager
         return null;
     }
 
-    function add_cart_item(AddToCartDto $dto): bool
+    function add_cart_item_tx(int $user_id, AddToCartDto $dto)
+    {   
+        $connection = $this->get_connection();
+
+        if (!$connection->beginTransaction()) {
+            $connection->rollBack();
+            throw new Exception("error during transaction"); 
+        }
+
+        $item_repo = new ItemRepo($connection);
+        $item = $item_repo->get_by_id($dto->item_id);
+        if (!$item) {
+            $connection->rollBack();
+            throw new Exception("item doesn't exist");
+        }
+
+        if ($item->stock < $dto->quantity) {
+            $connection->rollBack();
+            throw new Exception("not enough items");
+        }
+
+        if (!$this->add_cart_item($user_id, $dto)) {
+            $connection->rollBack();
+            throw new Exception("error adding to cart");
+        }
+
+        if (!$item_repo->remove_stock($dto->item_id, $dto->quantity)) {
+            $connection->rollBack();
+            throw new Exception("error removing stock");
+        }
+
+        $connection->commit();
+    }
+
+    function add_cart_item(int $user_id, AddToCartDto $dto): bool
     {
-        return true;
+        $stmt = $this->get_connection()->prepare("
+        INSERT INTO cart_item (user_id, item_id, quantity)
+        VALUES (:user_id, :item_id, :quantity);
+        ");
+
+        if ($stmt->execute([
+            "user_id" => $user_id,
+            "item_id" => $dto->item_id,
+            "quantity" => $dto->quantity
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+        
+        return false;
     }
 }
 

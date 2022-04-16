@@ -17,15 +17,17 @@ class SignInDto extends BaseDto
     }
 
     // parse from an array
-    static function from_array(array $array, array &$errors=array()): self
+    static function from_array(array $array): self
     {
+        $errors = array();
+
         if (!self::validate_array($array, ["email", "password"], $errors)) {
-            throw new ValidateDtoError();
+            throw new ValidateDtoError($errors);
         }
 
         $dto = new self($array["email"], $array["password"]);
         if (!$dto->validate($errors)) {
-            throw new ValidateDtoError();
+            throw new ValidateDtoError($errors);
         }
 
         return $dto;

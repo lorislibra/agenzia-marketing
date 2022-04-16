@@ -1,6 +1,15 @@
 <?php
 
-class ValidateDtoError extends Error { }
+class ValidateDtoError extends Exception
+{
+    public readonly array $errors;
+
+    function __construct(array $errors=array())
+    {
+        parent::__construct();
+        $this->errors = $errors;
+    }
+}
 
 class BaseDto
 {
