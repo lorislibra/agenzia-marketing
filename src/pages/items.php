@@ -16,12 +16,12 @@ function make_order(): string
 {
     global $item_repo;
 
-    if(!empty($_GET["item"])){
-        $item_id = $_GET["item"];
+    if (isset($_GET["id"]) && !empty($_GET["id"])) {
+        $item_id = $_GET["id"];
         $item = $item_repo->get_by_id($item_id);
         $product = $item->product;
 
-        if($item != null){
+        if ($item != null) {
             $make_order_html = '
                                 <div class="order_window">
                                     <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
@@ -33,8 +33,8 @@ function make_order(): string
                                     <button id="btn_add" class="order_number_add_sub" style="left: 59%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
                                     <a class="close_order_window" href="items.php">x</a>
                                     <form method="POST" action="cart.php">
-                                        <input type="hidden" name="item" value="' . $item_id . '">
-                                        <input id="order_number_input" type="number" name="order_number" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
+                                        <input type="hidden" name="item_id" value="' . $item_id . '">
+                                        <input id="order_number_input" type="number" name="quantity" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
                                         <button class="order_button">
                                             ADD TO CART
                                         </button>
