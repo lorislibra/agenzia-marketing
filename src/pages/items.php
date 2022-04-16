@@ -31,13 +31,13 @@ function make_order(): string
             $make_order_html = '
                                 <div class="order_window">
                                     <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
-                                    <p class="order_info" style="top: 6%;">Name: <b>' . $product->name . '</b></p>
-                                    <p class="order_info" style="top: 18%;">Brand: <b>' . $product->brand . '</b></p>
-                                    <p class="order_info" style="top: 30%;">Item price: <b>€' . number_format($product->price * $item->quantity, 2) . '</b></p>
-                                    <p class="order_info" style="top: 42%;">Products per item: <b>' . $item->quantity . '</b></p>
-                                    <button id="btn_sub" class="order_number_add_sub" style="left: 34.2%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
-                                    <button id="btn_add" class="order_number_add_sub" style="left: 59%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
-                                    <a class="close_order_window" href="items.php">x</a>
+                                    <p class="order_info" style="top: 12%;">Name: <b>' . $product->name . '</b></p>
+                                    <p class="order_info" style="top: 24%;">Brand: <b>' . $product->brand . '</b></p>
+                                    <p class="order_info" style="top: 36%;">Item price: <b>€' . number_format($product->price * $item->quantity, 2) . '</b></p>
+                                    <p class="order_info" style="top: 48%;">Products per item: <b>' . $item->quantity . '</b></p>
+                                    <button id="btn_sub" class="order_number_add_sub" style="left: 30%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
+                                    <button id="btn_add" class="order_number_add_sub" style="left: 53.4%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
+                                    <a class="close_order_window" href="items.php">✕</a>
                                     <form method="POST" action="cart.php">
                                         <input type="hidden" name="item_id" value="' . $item_id . '">
                                         <input id="order_number_input" type="number" name="quantity" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
