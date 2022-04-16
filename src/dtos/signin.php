@@ -1,6 +1,8 @@
 <?php
 
-class SignInDto
+require_once("dto.php");
+
+class SignInDto extends BaseDto
 {
     public int $id;
     public string $email;
@@ -15,9 +17,18 @@ class SignInDto
     }
 
     // parse from an array
-    public static function from_array(array $array): self
+    static function from_array(array $array, array &$errors=array()): self
     {
-        return new self($array["email"], $array["password"]);
+        if (!self::validate_array($array, ["email", "password"], $errors)) {
+            throw new ValidateDtoError();
+        }
+
+        $dto = new self($array["email"], $array["password"]);
+        if (!$dto->validate($errors)) {
+            throw new ValidateDtoError();
+        }
+
+        return $dto;
     }
 
     // check if the dto is valid

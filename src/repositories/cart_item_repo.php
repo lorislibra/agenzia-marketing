@@ -4,6 +4,7 @@ require_once("manager.php");
 require_once("src/entities/item.php");
 require_once("src/entities/cart_item.php");
 require_once("src/entities/product.php");
+require_once("src/dtos/add_to_cart.php");
 
 class CartItemRepo extends DbManager
 {
@@ -43,6 +44,11 @@ class CartItemRepo extends DbManager
         }
 
         return null;
+    }
+
+    function add_cart_item(AddToCartDto $dto): bool
+    {
+        return true;
     }
 }
 

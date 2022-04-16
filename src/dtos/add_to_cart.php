@@ -1,6 +1,8 @@
 <?php
 
-class AddToCartDto
+require_once("dto.php");
+
+class AddToCartDto extends BaseDto
 {
     public int $id;
     public int $quantity;
@@ -12,9 +14,18 @@ class AddToCartDto
     }
 
     // parse from an array
-    public static function from_array(array $array): self
+    static function from_array(array $array, array &$errors=array()): self
     {
-        return new self($array["id"], $array["quantity"]);
+        if (!self::validate_array($array, ["id", "quantity"], $errors)) {
+            throw new ValidateDtoError();
+        }
+
+        $dto = new self($array["id"], $array["quantity"]);
+        if (!$dto->validate($errors)) {
+            throw new ValidateDtoError();
+        }
+
+        return $dto;
     }
 
     // check if the dto is valid

@@ -5,13 +5,10 @@ require_once("src/templates/items_template.php");
 require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
+require_once("src/dtos/show_item.php");
 
 allowed_methods(["GET"]);
 need_logged();
-
-if (is_get()) {
-    
-}
 
 $connection = DbManager::build_connection_from_env();
 
@@ -22,36 +19,36 @@ function make_order(): string
 {
     global $item_repo;
 
-    if (isset($_GET["id"]) && !empty($_GET["id"])) {
-        $item_id = $_GET["id"];
-        $item = $item_repo->get_by_id($item_id);
+    try {
+        $dto = ShowItemDto::from_array($_GET);
+    } catch (ValidateDtoError $e) {
+        header("location: /items.php");
+        exit();
+    }
+
+    if ($item = $item_repo->get_by_id($dto->id)) {
         $product = $item->product;
+        $make_order_html = '
+                            <div class="order_window">
+                                <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
+                                <p class="order_info" style="top: 12%;">Name: <b>' . $product->name . '</b></p>
+                                <p class="order_info" style="top: 24%;">Brand: <b>' . $product->brand . '</b></p>
+                                <p class="order_info" style="top: 36%;">Item price: <b>€' . number_format($product->price * $item->quantity, 2) . '</b></p>
+                                <p class="order_info" style="top: 48%;">Products per item: <b>' . $item->quantity . '</b></p>
+                                <button id="btn_sub" class="order_number_add_sub" style="left: 30%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
+                                <button id="btn_add" class="order_number_add_sub" style="left: 53.4%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
+                                <a class="close_order_window" href="items.php">✕</a>
+                                <form method="POST" action="cart.php">
+                                    <input type="hidden" name="item_id" value="' . $item->id . '">
+                                    <input id="order_number_input" type="number" name="quantity" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
+                                    <button class="order_button">
+                                        ADD TO CART
+                                    </button>
+                                </form>
+                            </div>
+                            ';
 
-        if ($item != null) {
-            $make_order_html = '
-                                <div class="order_window">
-                                    <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
-                                    <p class="order_info" style="top: 12%;">Name: <b>' . $product->name . '</b></p>
-                                    <p class="order_info" style="top: 24%;">Brand: <b>' . $product->brand . '</b></p>
-                                    <p class="order_info" style="top: 36%;">Item price: <b>€' . number_format($product->price * $item->quantity, 2) . '</b></p>
-                                    <p class="order_info" style="top: 48%;">Products per item: <b>' . $item->quantity . '</b></p>
-                                    <button id="btn_sub" class="order_number_add_sub" style="left: 30%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
-                                    <button id="btn_add" class="order_number_add_sub" style="left: 53.4%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
-                                    <a class="close_order_window" href="items.php">✕</a>
-                                    <form method="POST" action="cart.php">
-                                        <input type="hidden" name="item_id" value="' . $item_id . '">
-                                        <input id="order_number_input" type="number" name="quantity" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
-                                        <button class="order_button">
-                                            ADD TO CART
-                                        </button>
-                                    </form>
-                                </div>
-                                ';
-
-            return $make_order_html;
-        }
-
-        return '';
+        return $make_order_html;
     }
 
     return '';

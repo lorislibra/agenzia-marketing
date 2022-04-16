@@ -1,6 +1,8 @@
 <?php
 
-class ShowItemDto
+require_once("dto.php");
+
+class ShowItemDto extends BaseDto
 {
     public int $id;
 
@@ -9,10 +11,18 @@ class ShowItemDto
         $this->id = $id;
     }
 
-    // parse from an array
-    public static function from_array(array $array): self
+    static function from_array(array $array, array &$errors=array()): self
     {
-        return new self($array["id"]);
+        if (!self::validate_array($array, ["id"], $errors)) {
+            throw new ValidateDtoError();
+        }
+
+        $dto = new self($array["id"]);
+        if (!$dto->validate($errors)) {
+            throw new ValidateDtoError();
+        }
+
+        return $dto;
     }
 
     // check if the dto is valid

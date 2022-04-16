@@ -5,8 +5,14 @@ class SessionManager
     function __construct()
     {
         session_start();
-        if (!isset($_SESSION["login_errors"])) {
-            $_SESSION["login_errors"] = array();
+
+        foreach (["login", "cart"] as $page) {
+            $page = strtolower($page);
+            if (!isset($_SESSION[$page])) {
+                $_SESSION[$page] = array(
+                    "error" => ""
+                );
+            }
         }
     }
 
@@ -17,32 +23,31 @@ class SessionManager
 
     function set_user(User $user)
     {
-        $_SESSION["user"] = $user;
+        $_SESSION["current_user"] = $user;
     }
 
     function get_user(): ?User
     {
-        if (isset($_SESSION["user"])){
-            return $_SESSION["user"];
+        if (isset($_SESSION["current_user"])){
+            return $_SESSION["current_user"];
         }
         return null;
     }
 
-    function add_login_errors(string ...$error) {
-        array_push($_SESSION["login_errors"], ...$error);
+    function add_error(string $page, string $error) {
+        $page = strtolower($page);
+        $_SESSION[$page]["error"] = $error;
     }
 
-    function get_login_errors(): Generator
+    function get_error(string $page): string
     {
-        while (!empty($_SESSION["login_errors"])) {
-            yield array_shift($_SESSION["login_errors"]);      
-        }
+        $page = strtolower($page);
+        return $_SESSION[$page]["error"];
     }
 
     function logout()
     {
-        unset($_SESSION["user"]);
-        // session_destroy();
+        unset($_SESSION["current_user"]);
     }
 }
 

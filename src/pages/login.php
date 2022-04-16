@@ -12,10 +12,11 @@ redirect_if_logged();
 // POST handler
 if (is_post()) {
     // validate input and redirect if errors
-    $user_dto = SignInDto::from_array($_POST);
-    $errors = array();
-    if (!$user_dto->validate($errors)) {
-        $session->add_login_errors("Invalid email or password");
+    
+    try {
+        $user_dto = SignInDto::from_array($_POST);
+    } catch (ValidateDtoError $e) {
+        $session->add_error("login", "Invalid email or password");
         header("location: /login.php");
         exit();
     }
@@ -28,21 +29,22 @@ if (is_post()) {
         $session->set_user($user);
         header("location: /dashboard.php");
     } else {
-        $session->add_login_errors("Invalid email or password");
+        $session->add_error("login", "Invalid email or password");
         header("location: /login.php");
     }
 
     exit();
 }
 
-function show_errors(): string 
+function show_error(): string 
 {
     global $session;
-    $error_html = '';
-    foreach ($session->get_login_errors() as $error) {
-        $error_html .= '<p class="login_errors">' .$error . '</p>';
+
+    if ($error = $session->get_error("login")) {
+        return '<p class="login_errors">' .$error . '</p>';
     }
-    return $error_html;
+
+    return "";
 }
 
 ?>
@@ -62,7 +64,7 @@ function show_errors(): string
                 <input class="login_input" type="text" name="email" placeholder="Email" autocomplete="off">
                 <input class="login_input" type="password" name="password" placeholder="Password" autocomplete="off">
                 <button class="login_button" type="submit">LOGIN</button>
-                <?php echo(show_errors()); ?>
+                <?php echo(show_error()); ?>
             </form>
         </div>
         <script>
