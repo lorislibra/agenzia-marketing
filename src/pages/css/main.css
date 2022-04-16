@@ -23,7 +23,7 @@ button{
 }
 
 .body_blurred >*:not(.order_window){
-    filter: blur(2px);
+    filter: blur(6px);
     pointer-events: none;
 }
 
@@ -38,6 +38,19 @@ button{
     font-family: Verdana, sans-serif;
     box-shadow: 8px 0px 34px -14px #000000;
     z-index: 10;
+}
+
+.back_img_login{
+    position: absolute;
+    background-image: url(https://peroni.it/wp-content/uploads/2021/04/family-2021-desktop.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    filter: blur(2px);
+    z-index: -10;
 }
 
 .lm_header{
@@ -194,7 +207,7 @@ button{
 
 .logo{
     height: 20%;
-    margin-top: 2.5%;
+    margin-top: 4%;
     margin-bottom: 2.5%;
     width: 100%;
     object-fit: scale-down;
@@ -208,7 +221,7 @@ button{
     justify-content: center;
 }
 
-.login_input, .login_button, .order_button, .order_number_add_sub{
+.login_input, .login_button{
     box-shadow: 0px 0px 20px -8px #000000;
 }
 
@@ -220,7 +233,7 @@ button{
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
-    margin-bottom: 5%;
+    margin-bottom: 6%;
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -304,7 +317,7 @@ button{
     left: 2%;
     object-fit: cover;
     z-index: 16;
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 6px 6px 6px 6px;
 }
 
 .order_info{
@@ -319,7 +332,7 @@ button{
     font-family: Verdana, sans-sarif;
     font-size: medium;
     position: absolute;
-    left: 40%;
+    left: 35%;
     bottom: 6%;
     width: 18%;
     padding: 8px;
