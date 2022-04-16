@@ -4,25 +4,27 @@ require_once("dto.php");
 
 class AddToCartDto extends BaseDto
 {
-    public int $id;
+    public int $item_id;
     public int $quantity;
 
-    function __construct(string $id, string $quantity)
+    function __construct(string $item_id, string $quantity)
     {
-        $this->id = $id;
+        $this->item_id = $item_id;
         $this->quantity = $quantity;
     }
 
     // parse from an array
-    static function from_array(array $array, array &$errors=array()): self
+    static function from_array(array $array): self
     {
-        if (!self::validate_array($array, ["id", "quantity"], $errors)) {
-            throw new ValidateDtoError();
+        $errors = array();
+        
+        if (!self::validate_array($array, ["item_id", "quantity"], $errors)) {
+            throw new ValidateDtoError($errors);
         }
 
-        $dto = new self($array["id"], $array["quantity"]);
+        $dto = new self($array["item_id"], $array["quantity"]);
         if (!$dto->validate($errors)) {
-            throw new ValidateDtoError();
+            throw new ValidateDtoError($errors);
         }
 
         return $dto;
@@ -33,7 +35,7 @@ class AddToCartDto extends BaseDto
     {
         $is_valid = true;
 
-        if (!filter_var($this->id, FILTER_VALIDATE_INT)) {
+        if (!filter_var($this->item_id, FILTER_VALIDATE_INT)) {
             array_push($errors, "id is not a number");
             $is_valid = false;
         }

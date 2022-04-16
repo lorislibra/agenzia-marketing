@@ -16,10 +16,13 @@ if (is_post()) {
         exit();
     }
     
+    $user = $session->get_user();
     $connection = DbManager::build_connection_from_env();
     $cart_item_repo = new CartItemRepo($connection);
-    
-    if (!$cart_item_repo->add_cart_item($dto)) {
+
+    try {
+        $cart_item_repo->add_cart_item_tx($user->id, $dto);
+    } catch (Exception $e) {
         $session->add_error("cart", "error adding to the cart");
     }
 

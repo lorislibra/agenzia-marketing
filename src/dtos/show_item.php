@@ -11,15 +11,17 @@ class ShowItemDto extends BaseDto
         $this->id = $id;
     }
 
-    static function from_array(array $array, array &$errors=array()): self
+    static function from_array(array $array): self
     {
+        $errors = array();
+
         if (!self::validate_array($array, ["id"], $errors)) {
-            throw new ValidateDtoError();
+            throw new ValidateDtoError($errors);
         }
 
         $dto = new self($array["id"]);
         if (!$dto->validate($errors)) {
-            throw new ValidateDtoError();
+            throw new ValidateDtoError($errors);
         }
 
         return $dto;
