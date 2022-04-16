@@ -3,13 +3,11 @@
 require_once("src/middleware/checks.php");
 require_once("src/middleware/session.php");
 require_once("src/repositories/manager.php");
+require_once("src/middleware/request.php");
 
-if (is_post()) {
-    $session->logout();
-}
+allowed_methods(["POST"]);
 
-// in get requests ignore logout
-redirect_if_logged();
+$session->logout();
 header("location: /login.php");
 
 ?>

@@ -4,7 +4,9 @@ require_once("src/middleware/checks.php");
 require_once("src/repositories/manager.php");
 require_once("src/repositories/user_repo.php");
 require_once("src/dtos/signin.php");
+require_once("src/middleware/request.php");
 
+allowed_methods(["GET", "POST"]);
 redirect_if_logged();
 
 // POST handler

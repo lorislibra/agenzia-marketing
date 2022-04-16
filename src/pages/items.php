@@ -4,8 +4,14 @@ require_once("src/templates/lateral_menu.php");
 require_once("src/templates/items_template.php");
 require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
+require_once("src/middleware/request.php");
 
+allowed_methods(["GET"]);
 need_logged();
+
+if (is_get()) {
+    
+}
 
 $connection = DbManager::build_connection_from_env();
 
