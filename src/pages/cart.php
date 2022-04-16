@@ -27,6 +27,20 @@ if (is_post()) {
     exit();
 }
 
-
-
 ?>
+
+<html>
+    <head>
+        <title>Cart</title>
+
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+    <body>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
+    </body>
+</html>
