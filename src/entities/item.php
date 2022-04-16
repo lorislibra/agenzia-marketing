@@ -11,14 +11,16 @@ class Item
     public int $quantity;
     public int $stock;
     public string $category;
+    public string $image;
     public ?Product $product;
 
-    function __construct(int $id, int $quantity, int $stock, string $category, ?Product $product) {
+    function __construct(int $id, int $quantity, int $stock, string $image, string $category, ?Product $product) {
         $this->id = $id;
         $this->quantity = $quantity;
         $this->stock = $stock;
         $this->category = $category;
         $this->product = $product;
+        $this->image = $image;
     }
 
     public static function check_row_column(QueryMetadata $metadata): bool 
@@ -32,13 +34,14 @@ class Item
         $quantity = DbManager::get_column($metadata, $row, self::$table, "quantity");
         $stock = DbManager::get_column($metadata, $row, self::$table, "stock");
         $category = DbManager::get_column($metadata, $row, self::$table, "category");
+        $image = DbManager::get_column($metadata, $row, self::$table, "image");
         try {
             $product = Product::build_from_row($metadata, $row);
         } catch (MissingColumnError $e) { 
             $product = null;
         }
 
-        return new self($id, $quantity, $stock, $category, $product);
+        return new self($id, $quantity, $stock, $image, $category, $product);
     }
 }
 

@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS item(
     product_sku VARCHAR(10) NOT NULL,
     quantity INT NOT NULL,
     stock INT NOT NULL,
+    image VARCHAR(200) NOT NULL,
     category VARCHAR(30) NOT NULL,
     PRIMARY KEY(id)
 );
@@ -168,8 +169,8 @@ INSERT INTO sell_point (id, name, address, region_id) VALUES
 INSERT INTO product (sku, brand, category, name, image, price) VALUES 
 ("PRN1", "Peroni", "Bevanda", "Peroni", "https://peroni.it/wp-content/uploads/2019/09/peroni-33-feat.jpg", 1.5);
 
-INSERT INTO item (id, product_sku, quantity, stock, category) VALUES 
-(1, "PRN1", 30, 100, "cartonato");
+INSERT INTO item (id, product_sku, quantity, stock, image, category) VALUES 
+(1, "PRN1", 30, 100, "", "cartonato");
 
 INSERT INTO cart_item (user_id, item_id, quantity) VALUES 
 (1, 1, 3);
