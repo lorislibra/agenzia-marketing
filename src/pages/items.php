@@ -14,7 +14,7 @@ need_logged();
 $connection = DbManager::build_connection_from_env();
 
 $item_repo = new ItemRepo($connection);
-$items = $item_repo->get_all();
+$items = $item_repo->get_all_with_filters();
 
 function make_order(): string
 {
