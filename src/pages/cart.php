@@ -4,6 +4,7 @@ require_once("src/repositories/cart_item_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
 require_once("src/dtos/add_to_cart.php");
+require_once("src/templates/lateral_menu.php");
 
 allowed_methods(["GET", "POST"]);
 need_logged();
@@ -40,6 +41,10 @@ if (is_post()) {
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
+        <?php echo(show_lateral_menu("Cart")); ?>
+        <div class="body_main">
+            
+        </div>
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
