@@ -21,13 +21,8 @@ button {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
 .body_blurred >*:not(.order_window){
-    filter: blur(6px);
-=======
-.body_blurred >*:not(.order_window) {
-    filter: blur(2px);
->>>>>>> 7efae762b64ea67c4442e080f40ea18e924166db
+    filter: blur(4px);
     pointer-events: none;
 }
 
@@ -44,7 +39,6 @@ button {
     z-index: 10;
 }
 
-<<<<<<< HEAD
 .back_img_login{
     position: absolute;
     background-image: url(https://peroni.it/wp-content/uploads/2021/04/family-2021-desktop.jpg);
@@ -54,14 +48,11 @@ button {
     left: 0px;
     width: 100%;
     height: 100%;
-    filter: blur(2px);
+    filter: blur(6px);
     z-index: -10;
 }
 
 .lm_header{
-=======
-.lm_header {
->>>>>>> 7efae762b64ea67c4442e080f40ea18e924166db
     height: 25%;
     background-color: #ba161f;
 }
@@ -205,6 +196,7 @@ button {
     display: block;
     top: 50%;
     left: 50%;
+    opacity: 0.9;
     transform: translate(-50%, -50%);
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0px 0px 20px -8px #000000;
@@ -229,11 +221,7 @@ button {
     justify-content: center;
 }
 
-<<<<<<< HEAD
 .login_input, .login_button{
-=======
-.login_input, .login_button, .order_button, .order_number_add_sub {
->>>>>>> 7efae762b64ea67c4442e080f40ea18e924166db
     box-shadow: 0px 0px 20px -8px #000000;
 }
 
