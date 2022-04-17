@@ -95,11 +95,13 @@ if(is_get()){
     <body>
         <?php echo(show_lateral_menu("Cart")); ?>
         <div class="body_main">
-            <?php
-                if($user_cart != null){
-                    echo(show_user_cart_items($user_cart));
-                }
-            ?>
+            <div class="cart_list">
+                <?php
+                    if($user_cart != null){
+                        echo(show_user_cart_items($user_cart));
+                    }
+                ?>
+            </div>
         </div>
         <script>
             if (window.history.replaceState) {

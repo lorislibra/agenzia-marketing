@@ -244,7 +244,7 @@ button {
 }
 
 
-.login_button, .order_button, .order_number_add_sub {
+.login_button, .order_button, .cart_order_button, .order_number_add_sub {
     font-family: Verdana, sans-serif;
     font-size: medium;
     font-weight: bold;
@@ -294,11 +294,11 @@ button {
     cursor: default;
 }
 
-.order_button:hover, .order_number_add_sub:hover {
+.order_button:hover, .order_number_add_sub:hover, .cart_order_button:hover {
     background-color: #ba161f;
 }
 
-.order_button:active, .order_number_add_sub:active {
+.order_button:active, .order_number_add_sub:active, .cart_order_button:active {
     background-color: #9e131a;
 }
 
@@ -371,4 +371,51 @@ button {
     border-radius: 10px 10px 10px 10px;
     z-index: 15;
     box-shadow: 0px 0px 50px -8px rgba(0, 0, 0, 0.73);
+}
+
+.cart_list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    top: 0px;
+    left: 0px;
+    padding: 20px;
+}
+
+.cart_item{
+    position: relative;
+    width: 500px;
+    height: 400px;
+    margin: 20px;
+}
+
+.cart_image{
+    position: absolute;
+    height: 65%;
+    width: 40%;
+    top: 8%;
+    left: 5%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.cart_info{
+    position: absolute;
+    left: 50%;
+    font-family: Verdana, sans-sarif;
+    font-size: medium;
+    overflow: hidden;
+}
+
+.cart_order_button{
+    position: absolute;
+    left: 13%;
+    bottom: 2%;
+    color: #ffffff;
+    background-color: #d41923;
+    width: 66%;
+    height: 10%;
 }

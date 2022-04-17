@@ -34,8 +34,7 @@ function make_order(): string
                             <div class="order_window">
                                 <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
                                 <p class="order_info" style="top: 12%;">Name: <b>' . $product->name . '</b></p>
-                                <p class="order_info" style="top: 24%;">Brand: <b>' . $product->brand . '</b></p>
-                                <p class="order_info" style="top: 36%;">Item price: <b>€' . number_format($product->price * $item->quantity, 2) . '</b></p>
+                                <p class="order_info" style="top: 30%;">Brand: <b>' . $product->brand . '</b></p>
                                 <p class="order_info" style="top: 48%;">Products per item: <b>' . $item->quantity . '</b></p>
                                 <button id="btn_sub" class="order_number_add_sub" style="left: 30%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
                                 <button id="btn_add" class="order_number_add_sub" style="left: 53.4%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
