@@ -4,6 +4,7 @@ require_once("src/repositories/cart_item_repo.php");
 require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
+require_once("src/middleware/session.php");
 require_once("src/dtos/add_to_cart.php");
 require_once("src/templates/lateral_menu.php");
 
@@ -51,7 +52,7 @@ if (is_post()) {
         header("location: /items.php");
         exit();
     }
-    
+
     $user = $session->get_user();
     $connection = DbManager::build_connection_from_env();
 
@@ -77,7 +78,7 @@ if (is_post()) {
     <body>
         <?php echo(show_lateral_menu("Cart")); ?>
         <div class="body_main">
-            
+
         </div>
         <script>
             if (window.history.replaceState) {
