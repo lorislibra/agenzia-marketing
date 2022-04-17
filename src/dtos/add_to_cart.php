@@ -36,7 +36,7 @@ class AddToCartDto extends BaseDto
         $is_valid = true;
 
         if (!filter_var($this->item_id, FILTER_VALIDATE_INT)) {
-            array_push($errors, "id is not a number");
+            array_push($errors, "item_id is not a number");
             $is_valid = false;
         }
 

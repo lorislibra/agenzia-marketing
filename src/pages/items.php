@@ -4,6 +4,7 @@ require_once("src/templates/lateral_menu.php");
 require_once("src/templates/items_template.php");
 require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
+require_once("src/middleware/session.php");
 require_once("src/middleware/request.php");
 require_once("src/dtos/show_item.php");
 
@@ -13,15 +14,16 @@ need_logged();
 $connection = DbManager::build_connection_from_env();
 
 $item_repo = new ItemRepo($connection);
-$items = $item_repo->get_all();
+$items = $item_repo->get_all_with_filters();
 
 function make_order(): string
 {
-    global $item_repo;
+    global $item_repo, $session;
 
     try {
         $dto = ShowItemDto::from_array($_GET);
     } catch (ValidateDtoError $e) {
+        $session->add_error("items", "invalid item");
         header("location: /items.php");
         exit();
     }

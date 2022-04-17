@@ -46,17 +46,19 @@ class CartItemRepo extends DbManager
         return null;
     }
 
-    function add_cart_item(int $user_id, AddToCartDto $dto): bool
+    function add_or_update_cart_item(int $user_id, AddToCartDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
         INSERT INTO cart_item (user_id, item_id, quantity)
-        VALUES (:user_id, :item_id, :quantity);
+        VALUES (:user_id, :item_id, :quantity)
+        ON DUPLICATE KEY UPDATE quantity = quantity + :quantity_update;
         ");
 
         if ($stmt->execute([
             "user_id" => $user_id,
             "item_id" => $dto->item_id,
-            "quantity" => $dto->quantity
+            "quantity" => $dto->quantity,
+            "quantity_update" => $dto->quantity
         ])) {
             return $stmt->rowCount() > 0;
         }

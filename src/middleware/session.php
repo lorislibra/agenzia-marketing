@@ -42,7 +42,9 @@ class SessionManager
     function get_error(string $page): string
     {
         $page = strtolower($page);
-        return $_SESSION[$page]["error"];
+        $val = $_SESSION[$page]["error"];
+        $_SESSION[$page]["error"] = "";
+        return $val;
     }
 
     function logout()

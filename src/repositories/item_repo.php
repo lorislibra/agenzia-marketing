@@ -77,10 +77,27 @@ class ItemRepo extends DbManager
         return null;
     }
 
+    // get all items
+    function get_all_with_filters(int $min_stock=1): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM item
+        LEFT JOIN product ON item.product_sku = product.sku
+        WHERE stock >= :min_stock;
+        ");
+
+        if ($stmt->execute(["min_stock" => $min_stock])) {
+            $items = $this->parse_fetch($stmt);
+            return $items;
+        }
+
+        return null;
+    }
+
     function remove_stock(int $item_id, int $quantity): bool
     {
         $stmt = $this->get_connection()->prepare("
-        UPDATE TABLE item
+        UPDATE item
         SET stock = stock - :quantity
         WHERE id = :id
         ");
