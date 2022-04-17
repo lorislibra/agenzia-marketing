@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@loLLo32 
-lorislibra
-/
-agenzia-marketing
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-agenzia-marketing/src/pages/cart.php /
-@lorislibra
-lorislibra add to cart transaction
-Latest commit e30b7a4 yesterday
- History
- 2 contributors
-@lorislibra@loLLo32
-89 lines (73 sloc)  2.29 KB
-   
 <?php
 
 require_once("src/repositories/cart_item_repo.php");
@@ -116,16 +87,3 @@ if (is_post()) {
         </script>
     </body>
 </html>
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
