@@ -1,11 +1,14 @@
 <?php
 
+use JetBrains\PhpStorm\ExpectedValues;
+
 require_once("src/repositories/cart_item_repo.php");
 require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
 require_once("src/dtos/add_to_cart.php");
 require_once("src/templates/lateral_menu.php");
+require_once("src/templates/cart_items_template.php");
 
 allowed_methods(["GET", "POST"]);
 need_logged();
@@ -66,6 +69,20 @@ if (is_post()) {
     exit();
 }
 
+if(is_get()){
+    $user = $session->get_user();
+    $connection = DbManager::build_connection_from_env();
+
+    $cart_repo = new CartItemRepo($connection);
+    $user_cart = null;
+    try{
+        $user_cart = $cart_repo->get_by_user_id($user->id);
+    }
+    catch(Exception $e){
+        $session->add_error("cart", $e->getMessage());
+    }
+}
+
 ?>
 
 <html>
@@ -78,7 +95,11 @@ if (is_post()) {
     <body>
         <?php echo(show_lateral_menu("Cart")); ?>
         <div class="body_main">
-        <?php echo($session->get_error("cart")); ?>
+            <?php
+                if($user_cart != null){
+                    echo(show_user_cart_items($user_cart));
+                }
+            ?>
         </div>
         <script>
             if (window.history.replaceState) {
