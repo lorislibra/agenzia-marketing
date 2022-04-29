@@ -16,19 +16,19 @@ $connection = DbManager::build_connection_from_env();
 $item_repo = new ItemRepo($connection);
 $items = $item_repo->get_all_with_filters();
 
+try {
+    $dto = ShowItemDto::from_array($_GET);
+    $item = $item_repo->get_by_id($dto->id);
+} catch (ValidateDtoError $e) {
+    $session->add_error("items", "invalid item");
+    $item = null;
+}
+
 function make_order(): string
 {
-    global $item_repo, $session;
+    global $item;
 
-    try {
-        $dto = ShowItemDto::from_array($_GET);
-    } catch (ValidateDtoError $e) {
-        $session->add_error("items", "invalid item");
-        header("location: /items.php");
-        exit();
-    }
-
-    if ($item = $item_repo->get_by_id($dto->id)) {
+    if ($item && $item->stock > 0) {
         $product = $item->product;
         $make_order_html = '
                             <div class="order_window">
@@ -55,6 +55,17 @@ function make_order(): string
     return '';
 }
 
+function show_error(): string 
+{
+    global $session;
+
+    if ($error = $session->get_error("items")) {
+        return '<p class="login_errors">' . $error . '</p>';
+    }
+
+    return "";
+}
+
 ?>
 
 <html lang="en">
@@ -64,7 +75,7 @@ function make_order(): string
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
-    <body <?php if(!empty($_GET["id"])) { echo 'class="body_blurred"'; } ?>>
+    <body <?php if($item && $item->stock > 0) { echo 'class="body_blurred"'; } ?>>
         <?php echo(show_lateral_menu("Items")); ?>
         <div class="body_main">
             <div class="items_list">
@@ -78,5 +89,6 @@ function make_order(): string
                 window.history.replaceState(null, null, window.location.href);
             }
         </script>
+        <?php echo(show_error()); ?>
     </body>
 </html>

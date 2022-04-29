@@ -5,6 +5,7 @@ require_once("src/entities/reservation.php");
 
 enum Status
 {
+
 }
 
 class ReservationRepo extends DbManager
@@ -41,7 +42,7 @@ class ReservationRepo extends DbManager
             $reservations = $this->parse_fetch($stmt);
             return $this->get_first_element($reservations);
         }
-        
+
         return null;
     }
 

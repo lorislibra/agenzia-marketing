@@ -27,7 +27,7 @@ if (is_post()) {
 
     if ($user = $userRepo->get_by_email_password($user_dto)) {
         $session->set_user($user);
-        header("location: /dashboard.php");
+        header("location: /items.php");
     } else {
         $session->add_error("login", "Invalid email or password");
         header("location: /login.php");

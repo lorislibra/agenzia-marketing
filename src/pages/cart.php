@@ -1,7 +1,5 @@
 <?php
 
-use JetBrains\PhpStorm\ExpectedValues;
-
 require_once("src/repositories/cart_item_repo.php");
 require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
@@ -47,7 +45,8 @@ function add_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
     $connection->commit();
 }
 
-if (is_post()) {
+if (is_post())
+{
     try {
         $dto = AddToCartDto::from_array($_POST);
     } catch (ValidateDtoError $e) {
@@ -69,17 +68,19 @@ if (is_post()) {
     exit();
 }
 
-if(is_get()){
+if(is_get())
+{
     $user = $session->get_user();
     $connection = DbManager::build_connection_from_env();
 
     $cart_repo = new CartItemRepo($connection);
-    $user_cart = null;
-    try{
+    try {
         $user_cart = $cart_repo->get_by_user_id($user->id);
+        $user_cart = $user_cart[$user->id];
     }
-    catch(Exception $e){
+    catch (Exception $e) {
         $session->add_error("cart", $e->getMessage());
+        $user_cart = null;
     }
 }
 
@@ -97,9 +98,7 @@ if(is_get()){
         <div class="body_main">
             <div class="cart_list">
                 <?php
-                    if($user_cart != null){
-                        echo(show_user_cart_items($user_cart));
-                    }
+                    echo(show_user_cart_items($user_cart));
                 ?>
             </div>
         </div>
