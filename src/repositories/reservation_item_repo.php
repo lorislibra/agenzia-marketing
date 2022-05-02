@@ -17,17 +17,17 @@ class ReservationItemRepo extends DbManager
         // iterate over rows
         while ($row = $statement->fetch(PDO::FETCH_NUM)) {
             
-            // build the temp cartItem from the row
+            // build the temp reservationItem from the row
             $reservation_item = ReservationItem::build_from_row($metadata, $row);
 
-            // add the cart_item in the list
+            // add the reservation_item in the list
             $list[$reservation_item->reservation_id][$reservation_item->reservation->id] = $reservation_item;      
         }
 
         return $list;
     }
 
-    // get cart_items of a user by its id
+    // get reservation_items of a user by its id
     function get_by_reservation_id(int $reservation_id): ?array
     {
         $stmt = $this->get_connection()->prepare("

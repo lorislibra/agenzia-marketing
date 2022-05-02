@@ -3,11 +3,6 @@
 require_once("manager.php");
 require_once("src/entities/reservation.php");
 
-enum Status
-{
-
-}
-
 class ReservationRepo extends DbManager
 {
 
@@ -46,11 +41,29 @@ class ReservationRepo extends DbManager
         return null;
     }
 
-    // get a reservation by its id
+    // get reservations by user id
+    function get_by_user_id(int $user_id): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM reservation
+        WHERE reservation.user_id = :user_id
+        ORDER BY date_order ASC;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id])) {
+            $reservations = $this->parse_fetch($stmt);
+            return $reservations;
+        }
+
+        return null;
+    }
+
+    // get all reservation
     function get_all(): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
+        ORDER BY date_order ASC;
         ");
 
         if ($stmt->execute()) {
@@ -65,13 +78,12 @@ class ReservationRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         INSERT INTO reservation (user_id, status, sell_point_id, date_order)
-        VALUES (:user_id, 0, :sell_point_id, :date_order);
+        VALUES (:user_id, 1, :sell_point_id, NOW());
         ");
 
         if ($stmt->execute([
             "user_id" => $user_id,
-            "sell_point_id" => $dto->sell_point_id,
-            "date_order" => new DateTime("now")
+            "sell_point_id" => $dto->sell_point_id
         ])) {
             return $stmt->rowCount() > 0;
         }

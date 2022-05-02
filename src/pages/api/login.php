@@ -11,7 +11,7 @@ redirect_if_logged();
 
 // validate input and redirect if errors
 try {
-    $user_dto = SignInDto::from_array($_POST);
+    $dto = SignInDto::from_array($_POST);
 } catch (ValidateDtoError $e) {
     $session->add_error("login", "Invalid email or password");
     header("location: /login.php");
@@ -20,9 +20,9 @@ try {
 
 // check user in the db
 $connection = DbManager::build_connection_from_env();
-$userRepo = new UserRepo($connection);
+$user_repo = new UserRepo($connection);
 
-if ($user = $userRepo->get_by_email_password($user_dto)) {
+if ($user = $user_repo->get_by_email_password($dto)) {
     $session->set_user($user);
     header("location: /items.php");
 } else {

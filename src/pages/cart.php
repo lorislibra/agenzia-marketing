@@ -18,7 +18,10 @@ $connection = DbManager::build_connection_from_env();
 $cart_repo = new CartItemRepo($connection);
 try {
     $user_cart = $cart_repo->get_by_user_id($user->id);
-    $user_cart = $user_cart[$user->id];
+    // if the user is in the array there is at least an item
+    if (array_key_exists($user->id, $user_cart)) {
+        $user_cart = $user_cart[$user->id];
+    }
 }
 catch (Exception $e) {
     $session->add_error("cart", $e->getMessage());

@@ -21,15 +21,15 @@ function show_lateral_menu(string $opened_section): string
     }
 
     $html_code = '
-                <div class="lateral_menu">
-                    <div class="lm_header">
-                        ' . add_header() . '
-                    </div>
-                    <div class="lm_body">
-                        ' . $lm_html_links . '
-                    </div>
-                </div>
-                ';
+    <div class="lateral_menu">
+        <div class="lm_header">
+            ' . add_header() . '
+        </div>
+        <div class="lm_body">
+            ' . $lm_html_links . '
+        </div>
+    </div>
+    ';
 
     return $html_code;
 }

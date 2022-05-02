@@ -11,25 +11,27 @@ require_once("src/dtos/show_item.php");
 allowed_methods(["GET"]);
 need_logged();
 
-$connection = DbManager::build_connection_from_env();
-
-$item_repo = new ItemRepo($connection);
-$items = $item_repo->get_all_with_filters();
-
 // no need to use error in session, because the error and the visualization are in the same page
 $error = "";
+$item = null;
+$dto = null;
 
 try {
     $dto = ShowItemDto::from_array($_GET);
-    $item = $item_repo->get_by_id($dto->id);
-    if (!$item) {
-        $error = "no item found";
-    }
 } catch (ValidateDtoError $e) {
-    if (isset($_GET["id"])) {
-        $error = "invalid item";
-    }
-    $item = null;
+    // set the error only if the query id is present
+    if (isset($_GET["id"])) $error = "invalid item";
+}
+
+$connection = DbManager::build_connection_from_env();
+$item_repo = new ItemRepo($connection);
+$items = $item_repo->get_all_with_filters();
+
+if ($dto && array_key_exists($dto->id, $items)) {
+    $item = $items[$dto->id];
+} else if ($dto) {
+    // WARNING: if the item is not present in the filtered list it could still be present in the db 
+    $error = "no item found";
 }
 
 // if the user put two query argument with the same name apache put in the $_GET array only the last element
@@ -60,11 +62,7 @@ function make_order(Item $item): string
 function show_error(): string 
 {
     global $error;
-
-    if ($error) {
-        return '<p class="login_errors">' . $error . '</p>';
-    }
-
+    if ($error) return '<p class="login_errors">' . $error . '</p>';
     return "";
 }
 
@@ -81,7 +79,7 @@ function show_error(): string
         <?php echo(show_lateral_menu("Items")); ?>
         <div class="body_main">
             <div class="items_list">
-                <?php echo(show_items($items)); ?>
+                <?php if ($items) echo(show_items($items)); ?>
             </div>
             <?php echo(show_error()); ?>
         </div>

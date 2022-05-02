@@ -164,7 +164,7 @@ INSERT INTO user_region (user_id, region_id) VALUES
 (1, 4), (1, 3), (1, 2), (1, 1);
 
 INSERT INTO sell_point (id, name, address, region_id) VALUES
-(1, "iper", "via roma 1, castelfranco veneto, 35010", 20); 
+(1, "iper", "via roma 1, castelfranco veneto, 35010", 20);
 
 INSERT INTO product (sku, brand, category, name, image, price) VALUES 
 ("PRN1", "Peroni", "Bevanda", "Peroni", "https://peroni.it/wp-content/uploads/2019/09/peroni-33-feat.jpg", 1.5),
@@ -191,8 +191,8 @@ INSERT INTO item (id, product_sku, quantity, stock, image, category) VALUES
 INSERT INTO cart_item (user_id, item_id, quantity) VALUES 
 (1, 1, 3);
 
-INSERT INTO reservation (id, user_id, status, sell_point_id, date_order, date_delivery) VALUES
-(1, 1, 1, 1, "2022-04-08 19:25:14", "2022-04-08 19:25:14");
+INSERT INTO reservation (id, user_id, status, sell_point_id, date_order) VALUES
+(1, 1, 1, 1, "2022-04-08 19:25:14");
 
 INSERT INTO reservation_item (reservation_id, item_id, quantity) VALUES
 (1, 1, 2);

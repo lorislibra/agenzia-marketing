@@ -5,6 +5,14 @@ require_once("user.php");
 require_once("item.php");
 require_once("sell_point.php");
 
+enum OrderStatus: int
+{
+    case Waiting = 1;
+    case Approved = 2;
+    case Shipping = 3;
+    case Arrived = 4;
+}
+
 class Reservation
 {
     public static $table = "reservation";
@@ -16,11 +24,11 @@ class Reservation
     public ?SellPoint $sell_point;
     public DateTime $date_order;
     public DateTime $date_delivery;
-    public int $status;
+    public OrderStatus $status;
 
     function __construct(
         int $id, int $user_id, ?User $user, int $sell_point_id, ?SellPoint $sell_point, 
-        DateTime $date_order, DateTime $date_delivery, int $status
+        DateTime $date_order, DateTime $date_delivery, OrderStatus $status
     )
     {
         $this->id = $id;
@@ -58,6 +66,8 @@ class Reservation
         } catch (MissingColumnError $e) { 
             $sell_point = null;
         }
+
+        $status = OrderStatus::from($status);
 
         return new self($id, $user_id, $user, $sell_point_id, $sell_point, new DateTime($date_order), new DateTime($date_delivery), $status);
     }
