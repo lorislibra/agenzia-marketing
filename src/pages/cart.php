@@ -15,6 +15,8 @@ need_logged();
 $user = $session->get_user();
 $connection = DbManager::build_connection_from_env();
 
+$error = "";
+
 $cart_repo = new CartItemRepo($connection);
 try {
     $user_cart = $cart_repo->get_by_user_id($user->id);
@@ -24,7 +26,7 @@ try {
     }
 }
 catch (Exception $e) {
-    $session->add_error("cart", $e->getMessage());
+    $error = $e->getMessage();
     $user_cart = null;
 }
 
@@ -43,6 +45,8 @@ catch (Exception $e) {
             <div class="cart_list">
                 <?php if ($user_cart) echo(show_user_cart_items($user_cart)); ?>
             </div>
+            <?php if ($error) echo($error); ?>
+            <?php if ($error = $session->get_error("order")) echo($error); ?>
         </div>
         <script>
             if (window.history.replaceState) {

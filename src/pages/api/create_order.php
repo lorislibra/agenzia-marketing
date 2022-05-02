@@ -20,11 +20,13 @@ $user = $session->get_user();
 $connection = DbManager::build_connection_from_env();
 
 try {
-    create_order_tx($connection, $user->id, $dto);
+    $reservation_id = create_order_tx($connection, $user, $dto);
 } catch (Exception $e) {
     $session->add_error("order", $e->getMessage());
+    header("location: /cart.php");
+    exit();
 }
 
-header("location: /order.php");
+header("location: /order.php?id=$reservation_id");
 
 ?>

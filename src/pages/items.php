@@ -59,13 +59,6 @@ function make_order(Item $item): string
         </div>';
 }
 
-function show_error(): string 
-{
-    global $error;
-    if ($error) return '<p class="login_errors">' . $error . '</p>';
-    return "";
-}
-
 ?>
 
 <html lang="en">
@@ -81,7 +74,8 @@ function show_error(): string
             <div class="items_list">
                 <?php if ($items) echo(show_items($items)); ?>
             </div>
-            <?php echo(show_error()); ?>
+            <?php if ($error) echo('<p class="login_errors">' . $error . '</p>'); ?>
+            <?php if ($error = $session->get_error("cart")) echo('<p class="login_errors">' . $error . '</p>'); ?>
         </div>
 
         <?php if($item && $item->stock > 0) echo(make_order($item)); ?>

@@ -34,12 +34,12 @@ class SessionManager
         return null;
     }
 
-    function add_error(string $page, string $error) {
+    function add_error(string $page, $error) {
         $page = strtolower($page);
         $_SESSION[$page]["error"] = $error;
     }
 
-    function get_error(string $page): string
+    function get_error(string $page)
     {
         $page = strtolower($page);
         $val = $_SESSION[$page]["error"];

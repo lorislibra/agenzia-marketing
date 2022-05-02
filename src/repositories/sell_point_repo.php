@@ -15,7 +15,6 @@ class SellPointRepo extends DbManager
 
         // iterate over rows
         while ($row = $statement->fetch(PDO::FETCH_NUM)) {
-            
             // build the temp sell_point from the row
             $sell_point = SellPoint::build_from_row($metadata, $row);
 
@@ -37,7 +36,7 @@ class SellPointRepo extends DbManager
 
         if ($stmt->execute(["id" => $id])) {
             $sell_points = $this->parse_fetch($stmt);
-            $this->get_first_element($sell_points);
+            return $this->get_first_element($sell_points);
         }
         
         return null;
