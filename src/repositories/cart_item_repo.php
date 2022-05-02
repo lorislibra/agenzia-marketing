@@ -46,7 +46,7 @@ class CartItemRepo extends DbManager
         return null;
     }
 
-    function add_or_update_cart_item(int $user_id, AddToCartDto $dto): bool
+    function add_or_update(int $user_id, AddToCartDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
         INSERT INTO cart_item (user_id, item_id, quantity)
@@ -60,6 +60,20 @@ class CartItemRepo extends DbManager
             "quantity" => $dto->quantity,
             "quantity_update" => $dto->quantity
         ])) {
+            return $stmt->rowCount() > 0;
+        }
+        
+        return false;
+    }
+
+    function delete_by_user_id(int $user_id): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        DELETE FROM cart_item
+        WHERE user_id = :user_id;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id])) {
             return $stmt->rowCount() > 0;
         }
         

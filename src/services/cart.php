@@ -11,7 +11,7 @@ function add_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
 
     if (!$connection->beginTransaction()) {
         $connection->rollBack();
-        throw new Exception("error during transaction"); 
+        throw new Exception("error during transaction");
     }
 
     $item = $item_repo->get_by_id($dto->item_id);
@@ -25,7 +25,7 @@ function add_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
         throw new Exception("not enough items");
     }
 
-    if (!$cart_item_repo->add_or_update_cart_item($user_id, $dto)) {
+    if (!$cart_item_repo->add_or_update($user_id, $dto)) {
         $connection->rollBack();
         throw new Exception("error adding to cart");
     }

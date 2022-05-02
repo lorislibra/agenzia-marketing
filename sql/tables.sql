@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS reservation(
     status INT NOT NULL,
     sell_point_id INT NOT NULL,
     date_order TIMESTAMP NOT NULL,
-    date_delivery TIMESTAMP NOT NULL,
+    date_delivery TIMESTAMP,
     PRIMARY KEY(id)
 );
 

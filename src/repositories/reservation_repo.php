@@ -61,6 +61,24 @@ class ReservationRepo extends DbManager
         return null;
     }
 
+    function add(int $user_id, CreateOrderDto $dto): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        INSERT INTO reservation (user_id, status, sell_point_id, date_order)
+        VALUES (:user_id, 0, :sell_point_id, :date_order);
+        ");
+
+        if ($stmt->execute([
+            "user_id" => $user_id,
+            "sell_point_id" => $dto->sell_point_id,
+            "date_order" => new DateTime("now")
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+
+        return false;
+    }
+
 }
 
 ?>

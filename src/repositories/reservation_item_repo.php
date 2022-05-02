@@ -44,6 +44,25 @@ class ReservationItemRepo extends DbManager
 
         return null;
     }
+
+    function add_from_cart(int $user_id, int $reservation_id): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        INSERT INTO reservation_item (reservation_id, item_id, quantity)
+        SELECT :reservation_id, item_id, quantity
+        FROM cart_item
+        WHERE user_id = :user_id;
+        ");
+
+        if ($stmt->execute([
+            "reservation_id" => $reservation_id,
+            "user_id" => $user_id
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+
+        return false;
+    }
 }
 
 ?>

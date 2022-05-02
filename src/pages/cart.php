@@ -38,9 +38,7 @@ catch (Exception $e) {
         <?php echo(show_lateral_menu("Cart")); ?>
         <div class="body_main">
             <div class="cart_list">
-                <?php
-                    echo(show_user_cart_items($user_cart));
-                ?>
+                <?php if ($user_cart) echo(show_user_cart_items($user_cart)); ?>
             </div>
         </div>
         <script>

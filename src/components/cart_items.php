@@ -2,13 +2,11 @@
 
 require_once("src/entities/cart_item.php");
 
-function show_user_cart_items(array $user_cart_items){
+function show_user_cart_items(array $cart_items){
     $html_code = '';
 
-    if($user_cart_items != null){
-        foreach($user_cart_items as $cart_item){
-            $html_code .= show_item($cart_item);
-        }
+    foreach($cart_items as $cart_item){
+        $html_code .= show_item($cart_item);
     }
 
     return $html_code;
@@ -34,7 +32,7 @@ function show_item(CartItem $cart_item){
                     <p class="cart_info" style="top: 35%;">N. of stocks: <b>' . $cart_item->quantity . '</b></p>
                     <p class="cart_info" style="top: 47.5%;">Prod. per stock: <b>' . $item->quantity . '</b></p>
                     <p class="cart_info" style="top: 60%;">Cost: <b>€' . number_format($cart_item->quantity * $item->quantity * $product->price, 2) . '</b></p>
-                    <form method="POST" action="api/add_to_cart.php">
+                    <form method="POST" action="api/create_order.php">
                         <input type="hidden" name="item_id" value="' . $cart_item->item_id . '">
                         <input type="hidden" name="user_id" value="' . $cart_item->user_id . '">
                         <button class="cart_order_button" style="vertical-align: middle;">
