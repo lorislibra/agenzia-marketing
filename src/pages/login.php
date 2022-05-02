@@ -6,35 +6,8 @@ require_once("src/repositories/user_repo.php");
 require_once("src/dtos/signin.php");
 require_once("src/middleware/request.php");
 
-allowed_methods(["GET", "POST"]);
+allowed_methods(["GET"]);
 redirect_if_logged();
-
-// POST handler
-if (is_post()) {
-    // validate input and redirect if errors
-    
-    try {
-        $user_dto = SignInDto::from_array($_POST);
-    } catch (ValidateDtoError $e) {
-        $session->add_error("login", "Invalid email or password");
-        header("location: /login.php");
-        exit();
-    }
-
-    // check user in the db
-    $connection = DbManager::build_connection_from_env();
-    $userRepo = new UserRepo($connection);
-
-    if ($user = $userRepo->get_by_email_password($user_dto)) {
-        $session->set_user($user);
-        header("location: /items.php");
-    } else {
-        $session->add_error("login", "Invalid email or password");
-        header("location: /login.php");
-    }
-
-    exit();
-}
 
 function show_error(): string 
 {
@@ -60,7 +33,7 @@ function show_error(): string
         <div class="back_img_login"></div>
         <div class="login_section">
             <img class="logo" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
-            <form class="login_form" method="POST" action="">
+            <form class="login_form" method="POST" action="api/login.php">
                 <input class="login_input" type="text" name="email" placeholder="Email" autocomplete="off">
                 <input class="login_input" type="password" name="password" placeholder="Password" autocomplete="off">
                 <button class="login_button" type="submit">LOGIN</button>

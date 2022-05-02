@@ -6,11 +6,11 @@
 function show_lateral_menu(string $opened_section): string
 {
     $lm_links = array(
-        array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/dog-house.png", "link_url" => "dashboard.php", "link_text" => "Home", "method" => "GET"),
+        array("icon_url" => "https://img.icons8.com/ios-filled/344/ffffff/dog-house.png", "link_url" => "items.php", "link_text" => "Home", "method" => "GET"),
         array("icon_url" => "https://img.icons8.com/wired/344/ffffff/circled-user.png", "link_url" => "login.php", "link_text" => "Account", "method" => "GET"),
         array("icon_url" => "https://img.icons8.com/wired/344/ffffff/bulleted-list.png", "link_url" => "items.php", "link_text" => "Items", "method" => "GET"),
         array("icon_url" => "https://img.icons8.com/ios-glyphs/344/ffffff/shopping-cart--v1.png", "link_url" => "cart.php", "link_text" => "Cart", "method" => "GET"),
-        array("icon_url" => "https://img.icons8.com/wired/344/ffffff/logout-rounded-left.png", "link_url" => "logout.php", "link_text" => "Log out", "method" => "POST")
+        array("icon_url" => "https://img.icons8.com/wired/344/ffffff/logout-rounded-left.png", "link_url" => "api/logout.php", "link_text" => "Logout", "method" => "POST")
     );
 
     $lm_html_links = '';

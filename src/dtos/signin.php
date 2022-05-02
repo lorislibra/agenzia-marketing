@@ -25,25 +25,24 @@ class SignInDto extends BaseDto
             throw new ValidateDtoError($errors);
         }
 
-        $dto = new self($array["email"], $array["password"]);
-        if (!$dto->validate($errors)) {
+        if (!self::validate($errors, $array)) {
             throw new ValidateDtoError($errors);
         }
 
-        return $dto;
+        return new self($array["email"], $array["password"]);
     }
 
     // check if the dto is valid
-    function validate(array &$errors): bool
+    static function validate(array &$errors, array &$array): bool
     {
         $is_valid = true;
 
-        if (strlen($this->password) < 8) {
+        if (strlen($array["password"]) < 8) {
             array_push($errors, "password is short");
             $is_valid = false;
         }
 
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($array["email"], FILTER_VALIDATE_EMAIL)) {
             array_push($errors, "email is not valid");
             $is_valid = false;
         }

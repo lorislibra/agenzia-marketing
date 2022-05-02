@@ -34,7 +34,7 @@ function show_item(CartItem $cart_item){
                     <p class="cart_info" style="top: 35%;">N. of stocks: <b>' . $cart_item->quantity . '</b></p>
                     <p class="cart_info" style="top: 47.5%;">Prod. per stock: <b>' . $item->quantity . '</b></p>
                     <p class="cart_info" style="top: 60%;">Cost: <b>€' . number_format($cart_item->quantity * $item->quantity * $product->price, 2) . '</b></p>
-                    <form method="POST" action="">
+                    <form method="POST" action="api/add_to_cart.php">
                         <input type="hidden" name="item_id" value="' . $cart_item->item_id . '">
                         <input type="hidden" name="user_id" value="' . $cart_item->user_id . '">
                         <button class="cart_order_button" style="vertical-align: middle;">

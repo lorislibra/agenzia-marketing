@@ -6,7 +6,7 @@ class ShowItemDto extends BaseDto
 {
     public int $id;
 
-    function __construct(string $id)
+    function __construct(int $id)
     {
         $this->id = $id;
     }
@@ -19,20 +19,19 @@ class ShowItemDto extends BaseDto
             throw new ValidateDtoError($errors);
         }
 
-        $dto = new self($array["id"]);
-        if (!$dto->validate($errors)) {
+        if (!self::validate($errors, $array)) {
             throw new ValidateDtoError($errors);
         }
 
-        return $dto;
+        return new self($array["id"]);;
     }
 
-    // check if the dto is valid
-    function validate(array &$errors): bool
+    // check if input are valids
+    static function validate(array &$errors, array &$array): bool
     {
         $is_valid = true;
 
-        if (!filter_var($this->id, FILTER_VALIDATE_INT)) {
+        if (!filter_var($array["id"], FILTER_VALIDATE_INT)) {
             array_push($errors, "id is not a number");
             $is_valid = false;
         }
