@@ -79,6 +79,20 @@ class CartItemRepo extends DbManager
         
         return false;
     }
+
+    function count_by_user_id(int $user_id): ?int
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(*) FROM cart_item
+        WHERE user_id = :user_id;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id])) {
+            return $stmt->fetchColumn();
+        }
+
+        return null;
+    }
 }
 
 ?>

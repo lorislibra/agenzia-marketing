@@ -13,8 +13,8 @@ need_logged();
 try {
     $dto = ShowOrderDto::from_array($_GET);
 } catch (ValidateDtoError $e) {
-    header("location: /cart.php");
     $session->add_error("order", "invalid order");
+    header("location: /cart.php");
     exit();
 }
 
@@ -29,6 +29,7 @@ $error = "";
 $reservation = $reservation_repo->get_by_id($dto->id);
 if (!$reservation || $reservation->user_id != $user->id) {
     $session->add_error("order", "order didn't exist");
+    header("location: /cart.php");
     exit();
 }
 

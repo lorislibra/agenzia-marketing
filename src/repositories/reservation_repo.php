@@ -58,6 +58,20 @@ class ReservationRepo extends DbManager
         return null;
     }
 
+    function count_by_user_id(int $user_id): ?int
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(*) FROM reservation
+        WHERE user_id = :user_id;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id])) {
+            return $stmt->fetchColumn();
+        }
+
+        return null;
+    }
+
     // get all reservation
     function get_all(): ?array
     {
