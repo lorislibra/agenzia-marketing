@@ -17,8 +17,7 @@ function need_logged()
 function need_warehouse()
 {
     global $session;
-
-    need_logged($session);
+    need_logged();
 
     if (!$session->get_user()->role->important_than(Role::Warehouse)) {
         header("location: /items.php");

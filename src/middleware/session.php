@@ -5,15 +5,6 @@ class SessionManager
     function __construct()
     {
         session_start();
-
-        foreach (["login", "cart"] as $page) {
-            $page = strtolower($page);
-            if (!isset($_SESSION[$page])) {
-                $_SESSION[$page] = array(
-                    "error" => ""
-                );
-            }
-        }
     }
 
     function is_logged(): bool

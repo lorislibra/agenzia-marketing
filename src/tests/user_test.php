@@ -2,11 +2,12 @@
 
 require_once("src/repositories/user_repo.php");
 require_once("test.php");
+require_once("src/dtos/signin.php");
 
 $user_repo = new UserRepo($connection);
 
 echo("User by email and password\n");
-if ($user = $user_repo->get_by_email_password("dev@dev.com", "dev")) {
+if ($user = $user_repo->get_by_email_password(new SignInDto("dev@dev.com", "dev"))) {
     var_dump($user);
 } else {
     echo("no user\n");
