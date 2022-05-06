@@ -33,7 +33,7 @@ function show_cart_item(CartItem $cart_item){
                 </button>
             </form>
         </div>
-        ';
+    ';
 }
 
 ?>

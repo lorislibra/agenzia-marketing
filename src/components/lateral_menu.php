@@ -20,28 +20,22 @@ function show_lateral_menu(string $opened_section): string
         }
     }
 
-    $html_code = '
-    <div class="lateral_menu">
-        <div class="lm_header">
-            ' . add_header() . '
+    return '
+        <div class="lateral_menu">
+            <div class="lm_header">
+                ' . add_header() . '
+            </div>
+            <div class="lm_body">
+                ' . $lm_html_links . '
+            </div>
         </div>
-        <div class="lm_body">
-            ' . $lm_html_links . '
-        </div>
-    </div>
     ';
-
-    return $html_code;
 }
 
 // Return the header of the lateral menu
 function add_header()
 {
-    $html_code = '
-                <img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">
-                ';
-
-    return $html_code;
+    return '<img class="lm_title" src="https://peroni.it/wp-content/themes/birraperoni/assets/svg/peroni.svg">';
 }
 
 // Return the html code of a link in the lateral menu
@@ -52,15 +46,13 @@ function add_link(string $icon_url, string $link_url, string $link_text, string 
                     ';
     $link_text = '<p class="lm_link_text">' . $link_text . '</p>';
     $link_text = (!empty($icon_url)) ? $img_html_code . $link_text : $link_text;
-    $html_code = '
-                <form class="lm_link" method="' . $link_method . '" action="' . $link_url .'">
-                    <button class="hidden_submit">
-                    ' . $link_text . '
-                    </button>
-                </form>
-                ';
-
-    return $html_code;
+    return '
+        <form class="lm_link" method="' . $link_method . '" action="' . $link_url .'">
+            <button class="hidden_submit">
+            ' . $link_text . '
+            </button>
+        </form>
+    ';
 }
 
 ?>

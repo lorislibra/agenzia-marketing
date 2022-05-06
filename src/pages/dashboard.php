@@ -7,4 +7,6 @@ require_once("src/repositories/user_repo.php");
 allowed_methods(["GET"]);
 need_logged();
 
+$connection = DbManager::build_connection_from_env();
+
 ?>
