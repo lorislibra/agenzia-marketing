@@ -37,8 +37,7 @@ class ItemRepo extends DbManager
 
         if ($stmt->execute(["id" => $id])) {
             $items = $this->parse_fetch($stmt);
-            $selected_item = $this->get_first_element($items);
-            return $selected_item;
+            return $this->get_first_element($items);
         }
         
         return null;

@@ -20,7 +20,7 @@ function need_warehouse()
     need_logged();
 
     if (!$session->get_user()->role->important_than(Role::Warehouse)) {
-        header("location: /items.php");
+        header("location: /dashboard.php");
         exit();
     }
 }
@@ -30,7 +30,12 @@ function redirect_if_logged()
     global $session;
 
     if ($session->is_logged()) {
-        header("location: /items.php");
+        if ($session->get_user()->role == Role::Warehouse) {
+            header("location: /dashboard.php");
+        } else {
+            header("location: /admin/dashboard.php");
+        }
+        
         exit();
     }
     

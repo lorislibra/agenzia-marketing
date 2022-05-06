@@ -6,7 +6,7 @@ require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
 require_once("src/dtos/add_to_cart.php");
 require_once("src/components/lateral_menu.php");
-require_once("src/components/cart_items.php");
+require_once("src/components/cart_item.php");
 require_once("src/services/cart.php");
 
 allowed_methods(["GET"]);
@@ -14,10 +14,11 @@ need_logged();
 
 $user = $session->get_user();
 $connection = DbManager::build_connection_from_env();
+$cart_repo = new CartItemRepo($connection);
 
 $error = "";
+$user_cart = null;
 
-$cart_repo = new CartItemRepo($connection);
 try {
     $user_cart = $cart_repo->get_by_user_id($user->id);
     // if the user is in the array there is at least an item
@@ -27,7 +28,6 @@ try {
 }
 catch (Exception $e) {
     $error = $e->getMessage();
-    $user_cart = null;
 }
 
 ?>
@@ -37,13 +37,13 @@ catch (Exception $e) {
         <title>Cart</title>
 
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
         <?php echo(show_lateral_menu("Cart")); ?>
         <div class="body_main">
             <div class="cart_list">
-                <?php if ($user_cart) echo(show_user_cart_items($user_cart)); ?>
+                <?php if ($user_cart) echo(join(array_map("show_cart_item", $user_cart))); ?>
             </div>
             <?php if ($error) echo($error); ?>
             <?php if ($error = $session->get_error("order")) echo($error); ?>

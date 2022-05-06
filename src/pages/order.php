@@ -24,8 +24,6 @@ $reservation_repo = new ReservationRepo($connection);
 
 $user = $session->get_user();
 
-$error = "";
-
 $reservation = $reservation_repo->get_by_id($dto->id);
 if (!$reservation || $reservation->user_id != $user->id) {
     $session->add_error("order", "order didn't exist");
@@ -33,6 +31,5 @@ if (!$reservation || $reservation->user_id != $user->id) {
     exit();
 }
 
-echo("order id: " . $reservation->id);
-
+var_dump($reservation);
 ?>

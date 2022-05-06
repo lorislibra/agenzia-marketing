@@ -1,8 +1,8 @@
 <?php
 
 require_once("src/repositories/manager.php");
-require_once("reservation.php");
-require_once("item.php");
+require_once("src/entities/reservation.php");
+require_once("src/entities/item.php");
 
 class ReservationItem
 {

@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS reservation(
     id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     status INT NOT NULL,
+    comment VARCHAR(400) NOT NULL,
     sell_point_id INT NOT NULL,
     date_order TIMESTAMP NOT NULL,
     date_delivery TIMESTAMP,

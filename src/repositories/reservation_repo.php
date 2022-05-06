@@ -91,13 +91,29 @@ class ReservationRepo extends DbManager
     function add(int $user_id, CreateOrderDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
-        INSERT INTO reservation (user_id, status, sell_point_id, date_order)
-        VALUES (:user_id, 1, :sell_point_id, NOW());
+        INSERT INTO reservation (user_id, status, sell_point_id, date_order, comment)
+        VALUES (:user_id, 1, :sell_point_id, NOW(), '');
         ");
 
         if ($stmt->execute([
             "user_id" => $user_id,
             "sell_point_id" => $dto->sell_point_id
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+
+        return false;
+    }
+
+    function update_comment(int $id, string $comment): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        UPDATE reservation SET comment = :comment WHERE id = :id;
+        ");
+
+        if ($stmt->execute([
+            "id" => $id,
+            "comment" => $comment
         ])) {
             return $stmt->rowCount() > 0;
         }
