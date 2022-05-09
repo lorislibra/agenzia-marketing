@@ -24,7 +24,13 @@ $user_repo = new UserRepo($connection);
 
 if ($user = $user_repo->get_by_email_password($dto)) {
     $session->set_user($user);
-    header("location: /dashboard.php");
+
+    if ($user->role == Role::Warehouse) {
+        header("location: /admin/dashboard.php");
+    } else {
+        header("location: /dashboard.php");
+    }
+    
 } else {
     $session->add_error("login", "Invalid email or password");
     header("location: /login.php");

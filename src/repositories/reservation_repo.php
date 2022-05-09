@@ -72,6 +72,19 @@ class ReservationRepo extends DbManager
         return null;
     }
 
+    function count(): ?int
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(*) FROM reservation;
+        ");
+
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn();
+        }
+
+        return null;
+    }
+
     // get all reservation
     function get_all(): ?array
     {
