@@ -3,6 +3,7 @@
 require_once("manager.php");
 require_once("src/entities/item.php");
 require_once("src/entities/product.php");
+require_once("src/dtos/show_items.php");
 
 class ItemRepo extends DbManager
 {
@@ -77,17 +78,59 @@ class ItemRepo extends DbManager
     }
 
     // get all items
-    function get_all_with_filters(int $min_stock=1): ?array
+    function get_all_filters(ShowItemsDto $dto, int $min_stock=1): ?array
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
         LEFT JOIN product ON item.product_sku = product.sku
-        WHERE stock >= :min_stock;
+        WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3)
+        ORDER BY product.name
+        LIMIT :offset, :limit
         ");
 
-        if ($stmt->execute(["min_stock" => $min_stock])) {
-            $items = $this->parse_fetch($stmt);
-            return $items;
+        if ($stmt->execute([
+            "min_stock" => $min_stock,
+            "offset" => ($dto->page-1) * $dto->per_page,
+            "limit" => $dto->per_page,
+            "query1" => "%".$dto->query."%",
+            "query2" => "%".$dto->query."%",
+            "query3" => "%".$dto->query."%"
+        ])) {
+            return $this->parse_fetch($stmt);
+        }
+
+        return null;
+    }
+
+    function count(): ?int
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(*) FROM item;
+        ");
+
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn();
+        }
+
+        return null;
+    }
+
+    function count_filters(ShowItemsDto $dto, int $min_stock=1): ?int
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(*)
+        FROM item
+        LEFT JOIN product ON item.product_sku = product.sku
+        WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3)
+        ;");
+
+        if ($stmt->execute([
+            "min_stock" => $min_stock,
+            "query1" => "%".$dto->query."%",
+            "query2" => "%".$dto->query."%",
+            "query3" => "%".$dto->query."%"
+        ])) {
+            return $stmt->fetchColumn();
         }
 
         return null;
