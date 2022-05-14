@@ -46,6 +46,23 @@ class CartItemRepo extends DbManager
         return null;
     }
 
+    function get(int $user_id, int $item_id): ?CartItem
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM cart_item
+        LEFT JOIN item ON item.id = cart_item.item_id
+        LEFT JOIN product ON item.product_sku = product.sku
+        WHERE cart_item.user_id = :user_id AND cart_item.item_id = :item_id;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id, "item_id" => $item_id])) {
+            $items = $this->parse_fetch($stmt);
+            return $this->get_first_element($items);
+        }
+
+        return null;
+    }
+
     function add_or_update(int $user_id, AddToCartDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
@@ -66,6 +83,23 @@ class CartItemRepo extends DbManager
         return false;
     }
 
+    function update(int $user_id, AddToCartDto $dto): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        UPDATE cart_item SET quantity = quantity - :quantity WHERE user_id = :user_id AND item_id = :item_id;
+        ");
+
+        if ($stmt->execute([
+            "user_id" => $user_id,
+            "item_id" => $dto->item_id,
+            "quantity" => $dto->quantity
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+        
+        return false;
+    }
+
     function delete_by_user_id(int $user_id): bool
     {
         $stmt = $this->get_connection()->prepare("
@@ -74,6 +108,20 @@ class CartItemRepo extends DbManager
         ");
 
         if ($stmt->execute(["user_id" => $user_id])) {
+            return $stmt->rowCount() > 0;
+        }
+        
+        return false;
+    }
+
+    function delete(int $user_id, int $item_id): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        DELETE FROM cart_item
+        WHERE user_id = :user_id AND item_id = :item_id;
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id, "item_id" => $item_id])) {
             return $stmt->rowCount() > 0;
         }
         
