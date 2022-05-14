@@ -74,6 +74,32 @@ class SellPointRepo extends DbManager
 
         return null;
     }
+
+    // get the sell_points of a certain region by id if similar to the string
+    function get_by_region_and_search(int $id, string $search_string): ?array
+    {
+        $search_string = preg_replace('/^\s+|\s+$|\s+(?=\s)/', '', $search_string);
+        $words = explode(" ", $search_string);
+
+        $query = "
+        SELECT * FROM sell_point
+        LEFT JOIN region ON sell_point.region_id = region.id
+        WHERE sell_point.region_id = :region_id AND(";
+        foreach($words as &$word)
+        {
+            $query += "sell_point.address LIKE \"%$word%\"
+                    OR sell_point.name LIKE \"%$word%\"";
+        }
+
+        $stmt = $this->get_connection()->prepare($query + ")");
+        
+        if ($stmt->execute(["region_id" => $id])) {
+            $sell_points = $this->parse_fetch($stmt);
+            return $sell_points;
+        }
+        
+        return null;
+    }
 }
 
 ?>
