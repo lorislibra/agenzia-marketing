@@ -19,9 +19,16 @@ function need_warehouse()
     global $session;
     need_logged();
 
-    if (!$session->get_user()->role->important_than(Role::Warehouse)) {
-        header("location: /dashboard.php");
-        exit();
+    $role = $session->get_user()->role;
+
+    switch ($role) {
+        case Role::Developer:
+        case Role::Warehouse:
+            break;
+        default:
+            header("location: /dashboard.php");
+            exit();
+            break;
     }
 }
 
@@ -30,11 +37,19 @@ function redirect_if_logged()
     global $session;
 
     if ($session->is_logged()) {
-        if ($session->get_user()->role->important_than(Role::Warehouse)) {
-            header("location: /admin/dashboard.php");
-        } else {
+
+        $role = $session->get_user()->role;
+
+        switch ($role) {
+            case Role::Developer:
+            case Role::Warehouse:
+                header("location: /admin/dashboard.php");
+                break;
+            default:
             header("location: /dashboard.php");
+                break;
         }
+
         exit();
     }
     
