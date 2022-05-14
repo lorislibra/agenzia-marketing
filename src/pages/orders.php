@@ -6,6 +6,7 @@ require_once("src/repositories/reservation_item_repo.php");
 require_once("src/repositories/reservation_repo.php");
 require_once("src/dtos/show_order.php");
 require_once("src/middleware/request.php");
+require_once("src/components/lateral_menu.php");
 
 allowed_methods(["GET"]);
 need_logged();
@@ -25,7 +26,7 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("Items", "user")); ?>
+        <?php echo(show_lateral_menu("Orders", "user")); ?>
             
         <div class="body_main">
             <?php var_dump($reservations); ?>    

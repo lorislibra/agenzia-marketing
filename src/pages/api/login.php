@@ -25,7 +25,7 @@ $user_repo = new UserRepo($connection);
 if ($user = $user_repo->get_by_email_password($dto)) {
     $session->set_user($user);
 
-    if ($user->role == Role::Warehouse) {
+    if ($user->role->important_than(Role::Warehouse)) {
         header("location: /admin/dashboard.php");
     } else {
         header("location: /dashboard.php");

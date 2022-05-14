@@ -63,7 +63,7 @@ function item_component(Item $item): string
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("", "user")); ?>
+        <?php echo(show_lateral_menu("Item", "user")); ?>
         <div class="body_main">
             <?php echo(item_component($item)); ?>
             <?php if ($error = $session->get_error("cart")) echo('<p class="login_errors">' . $error . '</p>'); ?>
