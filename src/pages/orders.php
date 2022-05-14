@@ -16,6 +16,27 @@ $connection = DbManager::build_connection_from_env();
 $reservation_repo = new ReservationRepo($connection);
 $reservations = $reservation_repo->get_by_user_id($user->id);
 
-var_dump($reservations);
-
 ?>
+
+<html lang="en">
+    <head>
+        <title>Orders</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+    </head>
+    <body>
+        <?php echo(show_lateral_menu("Items", "user")); ?>
+            
+        <div class="body_main">
+            <?php var_dump($reservations); ?>    
+        </div>
+        
+        <script src="/js/main.js"></script>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
+        
+    </body>
+</html>

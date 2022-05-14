@@ -23,7 +23,7 @@ $reservation_count = $reservation_repo->count_by_user_id($user->id);
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("Account")); ?>
+        <?php echo(show_lateral_menu("Dashboard", "user")); ?>
         <div class="body_main">
             <h1>
                 <?php echo("Ordini eseguiti: $reservation_count"); ?>

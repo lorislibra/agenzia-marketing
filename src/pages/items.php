@@ -35,7 +35,7 @@ $items = $item_repo->get_all_filters($dto);
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("Items")); ?>
+        <?php echo(show_lateral_menu("Items", "user")); ?>
         <div class="body_main">
             <div class="top_filters">
                 <form action="" class="filter_form" style="width: 40%;" method="get">

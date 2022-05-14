@@ -31,5 +31,26 @@ if (!$reservation || $reservation->user_id != $user->id) {
     exit();
 }
 
-var_dump($reservation);
 ?>
+
+<html lang="en">
+    <head>
+        <title>Order</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+    </head>
+    <body>
+        <?php echo(show_lateral_menu("Items", "user")); ?>
+        
+        <div class="body_main">
+            <?php var_dump($reservation); ?>    
+        </div>
+        <script src="/js/main.js"></script>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
+        
+    </body>
+</html>

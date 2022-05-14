@@ -40,7 +40,7 @@ catch (Exception $e) {
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("Cart")); ?>
+        <?php echo(show_lateral_menu("Cart", "user")); ?>
         <div class="body_main">
             <div class="cart_list">
                 <?php if ($user_cart) echo(join(array_map("show_cart_item", $user_cart))); ?>

@@ -30,12 +30,11 @@ function redirect_if_logged()
     global $session;
 
     if ($session->is_logged()) {
-        if ($session->get_user()->role == Role::Warehouse) {
+        if ($session->get_user()->role->important_than(Role::Warehouse)) {
             header("location: /admin/dashboard.php");
         } else {
             header("location: /dashboard.php");
         }
-        
         exit();
     }
     

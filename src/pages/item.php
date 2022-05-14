@@ -54,18 +54,16 @@ function item_component(Item $item): string
         </div>';
 }
 
-var_dump($item);
-
 ?>
 
 <html lang="en">
     <head>
-        <title>Showcase</title>
+        <title><?php echo($item->product->name) ?></title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("Items")); ?>
+        <?php echo(show_lateral_menu("", "user")); ?>
         <div class="body_main">
             <?php echo(item_component($item)); ?>
             <?php if ($error = $session->get_error("cart")) echo('<p class="login_errors">' . $error . '</p>'); ?>
