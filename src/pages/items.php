@@ -69,7 +69,9 @@ $items = $item_repo->get_all_filters($dto);
                         if(($page - $i <= 1 && $page - $i >= -1) || $i == 1 || $i == $max_page){
                             $href = ($i == $page) ? "" : "href=\"/items.php?page=$i&per_page=$per_page&query=$query\"";
                             $class = ($i == $page) ? "sel_page_link" : "page_link";
-                            echo("<a role=\"link\" class=\"page_link\" $href>$i</a>");
+                            $class .= ($i == 1) ? " first_page_link" : "";
+                            $class .= ($i == $max_page) ? " last_page_link" : "";
+                            echo("<a role=\"link\" class=\"$class\" $href>$i</a>");
                         }
                     }    
                 ?>
