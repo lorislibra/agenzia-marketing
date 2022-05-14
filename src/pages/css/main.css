@@ -419,3 +419,62 @@ button {
     width: 66%;
     height: 10%;
 }
+
+.top_filters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.filter_form{
+    display: flex;
+    margin: 20px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.filter_select{
+    padding: 5px;
+    transform: translateY(-2px);
+    background-color: #d41923;
+    color: #ffffff;
+    border-radius: 5px;
+    border: 0px;
+    margin-left: 5px;
+}
+
+.filter_select:focus{
+    outline: 0px;
+}
+
+.filter_input{
+    width: 100%;
+}
+
+.filter_submit{
+    background-color: #d41923;
+    color: #ffffff;
+    border: 0px;
+}
+
+.filter_submit:hover{
+    background-color: #ba161f;
+}
+
+.filter_submit:focus{
+    background-color: #9e131a;
+    outline: 0px;
+}
+
+.filter_input:focus{
+    outline: 0px;
+}
+
+.pages_list{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    width: fit-content;
+}
