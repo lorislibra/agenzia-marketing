@@ -150,6 +150,21 @@ class ItemRepo extends DbManager
 
         return false;
     }
+
+    function add_stock(int $item_id, int $quantity): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        UPDATE item
+        SET stock = stock + :quantity
+        WHERE id = :id
+        ");
+
+        if ($stmt->execute(["id" => $item_id, "quantity" => $quantity])) {
+            return $stmt->rowCount() > 0;
+        }
+
+        return false;
+    }
 }
 
 ?>
