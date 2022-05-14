@@ -5,7 +5,7 @@ $lm_links = array(
         array("icon_url" => "https://img.icons8.com/wired/344/ffffff/circled-user.png", "link_url" => "/dashboard.php", "link_text" => "Dashboard", "method" => "GET"),
         array("icon_url" => "https://img.icons8.com/wired/344/ffffff/bulleted-list.png", "link_url" => "/items.php", "link_text" => "Items", "method" => "GET"),
         array("icon_url" => "https://img.icons8.com/ios-glyphs/344/ffffff/shopping-cart--v1.png", "link_url" => "/cart.php", "link_text" => "Cart", "method" => "GET"),
-        array("icon_url" => "https://img.icons8.com/ios-glyphs/344/ffffff/shopping-cart--v1.png", "link_url" => "/orders.php", "link_text" => "Orders", "method" => "GET"),
+        array("icon_url" => "https://img.icons8.com/windows/344/ffffff/edit-online-order.png", "link_url" => "/orders.php", "link_text" => "Orders", "method" => "GET"),
         array("icon_url" => "https://img.icons8.com/wired/344/ffffff/logout-rounded-left.png", "link_url" => "/api/logout.php", "link_text" => "Logout", "method" => "POST")
     ),
     "admin" => array(
