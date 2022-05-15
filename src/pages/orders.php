@@ -49,7 +49,7 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
                                     <td>' . $reservation->id . '</td>
                                     <td>' . $reservation->date_order->format('d/m/Y') . '</td>
                                     <td>' . $delivery_date . '</td>
-                                    <td>' . $reservation->status->role->string() . '</td>
+                                    <td>' . $reservation->status->string() . '</td>
                                     <td></td>
                                 </tr>
                             ';
