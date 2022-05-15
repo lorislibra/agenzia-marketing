@@ -541,3 +541,26 @@ button {
     flex-wrap: wrap;
     justify-content: end;
 }
+
+table{
+    width: calc(100% - 40px);
+    margin: 20px;
+}
+
+table, td, th{
+    border: 1px solid #363636;
+    border-collapse: collapse;
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+}
+
+td, th{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+th{
+    background-color: #ba161f;
+    color: #ffffff;
+}

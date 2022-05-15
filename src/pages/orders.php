@@ -29,7 +29,34 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
         <?php echo(show_lateral_menu("Orders", "user")); ?>
             
         <div class="body_main">
-            <?php var_dump($reservations); ?>    
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Order date</th>
+                        <th>Delivery date</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        foreach($reservations as $reservation){
+                            $delivery_date = ($reservation->date_delivery->format('d/m/Y') == "30/11/-0001") ? "---": $reservation->date_delivery->format('d/m/Y');
+
+                            echo '
+                                <tr>
+                                    <td>' . $reservation->id . '</td>
+                                    <td>' . $reservation->date_order->format('d/m/Y') . '</td>
+                                    <td>' . $delivery_date . '</td>
+                                    <td>' . $reservation->status->role->string() . '</td>
+                                    <td></td>
+                                </tr>
+                            ';
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
         
         <script src="/js/main.js"></script>
