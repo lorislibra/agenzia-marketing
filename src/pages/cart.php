@@ -32,7 +32,7 @@ catch (Exception $e) {
 }
 
 $sell_points = $sell_point_repo->get_all_by_regions($user->regions);
-
+$cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : false;
 ?>
 
 <html>
@@ -46,22 +46,31 @@ $sell_points = $sell_point_repo->get_all_by_regions($user->regions);
         <?php echo(show_lateral_menu("Cart", "user")); ?>
         <div class="body_main">
             <div class="cart_list">
-                <?php if ($user_cart) echo(join(array_map("show_cart_item", $user_cart))); ?>
+                <?php 
+                    if($user_cart){
+                        echo join(array_map("show_cart_item", $user_cart));
+                    }
+                ?>
             </div>
-            <div>
-                <form method="POST" action="api/create_order.php">
-                    <select name="sell_point_id">
-                        <?php 
-                            foreach ($sell_points as $sell_point) {
-                                $name = $sell_point->name . " " . $sell_point->address;
-                                $id = $sell_point->id;
-                                echo ("<option value=\"$id\">$name</option>");
-                            }
-                        ?>
-                    </select>
-                    <input type="submit" style="vertical-align: middle;" value="ORDER">
-                </form>
-            </div>
+            <?php
+                if($cart_items_exists){
+                    echo '<form method="POST" class="order_form" action="api/create_order.php">
+                    <select class="cart_select" name="sell_point_id">';
+
+                    foreach ($sell_points as $sell_point) {
+                        $name = $sell_point->name . " " . $sell_point->address;
+                        $id = $sell_point->id;
+                        echo "<option value=\"$id\">$name</option>";
+                    }
+
+                    echo '</select>
+                    <input type="submit" class="cart_order_button" style="vertical-align: middle;" value="ORDER">
+                    </form>';
+                }
+                else{
+                    echo '<h1 class="cart_notify">There are no items in the cart</h1>';
+                }
+            ?>
 
             <?php if ($error) echo($error); ?>
             <?php if ($error = $session->get_error("order")) echo($error); ?>
