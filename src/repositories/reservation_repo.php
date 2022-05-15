@@ -30,6 +30,7 @@ class ReservationRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
+        JOIN user ON user.id = reservation.user_id
         WHERE reservation.id = :id;
         ");
 

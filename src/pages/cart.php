@@ -2,6 +2,7 @@
 
 require_once("src/repositories/cart_item_repo.php");
 require_once("src/repositories/item_repo.php");
+require_once("src/repositories/sell_point_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
 require_once("src/dtos/add_to_cart.php");
@@ -15,7 +16,7 @@ need_logged();
 $user = $session->get_user();
 $connection = DbManager::build_connection_from_env();
 $cart_repo = new CartItemRepo($connection);
-
+$sell_point_repo = new SellPointRepo($connection);
 $error = "";
 $user_cart = null;
 
@@ -29,6 +30,8 @@ try {
 catch (Exception $e) {
     $error = $e->getMessage();
 }
+
+$sell_points = $sell_point_repo->get_all();
 
 ?>
 
