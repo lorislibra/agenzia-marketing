@@ -2,9 +2,9 @@
 
 require_once("src/repositories/cart_item_repo.php");
 require_once("src/repositories/item_repo.php");
-require_once("src/dtos/add_to_cart.php");
+require_once("src/dtos/update_cart.php");
 
-function add_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
+function add_cart_item_tx(PDO $connection, int $user_id, UpdateCartDto $dto)
 {   
     $item_repo = new ItemRepo($connection);
     $cart_item_repo = new CartItemRepo($connection);
@@ -38,7 +38,7 @@ function add_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
     $connection->commit();
 }
 
-function remove_from_cart_item_tx(PDO $connection, int $user_id, AddToCartDto $dto)
+function remove_from_cart_item_tx(PDO $connection, int $user_id, UpdateCartDto $dto)
 {
     $item_repo = new ItemRepo($connection);
     $cart_item_repo = new CartItemRepo($connection);

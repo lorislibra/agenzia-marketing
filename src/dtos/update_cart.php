@@ -2,7 +2,7 @@
 
 require_once("dto.php");
 
-class AddToCartDto extends BaseDto
+class UpdateCartDto extends BaseDto
 {
     public int $item_id;
     public int $quantity;

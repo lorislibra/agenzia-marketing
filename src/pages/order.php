@@ -4,7 +4,7 @@ require_once("src/middleware/checks.php");
 require_once("src/repositories/manager.php");
 require_once("src/repositories/reservation_item_repo.php");
 require_once("src/repositories/reservation_repo.php");
-require_once("src/dtos/show_order.php");
+require_once("src/dtos/show_id.php");
 require_once("src/middleware/request.php");
 require_once("src/components/lateral_menu.php");
 
@@ -12,7 +12,7 @@ allowed_methods(["GET"]);
 need_logged();
 
 try {
-    $dto = ShowOrderDto::from_array($_GET);
+    $dto = ShowIdDto::from_array($_GET);
 } catch (ValidateDtoError $e) {
     $session->add_error("order", "invalid order");
     header("location: /cart.php");

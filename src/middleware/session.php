@@ -33,7 +33,7 @@ class SessionManager
     function get_error(string $page)
     {
         $page = strtolower($page);
-        if (!isset($_SERVER[$page]["error"])) {
+        if (!isset($_SESSION[$page]["error"])) {
             return "";
         }
         

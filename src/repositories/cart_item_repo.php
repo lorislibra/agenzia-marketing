@@ -4,7 +4,7 @@ require_once("manager.php");
 require_once("src/entities/item.php");
 require_once("src/entities/cart_item.php");
 require_once("src/entities/product.php");
-require_once("src/dtos/add_to_cart.php");
+require_once("src/dtos/update_cart.php");
 
 class CartItemRepo extends DbManager
 {
@@ -63,7 +63,7 @@ class CartItemRepo extends DbManager
         return null;
     }
 
-    function add_or_update(int $user_id, AddToCartDto $dto): bool
+    function add_or_update(int $user_id, UpdateCartDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
         INSERT INTO cart_item (user_id, item_id, quantity)
@@ -83,10 +83,11 @@ class CartItemRepo extends DbManager
         return false;
     }
 
-    function update(int $user_id, AddToCartDto $dto): bool
+    function update(int $user_id, UpdateCartDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
-        UPDATE cart_item SET quantity = quantity - :quantity WHERE user_id = :user_id AND item_id = :item_id;
+        UPDATE cart_item SET quantity = quantity - :quantity
+        WHERE user_id = :user_id AND item_id = :item_id;
         ");
 
         if ($stmt->execute([

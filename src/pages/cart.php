@@ -5,7 +5,7 @@ require_once("src/repositories/item_repo.php");
 require_once("src/repositories/sell_point_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/request.php");
-require_once("src/dtos/add_to_cart.php");
+require_once("src/dtos/update_cart.php");
 require_once("src/components/lateral_menu.php");
 require_once("src/components/cart_item.php");
 require_once("src/services/cart.php");
@@ -50,6 +50,7 @@ $sell_points = $sell_point_repo->get_all();
             </div>
             <?php if ($error) echo($error); ?>
             <?php if ($error = $session->get_error("order")) echo($error); ?>
+            
         </div>
         <script>
             if (window.history.replaceState) {

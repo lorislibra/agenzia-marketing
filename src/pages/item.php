@@ -6,13 +6,13 @@ require_once("src/repositories/item_repo.php");
 require_once("src/middleware/checks.php");
 require_once("src/middleware/session.php");
 require_once("src/middleware/request.php");
-require_once("src/dtos/show_item.php");
+require_once("src/dtos/show_id.php");
 
 allowed_methods(["GET"]);
 need_logged();
 
 try {
-    $dto = ShowItemDto::from_array($_GET);
+    $dto = ShowIdDto::from_array($_GET);
 } catch (ValidateDtoError $e) {
     $session->add_error("item", "invalid item");
     header("location: /items.php");

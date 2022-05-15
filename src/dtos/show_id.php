@@ -2,7 +2,7 @@
 
 require_once("dto.php");
 
-class ShowItemDto extends BaseDto
+class ShowIdDto extends BaseDto
 {
     public int $id;
 
