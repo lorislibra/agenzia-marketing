@@ -31,7 +31,7 @@ catch (Exception $e) {
     $error = $e->getMessage();
 }
 
-$sell_points = $sell_point_repo->get_all();
+$sell_points = $sell_point_repo->get_all_by_regions($user->regions);
 
 ?>
 
@@ -48,6 +48,21 @@ $sell_points = $sell_point_repo->get_all();
             <div class="cart_list">
                 <?php if ($user_cart) echo(join(array_map("show_cart_item", $user_cart))); ?>
             </div>
+            <div>
+                <form method="POST" action="api/create_order.php">
+                    <select name="sell_point_id">
+                        <?php 
+                            foreach ($sell_points as $sell_point) {
+                                $name = $sell_point->name . " " . $sell_point->address;
+                                $id = $sell_point->id;
+                                echo ("<option value=\"$id\">$name</option>");
+                            }
+                        ?>
+                    </select>
+                    <input type="submit" style="vertical-align: middle;" value="ORDER">
+                </form>
+            </div>
+
             <?php if ($error) echo($error); ?>
             <?php if ($error = $session->get_error("order")) echo($error); ?>
             

@@ -26,12 +26,6 @@ function show_cart_item(CartItem $cart_item){
             <p class="cart_info" style="top: 35%;">N. of stocks: <b>' . $cart_item->quantity . '</b></p>
             <p class="cart_info" style="top: 47.5%;">Prod. per stock: <b>' . $item->quantity . '</b></p>
             <p class="cart_info" style="top: 60%;">Cost: <b>€' . number_format($cart_item->quantity * $item->quantity * $product->price, 2) . '</b></p>
-            <form method="POST" action="api/create_order.php">
-                <input type="hidden" name="sell_point_id" value="' . 1 . '">
-                <button class="cart_order_button" style="vertical-align: middle;">
-                    ORDER
-                </button>
-            </form>
         </div>
     ';
 }

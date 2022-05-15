@@ -75,6 +75,24 @@ class SellPointRepo extends DbManager
         return null;
     }
 
+    function get_all_by_regions(array $regions): ?array
+    {
+        $regions_list = join(",", array_map(fn (Region $region) => $region->id , $regions));
+
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM sell_point
+        LEFT JOIN region ON sell_point.region_id = region.id
+        WHERE sell_point.region_id IN ($regions_list);
+        ");
+
+        if ($stmt->execute()) {
+            $sell_points = $this->parse_fetch($stmt);
+            return $sell_points;
+        }
+
+        return null;
+    }
+
     // get the sell_points of a certain region by id if similar to the string
     function get_by_region_and_search(int $id, string $search_string): ?array
     {
