@@ -11,6 +11,16 @@ enum OrderStatus: int
     case Approved = 2;
     case Shipping = 3;
     case Arrived = 4;
+
+    function string(): string
+    {
+        return [
+            self::Waiting => "waiting",
+            self::Approved => "approved",
+            self::Shipping => "shipping",
+            self::Arrived => "arrived"
+        ][$this];
+    }    
 }
 
 class Reservation

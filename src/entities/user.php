@@ -3,13 +3,6 @@
 require_once("src/repositories/manager.php");
 require_once("src/entities/region.php");
 
-const _ROLE_STRING = [
-    Role::Developer => "developer",
-    Role::Warehouse => "warehouse",
-    Role::GroupAdmin => "group_admin",
-    Role::RegionAdmin => "region_admin"
-];
-
 enum Role: int
 {
     case Developer = 1;
@@ -24,7 +17,12 @@ enum Role: int
 
     function string(): string
     {
-        return _ROLE_STRING[$this];
+        return [
+            self::Developer => "developer",
+            self::Warehouse => "warehouse",
+            self::GroupAdmin => "group_admin",
+            self::RegionAdmin => "region_admin"
+        ][$this];
     }
 }
 
