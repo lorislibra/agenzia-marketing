@@ -5,7 +5,7 @@ require_once("src/repositories/manager.php");
 require_once("src/repositories/reservation_item_repo.php");
 require_once("src/repositories/reservation_repo.php");
 require_once("src/dtos/show_id.php");
-require_once("src/middleware/request.php");
+    require_once("src/middleware/request.php");
 require_once("src/components/lateral_menu.php");
 
 allowed_methods(["GET"]);
@@ -42,6 +42,7 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
                     <?php
                         foreach($reservations as $reservation){
                             $delivery_date = !$reservation->date_delivery ? "---": $reservation->date_delivery->format('d/m/Y');
+                            $link = 'order.php?id=' . $reservation->id;
 
                             echo '
                                 <tr>
@@ -49,7 +50,7 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
                                     <td>' . $reservation->date_order->format('d/m/Y') . '</td>
                                     <td>' . $delivery_date . '</td>
                                     <td>' . $reservation->status->string() . '</td>
-                                    <td></td>
+                                    <td class="order_td_details"><a class="order_btn_details" href="' . $link . '">View details</a></td>
                                 </tr>
                             ';
                         }

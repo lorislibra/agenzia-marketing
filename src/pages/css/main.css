@@ -548,7 +548,9 @@ table{
 }
 
 table, td, th{
-    border: 1px solid #363636;
+    border: 1px solid #c4c2c2;
+    border-left: 0px;
+    border-right: 0px;
     border-collapse: collapse;
     font-family: Verdana, sans-serif;
     font-size: 14px;
@@ -563,4 +565,10 @@ td, th{
 th{
     background-color: #ba161f;
     color: #ffffff;
+}
+
+.order_btn_details, .order_btn_details:link, .order_btn_details:hover, .order_btn_details:active{
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
 }
