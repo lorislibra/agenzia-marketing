@@ -32,27 +32,7 @@ if (!$item || $item->stock == 0) {
     exit();
 }
 
-function item_component(Item $item): string
-{
-    $product = $item->product;
-    return '
-        <div class="order_window">
-            <img class="order_image" alt="' . strtoupper($product->name). '" src="' . $product->image . '">
-            <p class="order_info" style="top: 12%;">Name: <b>' . $product->name . '</b></p>
-            <p class="order_info" style="top: 30%;">Brand: <b>' . $product->brand . '</b></p>
-            <p class="order_info" style="top: 48%;">Products per item: <b>' . $item->quantity . '</b></p>
-            <button id="btn_sub" class="order_number_add_sub" style="left: 30%;" onclick="modify_order_quantity(-1, ' . $item->stock . ')" disabled>-</button>
-            <button id="btn_add" class="order_number_add_sub" style="left: 53.4%;" onclick="modify_order_quantity(1, ' . $item->stock . ')">+</button>
-            <a class="close_order_window" href="/items.php">✕</a>
-            <form method="POST" action="/api/add_to_cart.php">
-                <input type="hidden" name="item_id" value="' . $item->id . '">
-                <input id="order_number_input" type="number" name="quantity" onchange="check_value(' . $item->stock . ')" min="1" value="1" max="' . $item->stock . '">
-                <button class="order_button">
-                    ADD TO CART
-                </button>
-            </form>
-        </div>';
-}
+$product = $item->product;
 
 ?>
 
@@ -65,7 +45,22 @@ function item_component(Item $item): string
     <body>
         <?php echo(show_lateral_menu("Item", "user")); ?>
         <div class="body_main">
-            <?php echo(item_component($item)); ?>
+            <img class="order_image" alt="<?php echo strtoupper($product->name); ?>" src="<?php echo $product->image; ?>">
+            <p class="order_info" style="top: 12%;">Name: <b> <?php echo $product->name; ?> </b></p>
+            <p class="order_info" style="top: 20%;">Brand: <b> <?php echo $product->brand; ?> </b></p>
+            <p class="order_info" style="top: 28%;">Stock price: <b> €<?php echo ($product->price * $item->quantity); ?> </b></p>
+            <p class="order_info" style="top: 36%;">Products per stock: <b> <?php echo $item->quantity; ?> </b></p>
+            <p class="order_info" style="top: 44%;">Available stocks: <b> <?php echo $item->stock; ?> </b></p>
+            <button id="btn_sub" class="order_number_add_sub" style="right: calc(40% + 30px);transform: translateX(50%);" onclick="modify_order_quantity(-1, <?php echo $item->stock; ?>)" disabled>-</button>
+            <button id="btn_add" class="order_number_add_sub" style="right: calc(8% + 30px);transform: translateX(50%);" onclick="modify_order_quantity(1, <? echo $item->stock; ?>)">+</button>
+            <a class="close_order_window" href="/items.php">✕</a>
+            <form method="POST" action="/api/add_to_cart.php">
+                <input type="hidden" name="item_id" value="' . $item->id . '">
+                <input id="order_number_input" type="number" name="quantity" onchange="check_value(<?php echo $item->stock; ?>)" min="1" value="1" max="<?php echo $item->stock; ?>">
+                <button class="order_button">
+                    ADD TO CART
+                </button>
+            </form>
             <?php if ($error = $session->get_error("cart")) echo('<p class="login_errors">' . $error . '</p>'); ?>
         </div>
 
