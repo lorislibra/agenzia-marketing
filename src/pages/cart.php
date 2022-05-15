@@ -17,22 +17,16 @@ $user = $session->get_user();
 $connection = DbManager::build_connection_from_env();
 $cart_repo = new CartItemRepo($connection);
 $sell_point_repo = new SellPointRepo($connection);
-$error = "";
-$user_cart = null;
 
-try {
-    $user_cart = $cart_repo->get_by_user_id($user->id);
-    // if the user is in the array there is at least an item
-    if (array_key_exists($user->id, $user_cart)) {
-        $user_cart = $user_cart[$user->id];
-    }
-}
-catch (Exception $e) {
-    $error = $e->getMessage();
-}
 
+$user_cart = $cart_repo->get_by_user_id($user->id);
 $sell_points = $sell_point_repo->get_all_by_regions($user->regions);
-$cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : false;
+
+if (array_key_exists($user->id, $user_cart)) {
+    $user_cart = $user_cart[$user->id];
+}
+$cart_error = !count($user_cart) ? "There are no items in the cart": "";
+
 ?>
 
 <html>
@@ -47,33 +41,28 @@ $cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : fals
         <div class="body_main">
             <div class="cart_list">
                 <?php 
-                    if($user_cart){
-                        echo join(array_map("show_cart_item", $user_cart));
-                    }
+                    // no need to check if $user_cart exists because of array_map
+                    echo(join(array_map("show_cart_item", $user_cart)));
                 ?>
             </div>
-            <?php
-                if($cart_items_exists){
-                    echo '<form method="POST" class="order_form" action="api/create_order.php">
-                    <select class="cart_select" name="sell_point_id">';
 
-                    foreach ($sell_points as $sell_point) {
-                        $name = $sell_point->name . " " . $sell_point->address;
-                        $id = $sell_point->id;
-                        echo "<option value=\"$id\">$name</option>";
-                    }
-
-                    echo '</select>
-                    <input type="submit" class="cart_order_button" style="vertical-align: middle;" value="ORDER">
-                    </form>';
-                }
-                else{
-                    echo '<h1 class="cart_notify">There are no items in the cart</h1>';
-                }
+            <?php 
+                if ($cart_error) echo("<h1 class=\"cart_notify\">$cart_error</h1>");
+                if ($error = $session->get_error("order")) echo($error);
             ?>
 
-            <?php if ($error) echo($error); ?>
-            <?php if ($error = $session->get_error("order")) echo($error); ?>
+            <form method="POST" class="order_form" action="api/create_order.php">
+                <select class="cart_select" name="sell_point_id">;
+                    <?php
+                        foreach ($sell_points as $sell_point) {
+                            $name = $sell_point->name . " " . $sell_point->address;
+                            $id = $sell_point->id;
+                            echo("<option value=\"$id\">$name</option>");
+                        }
+                    ?>
+                </select>
+                <input type="submit" <?php echo(!count($user_cart) ? "disabled" : ""); ?> class="cart_order_button" style="vertical-align: middle;" value="ORDER">
+            </form>
             
         </div>
         <script>
