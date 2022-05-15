@@ -3,6 +3,13 @@
 require_once("src/repositories/manager.php");
 require_once("src/entities/region.php");
 
+const _ROLE_STRING = [
+    Role::Developer => "developer",
+    Role::Warehouse => "warehouse",
+    Role::GroupAdmin => "group_admin",
+    Role::RegionAdmin => "region_admin"
+];
+
 enum Role: int
 {
     case Developer = 1;
@@ -13,6 +20,11 @@ enum Role: int
     function important_than(self $other): bool
     { 
         return $this <= $other;
+    }
+
+    function string(): string
+    {
+        return _ROLE_STRING[$this];
     }
 }
 
