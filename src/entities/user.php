@@ -17,12 +17,20 @@ enum Role: int
 
     function string(): string
     {
-        return [
-            self::Developer => "developer",
-            self::Warehouse => "warehouse",
-            self::GroupAdmin => "group_admin",
-            self::RegionAdmin => "region_admin"
-        ][$this];
+        switch ($this) {
+            case self::Developer:
+                return "developer";
+                break;
+            case self::Warehouse:
+                return "warehouse";
+                break;
+            case self::GroupAdmin:
+                return "group_admin";
+                break;
+            case self::RegionAdmin:
+                return "region_admin";
+                break;
+        }
     }
 }
 

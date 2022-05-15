@@ -14,12 +14,20 @@ enum OrderStatus: int
 
     function string(): string
     {
-        return [
-            self::Waiting => "waiting",
-            self::Approved => "approved",
-            self::Shipping => "shipping",
-            self::Arrived => "arrived"
-        ][$this];
+        switch ($this) {
+            case self::Waiting:
+                return "waiting";
+                break;
+            case self::Approved:
+                return "approved";
+                break;
+            case self::Shipping:
+                return "shipping";
+                break;
+            case self::Arrived:
+                return "arrived";
+                break;
+        }
     }    
 }
 
