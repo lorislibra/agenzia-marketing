@@ -42,12 +42,12 @@ class Reservation
     public int $sell_point_id;
     public ?SellPoint $sell_point;
     public DateTime $date_order;
-    public DateTime $date_delivery;
+    public ?DateTime $date_delivery;
     public OrderStatus $status;
 
     function __construct(
         int $id, int $user_id, ?User $user, int $sell_point_id, ?SellPoint $sell_point, string $comment,  
-        DateTime $date_order, DateTime $date_delivery, OrderStatus $status
+        DateTime $date_order, ?DateTime $date_delivery, OrderStatus $status
     )
     {
         $this->id = $id;
@@ -74,23 +74,14 @@ class Reservation
         $sell_point_id = DbManager::get_column($metadata, $row, self::$table, "sell_point_id");
         $status = DbManager::get_column($metadata, $row, self::$table, "status");
         $date_order = DbManager::get_column($metadata, $row, self::$table, "date_order");
-        $date_delivery = DbManager::get_column($metadata, $row, self::$table, "date_delivery");
-
-        try {
-            $user = User::build_from_row($metadata, $row);
-        } catch (MissingColumnError $e) { 
-            $user = null;
-        }
-
-        try {
-            $sell_point = SellPoint::build_from_row($metadata, $row);
-        } catch (MissingColumnError $e) { 
-            $sell_point = null;
-        }
+        
+        try { $date_delivery = DbManager::get_column($metadata, $row, self::$table, "date_delivery"); } catch (MissingColumnError $e) { $date_delivery = null; } 
+        try { $user = User::build_from_row($metadata, $row); } catch (MissingColumnError $e) { $user = null; }
+        try { $sell_point = SellPoint::build_from_row($metadata, $row); } catch (MissingColumnError $e) {  $sell_point = null; }
 
         $status = OrderStatus::from($status);
 
-        return new self($id, $user_id, $user, $sell_point_id, $sell_point, $comment, new DateTime($date_order), new DateTime($date_delivery), $status);
+        return new self($id, $user_id, $user, $sell_point_id, $sell_point, $comment, new DateTime($date_order), $date_delivery ? new DateTime($date_delivery) : null, $status);
     }
 }
 

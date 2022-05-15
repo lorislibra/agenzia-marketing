@@ -27,7 +27,6 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
     </head>
     <body>
         <?php echo(show_lateral_menu("Orders", "user")); ?>
-            
         <div class="body_main">
             <table>
                 <thead>
@@ -42,7 +41,7 @@ $reservations = $reservation_repo->get_by_user_id($user->id);
                 <tbody>
                     <?php
                         foreach($reservations as $reservation){
-                            $delivery_date = ($reservation->date_delivery->format('d/m/Y') == "30/11/-0001") ? "---": $reservation->date_delivery->format('d/m/Y');
+                            $delivery_date = !$reservation->date_delivery ? "---": $reservation->date_delivery->format('d/m/Y');
 
                             echo '
                                 <tr>

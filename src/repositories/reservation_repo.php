@@ -105,8 +105,8 @@ class ReservationRepo extends DbManager
     function add(int $user_id, CreateOrderDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
-        INSERT INTO reservation (user_id, status, sell_point_id, date_order, comment)
-        VALUES (:user_id, 1, :sell_point_id, NOW(), '');
+        INSERT INTO reservation (user_id, status, sell_point_id, date_order, date_delivery, comment)
+        VALUES (:user_id, 1, :sell_point_id, NOW(), null, '');
         ");
 
         if ($stmt->execute([

@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS reservation(
     comment VARCHAR(400) NOT NULL,
     sell_point_id INT NOT NULL,
     date_order TIMESTAMP NOT NULL,
-    date_delivery TIMESTAMP,
+    date_delivery TIMESTAMP NULL,
     PRIMARY KEY(id)
 );
 
