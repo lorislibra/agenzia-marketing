@@ -26,7 +26,7 @@ if (array_key_exists($user->id, $user_cart)) {
     $user_cart = $user_cart[$user->id];
 }
 $cart_error = !count($user_cart) ? "There are no items in the cart": "";
-
+$cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : false;
 ?>
 
 <html>
@@ -47,22 +47,26 @@ $cart_error = !count($user_cart) ? "There are no items in the cart": "";
             </div>
 
             <?php 
-                if ($cart_error) echo("<h1 class=\"cart_notify\">$cart_error</h1>");
                 if ($error = $session->get_error("order")) echo($error);
-            ?>
+        
+                if($cart_items_exists){
+                    echo '<form method="POST" class="order_form" action="api/create_order.php">
+                    <select class="cart_select" name="sell_point_id">';
 
-            <form method="POST" class="order_form" action="api/create_order.php">
-                <select class="cart_select" name="sell_point_id">;
-                    <?php
-                        foreach ($sell_points as $sell_point) {
-                            $name = $sell_point->name . " " . $sell_point->address;
-                            $id = $sell_point->id;
-                            echo("<option value=\"$id\">$name</option>");
-                        }
-                    ?>
-                </select>
-                <input type="submit" <?php echo(!count($user_cart) ? "disabled" : ""); ?> class="cart_order_button" style="vertical-align: middle;" value="ORDER">
-            </form>
+                    foreach ($sell_points as $sell_point) {
+                        $name = $sell_point->name . " " . $sell_point->address;
+                        $id = $sell_point->id;
+                        echo "<option value=\"$id\">$name</option>";
+                    }
+
+                    echo '</select>
+                    <input type="submit" class="cart_order_button" style="vertical-align: middle;" value="ORDER">
+                    </form>';
+                }
+                else{
+                    echo '<h1 class="cart_notify">There are no items in the cart</h1>';
+                }
+            ?>
             
         </div>
         <script>

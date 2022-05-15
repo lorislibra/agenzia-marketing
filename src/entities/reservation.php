@@ -16,16 +16,16 @@ enum OrderStatus: int
     {
         switch ($this) {
             case self::Waiting:
-                return "waiting";
+                return "Waiting";
                 break;
             case self::Approved:
-                return "approved";
+                return "Approved";
                 break;
             case self::Shipping:
-                return "shipping";
+                return "Shipping";
                 break;
             case self::Arrived:
-                return "arrived";
+                return "Arrived";
                 break;
         }
     }    
