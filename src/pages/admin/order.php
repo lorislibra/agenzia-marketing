@@ -41,7 +41,7 @@ if (!$reservation) {
         <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
-        <?php echo(show_lateral_menu("Order", "user")); ?>
+        <?php echo(show_lateral_menu("Order", "admin")); ?>
         
         <div class="body_main">
             <?php var_dump($reservation); ?>    

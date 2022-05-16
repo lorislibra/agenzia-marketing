@@ -7,7 +7,7 @@ class ShowOrdersDto extends BaseDto
     public int $page;
     public int $per_page;
 
-    function __construct(int $page=1, int $per_page=20)
+    function __construct(int $page=1, int $per_page=15)
     {
         $this->page = $page;
         $this->per_page = $per_page;
@@ -40,7 +40,7 @@ class ShowOrdersDto extends BaseDto
 
         if (is_null($array["per_page"]) || !filter_var($array["per_page"], FILTER_VALIDATE_INT) || $array["per_page"] < 1) {
             array_push($errors, "per_page is not a number");
-            $array["per_page"] = 20;
+            $array["per_page"] = 15;
         }
 
         $array["per_page"] = min($array["per_page"], 50);
