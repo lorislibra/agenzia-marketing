@@ -26,7 +26,7 @@ $order_count = $reservation_repo->count_by_user_id($user->id);
 $max_page = ceil($order_count / $dto->per_page);
 $dto->page = min($dto->page, $max_page);
 
-$reservations = $reservation_repo->get_by_user_id($user->id);
+$reservations = $reservation_repo->get_by_user_id_filters($dto, $user->id);
 
 ?>
 

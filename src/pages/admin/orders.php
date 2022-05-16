@@ -6,13 +6,27 @@ require_once("src/repositories/manager.php");
 require_once("src/repositories/reservation_item_repo.php");
 require_once("src/repositories/reservation_repo.php");
 require_once("src/components/lateral_menu.php");
+require_once("src/dtos/show_orders.php");
 
 allowed_methods(["GET"]);
 need_warehouse();
 
+try {
+    $dto = ShowOrdersDto::from_array($_GET);
+} catch (ValidateDtoError $e) {
+    $dto = new ShowOrdersDto();
+}
+
+$user = $session->get_user();
+
 $connection = DbManager::build_connection_from_env();
 $reservation_repo = new ReservationRepo($connection);
-$reservations = $reservation_repo->get_all();
+
+$order_count = $reservation_repo->count($user->id);
+$max_page = ceil($order_count / $dto->per_page);
+$dto->page = min($dto->page, $max_page);
+
+$reservations = $reservation_repo->get_all_filters($dto);
 
 ?>
 
