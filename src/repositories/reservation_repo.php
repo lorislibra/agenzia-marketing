@@ -47,6 +47,7 @@ class ReservationRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
+        JOIN sell_point ON sell_point.id = reservation.sell_point_id
         WHERE reservation.user_id = :user_id
         ORDER BY date_order ASC;
         ");
@@ -91,6 +92,8 @@ class ReservationRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
+        JOIN user ON user.id = reservation.user_id
+        JOIN sell_point ON sell_point.id = reservation.sell_point_id
         ORDER BY date_order ASC;
         ");
 
