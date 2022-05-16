@@ -112,8 +112,8 @@ class ReservationRepo extends DbManager
         SELECT * FROM reservation
         JOIN user ON user.id = reservation.user_id
         JOIN sell_point ON sell_point.id = reservation.sell_point_id
-        LIMIT :offset, :limit
-        ORDER BY date_order ASC;
+        ORDER BY date_order ASC
+        LIMIT :offset, :limit;
         ");
 
         if ($stmt->execute([
@@ -133,8 +133,8 @@ class ReservationRepo extends DbManager
         JOIN user ON user.id = reservation.user_id
         JOIN sell_point ON sell_point.id = reservation.sell_point_id
         WHERE reservation.user_id = :user_id
-        LIMIT :offset, :limit
-        ORDER BY date_order ASC;
+        ORDER BY date_order ASC
+        LIMIT :offset, :limit;
         ");
 
         if ($stmt->execute([

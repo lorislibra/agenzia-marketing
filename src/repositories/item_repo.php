@@ -118,8 +118,7 @@ class ItemRepo extends DbManager
     function count_filters(ShowItemsDto $dto, int $min_stock=1): ?int
     {
         $stmt = $this->get_connection()->prepare("
-        SELECT COUNT(*)
-        FROM item
+        SELECT COUNT(*) FROM item
         LEFT JOIN product ON item.product_sku = product.sku
         WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3)
         ;");
