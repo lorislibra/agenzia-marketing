@@ -25,8 +25,7 @@ $sell_points = $sell_point_repo->get_all_by_regions($user->regions);
 if (array_key_exists($user->id, $user_cart)) {
     $user_cart = $user_cart[$user->id];
 }
-$cart_error = !count($user_cart) ? "There are no items in the cart": "";
-$cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : false;
+
 ?>
 
 <html>
@@ -49,7 +48,7 @@ $cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : fals
             <?php 
                 if ($error = $session->get_error("order")) echo($error);
         
-                if($cart_items_exists){
+                if(count($user_cart)) {
                     echo '<form method="POST" class="order_form" action="api/create_order.php">
                     <select class="cart_select" name="sell_point_id">';
 
@@ -62,9 +61,8 @@ $cart_items_exists = ($user_cart != null && count($user_cart) > 0) ? true : fals
                     echo '</select>
                     <input type="submit" class="cart_order_button" style="vertical-align: middle;" value="ORDER">
                     </form>';
-                }
-                else{
-                    echo '<h1 class="cart_notify">There are no items in the cart</h1>';
+                } else {
+                    echo('<h1 class="cart_notify">There are no items in the cart</h1>');
                 }
             ?>
             

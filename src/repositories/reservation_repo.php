@@ -2,6 +2,7 @@
 
 require_once("manager.php");
 require_once("src/entities/reservation.php");
+require_once("src/dtos/show_orders.php");
 
 class ReservationRepo extends DbManager
 {
@@ -42,19 +43,14 @@ class ReservationRepo extends DbManager
         return null;
     }
 
-    // get reservations by user id
-    function get_by_user_id(int $user_id): ?array
+    function count(): ?int
     {
         $stmt = $this->get_connection()->prepare("
-        SELECT * FROM reservation
-        JOIN sell_point ON sell_point.id = reservation.sell_point_id
-        WHERE reservation.user_id = :user_id
-        ORDER BY date_order ASC;
+        SELECT COUNT(*) FROM reservation;
         ");
 
-        if ($stmt->execute(["user_id" => $user_id])) {
-            $reservations = $this->parse_fetch($stmt);
-            return $reservations;
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn();
         }
 
         return null;
@@ -74,14 +70,19 @@ class ReservationRepo extends DbManager
         return null;
     }
 
-    function count(): ?int
+    // get reservations by user id
+    function get_by_user_id(int $user_id): ?array
     {
         $stmt = $this->get_connection()->prepare("
-        SELECT COUNT(*) FROM reservation;
+        SELECT * FROM reservation
+        JOIN sell_point ON sell_point.id = reservation.sell_point_id
+        WHERE reservation.user_id = :user_id
+        ORDER BY date_order ASC;
         ");
 
-        if ($stmt->execute()) {
-            return $stmt->fetchColumn();
+        if ($stmt->execute(["user_id" => $user_id])) {
+            $reservations = $this->parse_fetch($stmt);
+            return $reservations;
         }
 
         return null;
@@ -102,6 +103,48 @@ class ReservationRepo extends DbManager
             return $reservations;
         }
         
+        return null;
+    }
+
+    function get_all_filters(ShowOrdersDto $dto): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM reservation
+        JOIN user ON user.id = reservation.user_id
+        JOIN sell_point ON sell_point.id = reservation.sell_point_id
+        LIMIT :offset, :limit
+        ORDER BY date_order ASC;
+        ");
+
+        if ($stmt->execute([
+            "offset" => ($dto->page-1) * $dto->per_page,
+            "limit" => $dto->per_page,
+        ])) {
+            return $this->parse_fetch($stmt);
+        }
+
+        return null;
+    }
+
+    function get_by_user_id_filters(ShowOrdersDto $dto, int $user_id): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT * FROM reservation
+        JOIN user ON user.id = reservation.user_id
+        JOIN sell_point ON sell_point.id = reservation.sell_point_id
+        WHERE reservation.user_id = :user_id
+        LIMIT :offset, :limit
+        ORDER BY date_order ASC;
+        ");
+
+        if ($stmt->execute([
+            "offset" => ($dto->page-1) * $dto->per_page,
+            "limit" => $dto->per_page,
+            "user_id" => $user_id
+        ])) {
+            return $this->parse_fetch($stmt);
+        }
+
         return null;
     }
 
