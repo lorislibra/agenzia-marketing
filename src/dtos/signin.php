@@ -4,11 +4,8 @@ require_once("dto.php");
 
 class SignInDto extends BaseDto
 {
-    public int $id;
     public string $email;
     public string $password;
-    public int $role;
-    public array $states;
 
     function __construct(string $email, string $password)
     {
