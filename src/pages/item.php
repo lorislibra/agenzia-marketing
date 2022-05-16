@@ -55,7 +55,7 @@ $product = $item->product;
             <button id="btn_add" class="order_number_add_sub" style="right: calc(8% + 30px);transform: translateX(50%);" onclick="modify_order_quantity(1, <? echo $item->stock; ?>)">+</button>
             <a class="close_order_window" href="/items.php">✕</a>
             <form method="POST" action="/api/add_to_cart.php">
-                <input type="hidden" name="item_id" value="<?php echo($item->id) ?>">
+                <input type="hidden" name="item_id" value="<?php echo($item->id); ?>">
                 <input id="order_number_input" type="number" name="quantity" onchange="check_value(<?php echo $item->stock; ?>)" min="1" value="1" max="<?php echo $item->stock; ?>">
                 <button class="order_button">
                     ADD TO CART

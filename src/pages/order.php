@@ -52,6 +52,5 @@ if (!$reservation || $reservation->user_id != $user->id) {
                 window.history.replaceState(null, null, window.location.href);
             }
         </script>
-        
     </body>
 </html>

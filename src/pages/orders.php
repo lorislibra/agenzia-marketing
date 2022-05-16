@@ -39,6 +39,20 @@ $reservations = $reservation_repo->get_by_user_id_filters($dto, $user->id);
     <body>
         <?php echo(show_lateral_menu("Orders", "user")); ?>
         <div class="body_main">
+            <div class="top_filters" style="justify-content: end;">
+                <form action="" class="filter_form" method="get">
+                    <input type="hidden" name="page" value="<?php echo($dto->page); ?>">
+                    Items per page: <select name="per_page" class="filter_select" onchange="this.form.submit()">
+                        <?php 
+                            for($i=3; $i <= 30; $i+=3) {
+                                $sel = $i == $dto->per_page ? "selected" : "";
+                                echo("<option $sel value=\"$i\">$i</option>");
+                            }
+                        ?>
+                    </select>
+                </form>
+            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -68,6 +82,22 @@ $reservations = $reservation_repo->get_by_user_id_filters($dto, $user->id);
                     ?>
                 </tbody>
             </table>
+
+            <div class="pages_list">
+                <?php
+                    $per_page = $dto->per_page;
+                    $page = $dto->page;
+                    for($i = 1; $i <= $max_page; $i++) {
+                        if(($page - $i <= 1 && $page - $i >= -1) || $i == 1 || $i == $max_page){
+                            $href = ($i == $page) ? "" : "href=\"/orders.php?page=$i&per_page=$per_page\"";
+                            $class = ($i == $page) ? "sel_page_link" : "page_link";
+                            $class .= ($i == 1) ? " first_page_link" : "";
+                            $class .= ($i == $max_page) ? " last_page_link" : "";
+                            echo("<a role=\"link\" class=\"$class\" $href>$i</a>");
+                        }
+                    }    
+                ?>
+            </div>
         </div>
         
         <script src="/js/main.js"></script>

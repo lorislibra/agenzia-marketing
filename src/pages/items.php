@@ -47,7 +47,7 @@ $items = $item_repo->get_all_filters($dto);
                     <input type="hidden" name="query" value="<?php echo($dto->query); ?>">
                     Items per page: <select name="per_page" class="filter_select" onchange="this.form.submit()">
                         <?php 
-                            for($i=5; $i <= 50; $i+=5) {
+                            for($i=3; $i <= 30; $i+=3) {
                                 $sel = $i == $dto->per_page ? "selected" : "";
                                 echo("<option $sel value=\"$i\">$i</option>");
                             }
