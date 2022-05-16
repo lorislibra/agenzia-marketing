@@ -44,7 +44,8 @@ if (!$reservation || $reservation->user_id != $user->id) {
         <?php echo(show_lateral_menu("Order", "user")); ?>
         
         <div class="body_main">
-            <?php var_dump($reservation); ?>    
+            <?php var_dump($reservation); ?> 
+            <?php var_dump(""); ?>
         </div>
         <script src="/js/main.js"></script>
         <script>
