@@ -50,6 +50,25 @@ $items = $items[$reservation->id];
             <?php var_dump($reservation); ?>
             <br>
             <?php var_dump($items); ?>
+
+            <form action="/api/update_status.php" method="post">
+                <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
+                <select name="status" onchange="this.form.submit()">
+                    <?php
+                    foreach (OrderStatus::all() as $status) {
+                        $status_text = $status->string();
+                        $status_int = (int)$status;
+                        echo("<option name=\"$status_int\">$status_text</option>");
+                    }
+                    ?>
+                </select>
+            </form>
+
+            <form action="/api/update_comment.php" method="post">
+                <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
+                <input type="text" name="comment">
+                <input type="submit" value="Aggiorna">
+            </form>
         </div>
         <script src="/js/main.js"></script>
         <script>
