@@ -32,6 +32,9 @@ if (!$reservation) {
     exit();
 }
 
+$items = $reservation_item_repo->get_by_reservation_id($reservation->id);
+$items = $items[$reservation->id];
+
 ?>
 
 <html lang="en">
@@ -44,7 +47,9 @@ if (!$reservation) {
         <?php echo(show_lateral_menu("Order", "admin")); ?>
         
         <div class="body_main">
-            <?php var_dump($reservation); ?>    
+            <?php var_dump($reservation); ?>
+            <br>
+            <?php var_dump($items); ?>
         </div>
         <script src="/js/main.js"></script>
         <script>

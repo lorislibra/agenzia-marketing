@@ -32,7 +32,13 @@ class ReservationItem
         $quantity = DbManager::get_column($metadata, $row, self::$table, "quantity");
         $reservation_id = DbManager::get_column($metadata, $row, self::$table, "reservation_id");
         $item_id = DbManager::get_column($metadata, $row, self::$table, "item_id");
-        $item = Item::build_from_row($metadata, $row);
+        
+        try {
+            $item = Item::build_from_row($metadata, $row);
+        } catch (MissingColumnError $e) { 
+            $item = null;
+        }
+        
         try {
             $reservation = Reservation::build_from_row($metadata, $row);
         } catch (MissingColumnError $e) { 

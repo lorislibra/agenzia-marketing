@@ -31,8 +31,10 @@ class ReservationRepo extends DbManager
     {
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM reservation
+        JOIN sell_point ON reservation.sell_point_id = sell_point.id
         JOIN user ON user.id = reservation.user_id
-        WHERE reservation.id = :id;
+        WHERE reservation.id = :id
+        ORDER BY reservation.id ASC;
         ");
 
         if ($stmt->execute(["id" => $id])) {

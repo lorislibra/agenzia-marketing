@@ -4,6 +4,7 @@ require_once("manager.php");
 require_once("src/entities/item.php");
 require_once("src/entities/cart_item.php");
 require_once("src/entities/product.php");
+require_once("src/entities/reservation_item.php");
 
 class ReservationItemRepo extends DbManager
 {
@@ -21,7 +22,7 @@ class ReservationItemRepo extends DbManager
             $reservation_item = ReservationItem::build_from_row($metadata, $row);
 
             // add the reservation_item in the list
-            $list[$reservation_item->reservation_id][$reservation_item->reservation->id] = $reservation_item;      
+            $list[$reservation_item->reservation_id][$reservation_item->item_id] = $reservation_item;      
         }
 
         return $list;
@@ -34,7 +35,8 @@ class ReservationItemRepo extends DbManager
         SELECT * FROM reservation_item
         LEFT JOIN item ON item.id = reservation_item.item_id
         LEFT JOIN product ON item.product_sku = product.sku
-        WHERE reservation_item.reservation_id = :reservation_id;
+        WHERE reservation_item.reservation_id = :reservation_id
+        ORDER BY product.name ASC;
         ");
 
         if ($stmt->execute(["reservation_id" => $reservation_id])) {
