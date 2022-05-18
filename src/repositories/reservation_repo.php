@@ -183,6 +183,22 @@ class ReservationRepo extends DbManager
         return false;
     }
 
+    function update_status(int $id, OrderStatus $status): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        UPDATE reservation SET status = :status WHERE id = :id;
+        ");
+
+        if ($stmt->execute([
+            "id" => $id,
+            "status" => $status
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+
+        return false;
+    }
+
 }
 
 ?>

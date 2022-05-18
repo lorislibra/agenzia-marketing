@@ -28,7 +28,16 @@ enum OrderStatus: int
                 return "Arrived";
                 break;
         }
-    }    
+    }
+
+    static function all(): array
+    {
+        $array = array();
+        for ($i=1; $i <= 4; $i++) { 
+            array_push($array, self::from($i));
+        }
+        return $array;
+    }
 }
 
 class Reservation
