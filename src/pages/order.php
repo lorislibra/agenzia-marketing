@@ -6,7 +6,9 @@ require_once("src/repositories/reservation_item_repo.php");
 require_once("src/repositories/reservation_repo.php");
 require_once("src/dtos/show_id.php");
 require_once("src/middleware/request.php");
+require_once("src/components/item.php");
 require_once("src/components/lateral_menu.php");
+require_once("src/dtos/show_items.php");
 
 allowed_methods(["GET"]);
 need_logged();
@@ -32,6 +34,9 @@ if (!$reservation || $reservation->user_id != $user->id) {
     exit();
 }
 
+$items = $reservation_item_repo->get_by_reservation_id($reservation->id);
+$items = $items[$reservation->id];
+
 ?>
 
 <html lang="en">
@@ -44,8 +49,16 @@ if (!$reservation || $reservation->user_id != $user->id) {
         <?php echo(show_lateral_menu("Order", "user")); ?>
         
         <div class="body_main">
-            <?php var_dump($reservation); ?> 
-            <?php var_dump(""); ?>
+            <?php var_dump($reservation); ?>
+            <br>
+            <div class="items_list">
+                <?php 
+                    foreach($items as $item){
+                        $product = $item->item->product;
+                        echo '<img class="order_detail_image" alt="' .strtoupper($product->name) . '" src="' . $product->image . '">';
+                    }
+                ?>
+            </div>
         </div>
         <script src="/js/main.js"></script>
         <script>
