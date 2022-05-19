@@ -574,3 +574,22 @@ th{
     color: #000000;
     font-weight: bold;
 }
+
+.order_det_infos{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.order_det_info{
+    width: 40%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    flex-basis: 50%;
+}
+
+.order_det_comments{
+    width: 100%;
+    text-align: center;
+}

@@ -49,17 +49,55 @@ $items = $items[$reservation->id];
         <?php echo(show_lateral_menu("Order", "user")); ?>
         
         <div class="body_main">
-            <?php var_dump($reservation); ?>
-            <br>
             <div class="items_list">
                 <?php 
                     foreach($items as $item){
-                        $product = $item->item->product;
-                        echo '<img class="order_detail_image" alt="' .strtoupper($product->name) . '" src="' . $product->image . '">';
+                        echo show_order_item($item);
                     }
                 ?>
             </div>
+            
+            <div class="order_det_infos">
+                <p class="order_det_info">
+                <?php
+                    echo '<b>Order date:</b><br> ' . $reservation->date_order->format('d/m/Y');
+                ?>
+                </p>
+                <p class="order_det_info">
+                    <?php
+                        echo '<b>Delivery date:</b><br> ';
+                        if ($reservation->date_delivery){
+                            echo $reservation->date_delivery->format('d/m/Y');
+                        }
+                        else{
+                            echo "---";
+                        }
+                    ?>
+                </p>
+                <p class="order_det_info" style="flex: right;">
+                    <?php
+                        echo '<b>Sell point:</b><br> ' . $reservation->sell_point->name;
+                    ?>
+                </p>
+                <p class="order_det_info">
+                    <?php
+                        echo "<b>Status:</b><br> " . $reservation->status->string();
+                    ?>
+                </p>
+                <p class="order_det_comments">
+                    <?php
+                        echo '<b>Comments:</b><br> ';
+                        if($reservation->comment){
+                            echo $reservation->comment;
+                        }
+                        else{
+                            echo '---';
+                        }
+                    ?>
+                </p>
+            </div>
         </div>
+
         <script src="/js/main.js"></script>
         <script>
             if (window.history.replaceState) {
