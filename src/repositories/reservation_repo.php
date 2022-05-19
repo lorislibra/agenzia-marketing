@@ -3,6 +3,7 @@
 require_once("manager.php");
 require_once("src/entities/reservation.php");
 require_once("src/dtos/show_orders.php");
+require_once("src/dtos/update_delivery_date.php");
 
 class ReservationRepo extends DbManager
 {
@@ -176,6 +177,22 @@ class ReservationRepo extends DbManager
         if ($stmt->execute([
             "id" => $id,
             "comment" => $comment
+        ])) {
+            return $stmt->rowCount() > 0;
+        }
+
+        return false;
+    }
+
+    function update_delivery_date(UpdateDeliveryDateDto $dto): bool
+    {
+        $stmt = $this->get_connection()->prepare("
+        UPDATE reservation SET date_delivery = :date_delivery WHERE id = :id;
+        ");
+
+        if ($stmt->execute([
+            "id" => $dto->id,
+            "date_delivery" => $dto->delivery_date
         ])) {
             return $stmt->rowCount() > 0;
         }
