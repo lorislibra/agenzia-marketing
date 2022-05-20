@@ -23,6 +23,6 @@ if (!$reservation_repo->update_delivery_date($dto)) {
     $session->add_error("order", "error updating delivery date");
 }
 
-header("location: /admin/order.php?id=".$dto->id);
+header("location: /admin/order.php?id=".$dto->reservation_id);
 
 ?>

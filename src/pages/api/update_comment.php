@@ -19,10 +19,10 @@ try {
 $connection = DbManager::build_connection_from_env();
 $reservation_repo = new ReservationRepo($connection);
 
-if (!$reservation_repo->update_comment($dto->id, $dto->comment)) {
+if (!$reservation_repo->update_comment($dto)) {
     $session->add_error("order", "error updating comment");
 }
 
-header("location: /admin/order.php?id=".$dto->id);
+header("location: /admin/order.php?id=".$dto->reservation_id);
 
 ?>

@@ -27,7 +27,7 @@ class UpdateStatusDto extends BaseDto
             throw new ValidateDtoError($errors);
         }
 
-        return new self($array["reservation_id"], OrderStatus::from($array["status"]));
+        return new self($array["reservation_id"], OrderStatus::from((int)$array["status"]));
     }
 
     // check if the dto is valid
@@ -45,8 +45,8 @@ class UpdateStatusDto extends BaseDto
             $is_valid = false;
         }
 
-        try { OrderStatus::from($array["status"]); }
-        catch(Exception $e)
+        try { OrderStatus::from((int)$array["status"]); }
+        catch(Error $e)
         {
             array_push($errors, "status doesn't exist");
             $is_valid = false;

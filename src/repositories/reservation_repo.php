@@ -4,6 +4,8 @@ require_once("manager.php");
 require_once("src/entities/reservation.php");
 require_once("src/dtos/show_orders.php");
 require_once("src/dtos/update_delivery_date.php");
+require_once("src/dtos/update_status.php");
+require_once("src/dtos/update_comment.php");
 
 class ReservationRepo extends DbManager
 {
@@ -168,15 +170,15 @@ class ReservationRepo extends DbManager
         return false;
     }
 
-    function update_comment(int $id, string $comment): bool
+    function update_comment(UpdateCommentDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
         UPDATE reservation SET comment = :comment WHERE id = :id;
         ");
 
         if ($stmt->execute([
-            "id" => $id,
-            "comment" => $comment
+            "id" => $dto->id,
+            "comment" => $dto->comment
         ])) {
             return $stmt->rowCount() > 0;
         }
@@ -191,7 +193,7 @@ class ReservationRepo extends DbManager
         ");
 
         if ($stmt->execute([
-            "id" => $dto->id,
+            "id" => $dto->reservation_id,
             "date_delivery" => $dto->delivery_date
         ])) {
             return $stmt->rowCount() > 0;
@@ -200,15 +202,15 @@ class ReservationRepo extends DbManager
         return false;
     }
 
-    function update_status(int $id, OrderStatus $status): bool
+    function update_status(UpdateStatusDto $dto): bool
     {
         $stmt = $this->get_connection()->prepare("
         UPDATE reservation SET status = :status WHERE id = :id;
         ");
 
         if ($stmt->execute([
-            "id" => $id,
-            "status" => $status
+            "id" => $dto->reservation_id,
+            "status" => $dto->status->value
         ])) {
             return $stmt->rowCount() > 0;
         }

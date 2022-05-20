@@ -85,10 +85,10 @@ $items = $items[$reservation->id];
                         <?php
                         foreach (OrderStatus::all() as $status) {
                             $status_text = $status->string();
-                            $status_int = (int)$status;
+                            $status_int = $status->value;
                             
                             $sel = ($reservation->status == $status) ? "selected" : "";
-                            echo("<option $sel name=\"$status_int\">$status_text</option>");
+                            echo("<option $sel value=\"$status_int\">$status_text</option>");
                         }
                         ?>
                     </select>
