@@ -45,9 +45,7 @@ if (array_key_exists($user->id, $user_cart)) {
                 ?>
             </div>
 
-            <?php 
-                if ($error = $session->get_error("order")) echo($error);
-        
+            <?php         
                 if(count($user_cart)) {
                     echo '<form method="POST" class="order_form" action="api/create_order.php">
                     <select class="cart_select" name="sell_point_id">';

@@ -60,12 +60,12 @@ $items = $items[$reservation->id];
             <div class="order_det_infos">
                 <p class="order_det_info">
                 <?php
-                    echo '<b>Order date:</b><br> ' . $reservation->date_order->format('d/m/Y');
+                    echo '<b>Order date:</b><br><br> ' . $reservation->date_order->format('d/m/Y');
                 ?>
                 </p>
                 <p class="order_det_info">
                     <?php
-                        echo '<b>Delivery date:</b><br> ';
+                        echo '<b>Delivery date:</b><br><br> ';
                         if ($reservation->date_delivery){
                             echo $reservation->date_delivery->format('d/m/Y');
                         }
@@ -76,17 +76,17 @@ $items = $items[$reservation->id];
                 </p>
                 <p class="order_det_info" style="flex: right;">
                     <?php
-                        echo '<b>Sell point:</b><br> ' . $reservation->sell_point->name;
+                        echo '<b>Sell point:</b><br><br> ' . $reservation->sell_point->name;
                     ?>
                 </p>
                 <p class="order_det_info">
                     <?php
-                        echo "<b>Status:</b><br> " . $reservation->status->string();
+                        echo "<b>Status:</b><br><br> " . $reservation->status->string();
                     ?>
                 </p>
                 <p class="order_det_comments">
                     <?php
-                        echo '<b>Comments:</b><br> ';
+                        echo '<b>Comments:</b><br><br> ';
                         if($reservation->comment){
                             echo $reservation->comment;
                         }

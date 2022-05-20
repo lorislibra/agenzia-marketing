@@ -59,12 +59,12 @@ $items = $items[$reservation->id];
             <div class="order_det_infos">
                 <p class="order_det_info">
                 <?php
-                    echo '<b>Order date:</b><br> ' . $reservation->date_order->format('d/m/Y');
+                    echo '<b>Order date:</b><br><br> ' . $reservation->date_order->format('d/m/Y');
                 ?>
                 </p>
                 <p class="order_det_info">
                     <?php
-                        echo '<b>Delivery date:</b><br> ';
+                        echo '<b>Delivery date:</b><br><br> ';
                         if ($reservation->date_delivery){
                             echo $reservation->date_delivery->format('d/m/Y');
                         }
@@ -75,30 +75,44 @@ $items = $items[$reservation->id];
                 </p>
                 <p class="order_det_info" style="flex: right;">
                     <?php
-                        echo '<b>Sell point:</b><br> ' . $reservation->sell_point->name;
+                        echo '<b>Sell point:</b><br><br> ' . $reservation->sell_point->name;
                     ?>
                 </p>
 
-                <form action="/api/update_status.php" method="post">
-                    <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
-                    <select name="status" class="order_det_info" onchange="this.form.submit()">
-                        <?php
-                        foreach (OrderStatus::all() as $status) {
-                            $status_text = $status->string();
-                            $status_int = $status->value;
-                            
-                            $sel = ($reservation->status == $status) ? "selected" : "";
-                            echo("<option $sel value=\"$status_int\">$status_text</option>");
-                        }
-                        ?>
-                    </select>
-                </form>
-
-                <form action="/api/update_comment.php" method="post">
-                    <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
-                    <input type="text" name="comment" class="order_det_comments" value="<?php echo($reservation->comment); ?>">
-                    <input type="submit" value="Aggiorna">
-                </form>
+                <div class="order_det_info">
+                    <b>Status: </b><br><br>
+                    <form action="/api/update_status.php" method="post">
+                        <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
+                        <select class="filter_select" name="status" onchange="this.form.submit()">
+                            <?php
+                            foreach (OrderStatus::all() as $status) {
+                                $status_text = $status->string();
+                                $status_int = $status->value;
+                                
+                                $sel = ($reservation->status == $status) ? "selected" : "";
+                                echo("<option $sel value=\"$status_int\">$status_text</option>");
+                            }
+                            ?>
+                        </select>
+                    </form>
+                </div>
+                
+                <div class="order_det_comments"> 
+                    <b>Comments: </b><br><br>           
+                    <form action="/api/update_comment.php" method="post">
+                        <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
+                        <input type="text" name="comment" class="filter_input" style="width: 40%; text-align: center;"
+                            <?php 
+                                if($reservation->comment) {
+                                    echo 'value="' . $reservation->comment . '"'; 
+                                }
+                                else{
+                                    echo 'placeholder="---"';
+                                }
+                            ?>>
+                        <br><br><input type="submit" class="filter_submit" style="padding: 15px; border-radius: 5px;" value="Aggiorna">
+                    </form>
+                </div>
             </div>
         </div>
 
