@@ -177,7 +177,7 @@ class ReservationRepo extends DbManager
         ");
 
         if ($stmt->execute([
-            "id" => $dto->id,
+            "id" => $dto->reservation_id,
             "comment" => $dto->comment
         ])) {
             return $stmt->rowCount() > 0;
