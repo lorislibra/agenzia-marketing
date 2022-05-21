@@ -18,8 +18,12 @@ class UpdateCommentDto extends BaseDto
     {
         $errors = array();
         
-        if (!self::validate_array($array, ["reservation_id", "comment"], $errors)) {
+        if (!self::validate_array($array, ["reservation_id"], $errors, ["comment"])) {
             throw new ValidateDtoError($errors);
+        }
+
+        if (is_null($array["comment"])) {
+            $array["comment"] = "";
         }
 
         if (!self::validate($errors, $array)) {
@@ -36,11 +40,6 @@ class UpdateCommentDto extends BaseDto
 
         if (!filter_var($array["reservation_id"], FILTER_VALIDATE_INT)) {
             array_push($errors, "reservation_id is not a number");
-            $is_valid = false;
-        }
-
-        if (empty($array["comment"])) {
-            array_push($errors, "comment is not valid");
             $is_valid = false;
         }
 
