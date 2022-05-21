@@ -44,30 +44,26 @@ $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_stat
                 </div>
                 <div class="dash_area">
                     <p class="dash_name">Waiting orders</p>
-                    <?php echo $waiting_count; ?>
+                    <div class="dash_info">
+                        <?php echo $waiting_count; ?>
+                    </div>
                 </div>
                 <div class="dash_area">
                     <p class="dash_name">Approved orders</p>
-                    <div class="dash_progress">
-                        <div class="dash_info">
-                            <?php echo $approved_count; ?>
-                        </div>
+                    <div class="dash_info">
+                        <?php echo $approved_count; ?>
                     </div>
                 </div>
                 <div class="dash_area">
                     <p class="dash_name">Shipping orders</p>
-                    <div class="dash_progress">
-                        <div class="dash_info">
-                            <?php echo $shipping_count; ?>
-                        </div>
+                    <div class="dash_info">
+                        <?php echo $shipping_count; ?>
                     </div>
                 </div>
                 <div class="dash_area">
                     <p class="dash_name">Arrived orders</p>
-                    <div class="dash_progress">
-                        <div class="dash_info">
-                            <?php echo $arrived_count; ?>
-                        </div>
+                    <div class="dash_info">
+                        <?php echo $arrived_count; ?>
                     </div>
                 </div>
             </div>
