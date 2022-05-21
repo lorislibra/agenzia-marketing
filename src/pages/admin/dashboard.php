@@ -18,7 +18,7 @@ $reservation_count = $reservation_repo->count();
 $count_status = $reservation_repo->count_status();
 
 $waiting_count = isset($count_status[OrderStatus::Waiting->value]) ? $count_status[OrderStatus::Waiting->value] : 0;
-$shipping_count = isset($count_status[OrderStatus::Approved->value]) ? $count_status[OrderStatus::Approved->value] : 0;
+$approved_count = isset($count_status[OrderStatus::Approved->value]) ? $count_status[OrderStatus::Approved->value] : 0;
 $shipping_count = isset($count_status[OrderStatus::Shipping->value]) ? $count_status[OrderStatus::Shipping->value] : 0;
 $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_status[OrderStatus::Arrived->value] : 0;
 
@@ -40,7 +40,14 @@ $top_users = $reservation_repo->get_top_users();
                 <?php echo("Ordini eseguiti in totale: $reservation_count"); ?>
             </h1>
 
-            <?php var_dump($top_users); ?>
+            <?php
+                var_dump($count_status);
+                var_dump($waiting_count);
+                var_dump($approved_count);
+                var_dump($shipping_count);
+                var_dump($arrived_count);
+                var_dump($top_users);
+            ?>
         </div>
 
         <script src="/js/main.js"></script>
