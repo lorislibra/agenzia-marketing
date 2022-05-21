@@ -22,6 +22,9 @@ $shipping_count = isset($count_status[OrderStatus::Approved->value]) ? $count_st
 $shipping_count = isset($count_status[OrderStatus::Shipping->value]) ? $count_status[OrderStatus::Shipping->value] : 0;
 $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_status[OrderStatus::Arrived->value] : 0;
 
+$top_users = $reservation_repo->get_top_users();
+// scorrilo e dentro c'è un array: index 0 --> oggetto user , index 1 --> numeri di ordini eseguiti
+
 ?>
 
 <html lang="en">
@@ -36,6 +39,8 @@ $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_stat
             <h1>
                 <?php echo("Ordini eseguiti in totale: $reservation_count"); ?>
             </h1>
+
+            <?php var_dump($top_users); ?>
         </div>
 
         <script src="/js/main.js"></script>

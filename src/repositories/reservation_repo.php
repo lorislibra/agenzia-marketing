@@ -1,6 +1,7 @@
 <?php
 
 require_once("manager.php");
+require_once("src/entities/user.php");
 require_once("src/entities/reservation.php");
 require_once("src/dtos/show_orders.php");
 require_once("src/dtos/update_delivery_date.php");
@@ -100,6 +101,34 @@ class ReservationRepo extends DbManager
 
         return null;
     }
+
+    function get_top_users(): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT COUNT(reservation.id) AS count, user.*
+        FROM reservation
+        JOIN user ON user.id = reservation.user_id
+        GROUP BY (reservation.user_id)
+        ORDER BY count DESC;
+        ");
+
+        if ($stmt->execute()) {
+            $list = array();
+
+            $metadata = new QueryMetadata($stmt);
+            while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                $user = User::build_from_row($metadata, $row);
+                if (array_key_exists($user->id, $list)) {
+                    $list[$user->id][1]++;
+                }
+                $list[$user->id] = array($user, $row[0]);
+            }
+
+            return $list;
+        }
+        
+        return null;
+    } 
 
     function count_by_user_id(int $user_id): ?int
     {
