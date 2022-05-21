@@ -263,7 +263,7 @@ class ReservationRepo extends DbManager
 
         if ($stmt->execute([
             "id" => $dto->reservation_id,
-            "date_delivery" => $dto->delivery_date
+            "date_delivery" => $dto->delivery_date->format("Y-m-d")
         ])) {
             return $stmt->rowCount() > 0;
         }
@@ -271,15 +271,15 @@ class ReservationRepo extends DbManager
         return false;
     }
 
-    function update_status(UpdateStatusDto $dto): bool
+    function update_status(int $id, OrderStatus $status): bool
     {
         $stmt = $this->get_connection()->prepare("
         UPDATE reservation SET status = :status WHERE id = :id;
         ");
 
         if ($stmt->execute([
-            "id" => $dto->reservation_id,
-            "status" => $dto->status->value
+            "id" => $id,
+            "status" => $status->value
         ])) {
             return $stmt->rowCount() > 0;
         }

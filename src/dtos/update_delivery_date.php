@@ -44,6 +44,13 @@ class UpdateDeliveryDateDto extends BaseDto
             $is_valid = false;
         }
 
+        try {
+            new DateTime($array["delivery_date"]);
+        } catch (Exception $e) {
+            array_push($errors, "delivery_date is not valid");
+            $is_valid = false;
+        }
+
         return $is_valid;
     }
 }

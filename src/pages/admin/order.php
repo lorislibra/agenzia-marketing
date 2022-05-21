@@ -36,6 +36,8 @@ if (!$reservation) {
 $items = $reservation_item_repo->get_by_reservation_id($reservation->id);
 $items = $items[$reservation->id];
 
+$disable_date = $reservation->status == OrderStatus::Waiting || $reservation->status == OrderStatus::Arrived;
+
 ?>
 
 <html lang="en">
@@ -48,6 +50,9 @@ $items = $items[$reservation->id];
         <?php echo(show_lateral_menu("Order", "admin")); ?>
 
         <div class="body_main">
+
+            <?php if ($err = $session->get_error("order")) echo("<p>$err</p>"); ?>
+
             <div class="items_list">
                 <?php 
                     foreach($items as $item){
@@ -62,17 +67,20 @@ $items = $items[$reservation->id];
                     echo '<b>Order date:</b><br><br> ' . $reservation->date_order->format('d/m/Y');
                 ?>
                 </p>
-                <p class="order_det_info">
-                    <?php
-                        echo '<b>Delivery date:</b><br><br> ';
-                        if ($reservation->date_delivery){
-                            echo $reservation->date_delivery->format('d/m/Y');
-                        }
-                        else{
-                            echo "---";
-                        }
-                    ?>
-                </p>
+
+                <div class="order_det_info">
+                    <form action="/api/update_delivery_date.php" method="post"">
+                        <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
+                        <b>Delivery date:</b><br><br>
+                        <input type="date" <?php if ($disable_date) echo("disabled") ?> name="delivery_date" onchange="this.form.submit()" value="<?php
+                            if ($reservation->date_delivery){
+                                echo $reservation->date_delivery->format('Y-m-d');
+                            }
+                        ?>">
+                    </form>
+                    
+                </div>
+
                 <p class="order_det_info" style="flex: right;">
                     <?php
                         echo '<b>Sell point:</b><br><br> ' . $reservation->sell_point->name;
@@ -81,19 +89,20 @@ $items = $items[$reservation->id];
 
                 <div class="order_det_info">
                     <b>Status: </b><br><br>
+                    <?php echo($reservation->status->string()); ?>
                     <form action="/api/update_status.php" method="post">
-                        <input type="hidden" name="reservation_id" value="<?php echo($reservation->id); ?>">
-                        <select class="filter_select" name="status" onchange="this.form.submit()">
-                            <?php
-                            foreach (OrderStatus::all() as $status) {
-                                $status_text = $status->string();
-                                $status_int = $status->value;
-                                
-                                $sel = ($reservation->status == $status) ? "selected" : "";
-                                echo("<option $sel value=\"$status_int\">$status_text</option>");
-                            }
-                            ?>
-                        </select>
+                        <input type="hidden" name="id" value="<?php echo($reservation->id); ?>">
+                        <?php 
+                        switch ($reservation->status) {
+                            case OrderStatus::Waiting:
+                                echo("<input type=\"submit\" value=\"Approva\">");
+                                break;
+                            case OrderStatus::Shipping:
+                                echo("<input type=\"submit\" value=\"Conferma arrivo\">");
+                            default:
+                                break;
+                        }
+                        ?>
                     </form>
                 </div>
                 
