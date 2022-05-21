@@ -31,10 +31,6 @@ $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_stat
     <body>
         <?php echo(show_lateral_menu("Dashboard", "user")); ?>
         <div class="body_main">
-            <h1>
-                <?php echo("Ordini eseguiti: $reservation_count"); ?>
-            </h1>
-
             <div class="dash_list">
                 <div class="dash_area">
                     <p class="dash_name">Total orders</p>

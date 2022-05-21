@@ -593,3 +593,24 @@ th{
     width: 100%;
     text-align: center;
 }
+
+.dash_list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dash_area{
+    width: 200px;
+    max-width: calc(33% - 40px);
+    aspect-ratio: 1 / 1;
+    margin: 20px;
+    border-radius: 20px;
+    flex-basis: 33%;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 30px -16px #000000;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+}
