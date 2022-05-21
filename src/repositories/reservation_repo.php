@@ -61,6 +61,46 @@ class ReservationRepo extends DbManager
         return null;
     }
 
+    function count_status(): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT status, COUNT(status)
+        FROM reservation
+        GROUP BY (status);
+        ");
+
+        if ($stmt->execute()) {
+            $res = array();
+            while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                $res[$row[0]] = $row[1];
+            }
+            return $res;
+        }
+
+        return null;
+    }
+
+    function count_status_by_user_id(int $user_id): ?array
+    {
+        $stmt = $this->get_connection()->prepare("
+        SELECT status, COUNT(status)
+        FROM reservation
+        WHERE user_id = :user_id
+        GROUP BY (status);
+        ");
+
+        if ($stmt->execute(["user_id" => $user_id])) {
+            $res = array();
+            while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+                $res[$row[0]] = $row[1];
+            }
+            return $res;
+
+        }
+
+        return null;
+    }
+
     function count_by_user_id(int $user_id): ?int
     {
         $stmt = $this->get_connection()->prepare("

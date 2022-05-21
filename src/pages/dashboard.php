@@ -14,6 +14,12 @@ $user = $session->get_user();
 $reservation_repo = new ReservationRepo($connection);
 $reservation_count = $reservation_repo->count_by_user_id($user->id);
 
+$count_status = $reservation_repo->count_status_by_user_id($user->id);
+
+$waiting_count = isset($count_status[OrderStatus::Waiting->value]) ? $count_status[OrderStatus::Waiting->value] : 0;
+$shipping_count = isset($count_status[OrderStatus::Approved->value]) ? $count_status[OrderStatus::Approved->value] : 0;
+$shipping_count = isset($count_status[OrderStatus::Shipping->value]) ? $count_status[OrderStatus::Shipping->value] : 0;
+$arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_status[OrderStatus::Arrived->value] : 0;
 ?>
 
 <html lang="en">
@@ -28,6 +34,8 @@ $reservation_count = $reservation_repo->count_by_user_id($user->id);
             <h1>
                 <?php echo("Ordini eseguiti: $reservation_count"); ?>
             </h1>
+
+            <?php var_dump($count_status); var_dump($waiting_count); ?>
         </div>
 
         <script src="/js/main.js"></script>
