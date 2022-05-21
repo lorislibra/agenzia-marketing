@@ -30,6 +30,7 @@ $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_stat
     </head>
     <body>
         <?php echo(show_lateral_menu("Dashboard", "user")); ?>
+        <div class="back_img_login"></div>
         <div class="body_main">
             <div class="dash_list">
                 <div class="dash_area">

@@ -35,6 +35,7 @@ $top_users = $reservation_repo->get_top_users();
     </head>
     <body>
         <?php echo(show_lateral_menu("Dashboard", "admin")); ?>
+        <div class="back_img_login"></div>
         <div class="body_main">
             <h1>
                 <?php echo("Ordini eseguiti in totale: $reservation_count"); ?>
