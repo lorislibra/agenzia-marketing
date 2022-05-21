@@ -35,36 +35,40 @@ $arrived_count = isset($count_status[OrderStatus::Arrived->value]) ? $count_stat
                 <?php echo("Ordini eseguiti: $reservation_count"); ?>
             </h1>
 
-            <?php
-                var_dump($count_status);
-                var_dump($waiting_count);
-                var_dump($approved_count);
-                var_dump($shipping_count);
-                var_dump($arrived_count);
-            ?>
-
             <div class="dash_list">
                 <div class="dash_area">
-                    <p>Total orders</p>
+                    <p class="dash_name">Total orders</p>
                     <div class="dash_info">
                         <?php echo $reservation_count; ?> 
                     </div>
                 </div>
                 <div class="dash_area">
-                    <p>Waiting orders</p>
+                    <p class="dash_name">Waiting orders</p>
                     <?php echo $waiting_count; ?>
                 </div>
                 <div class="dash_area">
-                    <p>Approved orders</p>
-                    <?php echo $approved_count; ?>
+                    <p class="dash_name">Approved orders</p>
+                    <div class="dash_progress">
+                        <div class="dash_info">
+                            <?php echo $approved_count; ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="dash_area">
-                    <p>Shipping orders</p>
-                    <?php echo $shipping_count; ?>
+                    <p class="dash_name">Shipping orders</p>
+                    <div class="dash_progress">
+                        <div class="dash_info">
+                            <?php echo $shipping_count; ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="dash_area">
-                    <p>Arrived orders</p>
-                    <?php echo $arrived_count; ?>
+                    <p class="dash_name">Arrived orders</p>
+                    <div class="dash_progress">
+                        <div class="dash_info">
+                            <?php echo $arrived_count; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
