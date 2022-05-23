@@ -619,7 +619,7 @@ th{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 8%;
+    top: 4%;
     font-size: large;
 }
 
@@ -629,4 +629,24 @@ th{
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: xx-large;
+}
+
+.dash_ranking{
+    position: absolute;
+    top: 12%;
+    overflow-y: auto;
+    width: calc(100% - 40px);
+    max-height: 70%;
+    margin: 20px;
+}
+
+.dash_ranking_place{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dash_ranking_place_info{
+    font-weight: normal;
 }

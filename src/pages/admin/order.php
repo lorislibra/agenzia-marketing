@@ -95,10 +95,10 @@ $disable_date = $reservation->status == OrderStatus::Waiting || $reservation->st
                         <?php 
                         switch ($reservation->status) {
                             case OrderStatus::Waiting:
-                                echo("<input type=\"submit\" value=\"Approva\">");
+                                echo("<input class=\"filter_submit\" style=\"padding: 10px; border-radius: 3px;\" type=\"submit\" value=\"Approva\">");
                                 break;
                             case OrderStatus::Shipping:
-                                echo("<input type=\"submit\" value=\"Conferma arrivo\">");
+                                echo("<input class=\"filter_submit\" style=\"padding: 10px; border-radius: 3px;\" type=\"submit\" value=\"Conferma arrivo\">");
                             default:
                                 break;
                         }
@@ -119,7 +119,7 @@ $disable_date = $reservation->status == OrderStatus::Waiting || $reservation->st
                                     echo 'placeholder="---"';
                                 }
                             ?>>
-                        <br><br><input type="submit" class="filter_submit" style="padding: 15px; border-radius: 5px;" value="Aggiorna">
+                        <br><br><input type="submit" class="filter_submit" style="padding: 10px; border-radius: 3px;" value="Aggiorna">
                     </form>
                 </div>
             </div>

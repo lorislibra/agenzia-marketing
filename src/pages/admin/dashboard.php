@@ -37,18 +37,65 @@ $top_users = $reservation_repo->get_top_users();
         <?php echo(show_lateral_menu("Dashboard", "admin")); ?>
         <div class="back_img_login"></div>
         <div class="body_main">
-            <h1>
-                <?php echo("Ordini eseguiti in totale: $reservation_count"); ?>
-            </h1>
+            <div class="dash_list">
+                <div class="dash_area">
+                    <p class="dash_name">Total orders</p>
+                    <div class="dash_info">
+                        <?php echo $reservation_count; ?> 
+                    </div>
+                </div>
+                <div class="dash_area">
+                    <p class="dash_name">Waiting orders</p>
+                    <div class="dash_info">
+                        <?php echo $waiting_count; ?>
+                    </div>
+                </div>
+                <div class="dash_area">
+                    <p class="dash_name">Approved orders</p>
+                    <div class="dash_info">
+                        <?php echo $approved_count; ?>
+                    </div>
+                </div>
+                <div class="dash_area">
+                    <p class="dash_name">Shipping orders</p>
+                    <div class="dash_info">
+                        <?php echo $shipping_count; ?>
+                    </div>
+                </div>
+                <div class="dash_area">
+                    <p class="dash_name">Arrived orders</p>
+                    <div class="dash_info">
+                        <?php echo $arrived_count; ?>
+                    </div>
+                </div>
+                <div class="dash_area">
+                    <p class="dash_name">Top users</p>
+                    <div class="dash_ranking">
+                        <div class="dash_ranking_place">
+                            <p class="dash_ranking_place_info"><b>#</b></p>
+                            <p class="dash_ranking_place_info"><b>User mail</b></p>
+                            <p class="dash_ranking_place_info"><b>Orders</b></p>
+                        </div>
+                        <?php
+                            $position = 1;
+                            foreach($top_users as $top_user){
+                                $top_user_mail = $top_user[0]->email;
+                                $top_user_number_of_orders = $top_user[1];
 
-            <?php
-                var_dump($count_status);
-                var_dump($waiting_count);
-                var_dump($approved_count);
-                var_dump($shipping_count);
-                var_dump($arrived_count);
-                var_dump($top_users);
-            ?>
+                                $html = '';
+                                $html .= '<div class="dash_ranking_place">';
+                                $html .= '<p class="dash_ranking_place_info">' . $position . '</p>';
+                                $html .= '<p class="dash_ranking_place_info">' . $top_user_mail . '</p>';
+                                $html .= '<p class="dash_ranking_place_info"> ' . $top_user_number_of_orders . ' </p>';
+                                $html .= '</div>';
+                                echo $html;
+
+                                $position++;
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="/js/main.js"></script>
