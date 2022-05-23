@@ -6,7 +6,8 @@ class ValidateDtoError extends Exception
 
     function __construct(array $errors=array())
     {
-        parent::__construct();
+        $message = count($errors) ? $errors[0] : "";
+        parent::__construct($message);
         $this->errors = $errors;
     }
 }

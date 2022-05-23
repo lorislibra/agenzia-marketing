@@ -8,6 +8,7 @@ require_once("src/dtos/show_id.php");
 require_once("src/middleware/request.php");
 require_once("src/components/item.php");
 require_once("src/components/lateral_menu.php");
+require_once("src/utils/errors.php");
 
 allowed_methods(["GET"]);
 need_warehouse();
@@ -15,7 +16,7 @@ need_warehouse();
 try {
     $dto = ShowIdDto::from_array($_GET);
 } catch (ValidateDtoError $e) {
-    $session->add_error("order", "invalid order");
+    $session->add_error("order", $e->getMessage());
     header("location: /admin/orders.php");
     exit();
 }
@@ -50,9 +51,6 @@ $disable_date = $reservation->status == OrderStatus::Waiting || $reservation->st
         <?php echo(show_lateral_menu("Order", "admin")); ?>
 
         <div class="body_main">
-
-            <?php if ($err = $session->get_error("order")) echo("<p>$err</p>"); ?>
-
             <div class="items_list">
                 <?php 
                     foreach($items as $item){
@@ -130,6 +128,7 @@ $disable_date = $reservation->status == OrderStatus::Waiting || $reservation->st
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
+            <?php show_error("order"); ?>
         </script>
         
     </body>

@@ -13,7 +13,7 @@ redirect_if_logged();
 try {
     $dto = SignInDto::from_array($_POST);
 } catch (ValidateDtoError $e) {
-    $session->add_error("login", "Invalid email or password");
+    $session->add_error("login", $e->getMessage());
     header("location: /login.php");
     exit();
 }
@@ -24,13 +24,7 @@ $user_repo = new UserRepo($connection);
 
 if ($user = $user_repo->get_by_email_password($dto)) {
     $session->set_user($user);
-
-    if ($user->role->important_than(Role::Warehouse)) {
-        header("location: /admin/dashboard.php");
-    } else {
-        header("location: /dashboard.php");
-    }
-    
+    redirect_if_logged();
 } else {
     $session->add_error("login", "Invalid email or password");
     header("location: /login.php");

@@ -45,7 +45,7 @@ class UpdateDeliveryDateDto extends BaseDto
         }
 
         try {
-            new DateTime($array["delivery_date"]);
+            $date = new DateTime($array["delivery_date"]);
         } catch (Exception $e) {
             array_push($errors, "delivery_date is not valid");
             $is_valid = false;

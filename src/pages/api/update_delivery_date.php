@@ -12,8 +12,14 @@ need_warehouse();
 try {
     $dto = UpdateDeliveryDateDto::from_array($_POST);
 } catch (ValidateDtoError $e) {
-    $session->add_error("order", "order doesn't exist");
+    $session->add_error("order", $e->getMessage());
     header("location: /admin/orders.php");
+    exit();
+}
+
+if ((new DateTime("now"))->setTime(0, 0, 0, 0) > $dto->delivery_date) {
+    $session->add_error("order",  "delivery date must be in the future");
+    header("location: /admin/order.php?id=".$dto->reservation_id);
     exit();
 }
 
@@ -45,8 +51,6 @@ if ($reservation = $reservation_repo->get_by_id($dto->reservation_id)) {
 } else {
     $session->add_error("order", "reservation doesn't exist");
 }
-
-
 
 header("location: /admin/order.php?id=".$dto->reservation_id);
 

@@ -7,6 +7,7 @@ require_once("src/middleware/checks.php");
 require_once("src/middleware/session.php");
 require_once("src/middleware/request.php");
 require_once("src/dtos/show_items.php");
+require_once("src/utils/errors.php");
 
 allowed_methods(["GET"]);
 need_logged();
@@ -84,6 +85,7 @@ $items = $item_repo->get_all_filters($dto);
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
+            <?php show_error("item"); ?>
         </script>
     </body>
 </html>

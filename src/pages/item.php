@@ -14,7 +14,7 @@ need_logged();
 try {
     $dto = ShowIdDto::from_array($_GET);
 } catch (ValidateDtoError $e) {
-    $session->add_error("item", "invalid item");
+    $session->add_error("item", $e->getMessage());
     header("location: /items.php");
     exit();
 }

@@ -7,6 +7,7 @@ require_once("src/repositories/reservation_item_repo.php");
 require_once("src/repositories/reservation_repo.php");
 require_once("src/components/lateral_menu.php");
 require_once("src/dtos/show_orders.php");
+require_once("src/utils/errors.php");
 
 allowed_methods(["GET"]);
 need_warehouse();
@@ -38,6 +39,7 @@ $reservations = $reservation_repo->get_all_filters($dto);
     </head>
     <body>
         <?php echo(show_lateral_menu("Orders", "admin")); ?>
+
         <div class="body_main">
             <div class="top_filters" style="justify-content: end;">
                 <form action="" class="filter_form" method="get">
@@ -107,7 +109,7 @@ $reservations = $reservation_repo->get_all_filters($dto);
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
+            <?php show_error("order"); ?>
         </script>
-        
     </body>
 </html>

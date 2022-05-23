@@ -16,7 +16,7 @@ need_logged();
 try {
     $dto = ShowIdDto::from_array($_GET);
 } catch (ValidateDtoError $e) {
-    $session->add_error("order", "invalid order");
+    $session->add_error("order", $e->getMessage());
     header("location: /cart.php");
     exit();
 }

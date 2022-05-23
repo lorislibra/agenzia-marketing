@@ -13,7 +13,7 @@ need_logged();
 try {
     $dto = UpdateCartDto::from_array($_POST);
 } catch (ValidateDtoError $e) {
-    $session->add_error("cart", "invalid add to cart");
+    $session->add_error("cart", $e->getMessage());
     header("location: /items.php");
     exit();
 }

@@ -9,6 +9,7 @@ require_once("src/dtos/update_cart.php");
 require_once("src/components/lateral_menu.php");
 require_once("src/components/cart_item.php");
 require_once("src/services/cart.php");
+require_once("src/utils/errors.php");
 
 allowed_methods(["GET"]);
 need_logged();
@@ -68,6 +69,10 @@ if (array_key_exists($user->id, $user_cart)) {
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
+                <?php 
+                    show_error("cart"); 
+                    show_error("order");
+                ?>
             }
         </script>
     </body>

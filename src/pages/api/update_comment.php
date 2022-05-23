@@ -11,7 +11,7 @@ need_warehouse();
 try {
     $dto = UpdateCommentDto::from_array($_POST);
 } catch (ValidateDtoError $e) {
-    $session->add_error("order", "order doesn't exist");
+    $session->add_error("order", $e->getMessage());
     header("location: /admin/orders.php");
     exit();
 }
