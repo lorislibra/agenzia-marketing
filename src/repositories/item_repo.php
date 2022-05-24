@@ -83,7 +83,7 @@ class ItemRepo extends DbManager
         $stmt = $this->get_connection()->prepare("
         SELECT * FROM item
         LEFT JOIN product ON item.product_sku = product.sku
-        WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3)
+        WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3 OR item.category LIKE :query4)
         ORDER BY product.name
         LIMIT :offset, :limit
         ");
@@ -94,7 +94,8 @@ class ItemRepo extends DbManager
             "limit" => $dto->per_page,
             "query1" => "%".$dto->query."%",
             "query2" => "%".$dto->query."%",
-            "query3" => "%".$dto->query."%"
+            "query3" => "%".$dto->query."%",
+            "query4" => "%".$dto->query."%"
         ])) {
             return $this->parse_fetch($stmt);
         }
@@ -120,14 +121,15 @@ class ItemRepo extends DbManager
         $stmt = $this->get_connection()->prepare("
         SELECT COUNT(*) FROM item
         LEFT JOIN product ON item.product_sku = product.sku
-        WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3)
+        WHERE stock >= :min_stock AND (product.brand LIKE :query1 OR product.name LIKE :query2 OR product.category LIKE :query3 OR item.category LIKE :query4)
         ;");
 
         if ($stmt->execute([
             "min_stock" => $min_stock,
             "query1" => "%".$dto->query."%",
             "query2" => "%".$dto->query."%",
-            "query3" => "%".$dto->query."%"
+            "query3" => "%".$dto->query."%",
+            "query4" => "%".$dto->query."%"
         ])) {
             return $stmt->fetchColumn();
         }

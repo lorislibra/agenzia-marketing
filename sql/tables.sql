@@ -120,11 +120,17 @@ INSERT INTO product (sku, brand, category, name, image, price) VALUES
 ("ICN1", "Ichnusa", "Birra", "Birra Ichnusa", "", 1.30),
 ("TN1", "Tennents", "Birra", "Birra Tennents", "", 1),
 ("BLL1", "Bellazzi", "Birra", "Birra Bellazzi", "", 2.5),
-("WL1", "Weili", "Birra", "Birra Weili", "", 1.8);
+("WL1", "Weili", "Birra", "Birra Weili", "", 1.8),
+("HI1", "Hicon", "Vino", "Vino Hicon", "", 3),
+("JD1", "IATD", "Super Alcolico", "Jack & Daniels", "", 15)
+;
 
 INSERT INTO item (product_sku, quantity, stock, category, image) VALUES 
 ("BF1", 9, 20, "cartonato", "https://www.birrafollina-shoponline.it/wp-content/uploads/2020/05/birra-follina-espositore-9-bottiglie.jpg"),
 ("ICN1", 60, 4, "legno", "https://www.reclametotale.com/upload/documenti/5/51/_thumbs/design-515.jpg"),
 ("TN1", 160, 6, "cartonato", "https://www.espositoritalia.it/wp-content/uploads/2021/02/espositore_in_cartot.jpg" ),
 ("BLL1", 10, 20, "cartonato", "https://solutiongroup.it/wp-content/uploads/2021/01/vino.png"),
-("WL1", 7, 15, "frighetto", "https://sc04.alicdn.com/kf/HTB19oTNk25TBuNjSspmq6yDRVXau.jpg");
+("WL1", 7, 15, "frighetto", "https://sc04.alicdn.com/kf/HTB19oTNk25TBuNjSspmq6yDRVXau.jpg"),
+("HI1", 18, 7, "metallo", "https://it.hidisplaystand.com/uploadfile/201901/22/158c399b1a76f01c52c27569c11138fc_medium.jpg"),
+("JD1", 9, 6, "legno", "https://image.made-in-china.com/155f0j00eZmTqNKleAzd/Pop-up-Wood-Floor-Retail-Display-Stand-for-Drink-Beer.jpg")
+;
