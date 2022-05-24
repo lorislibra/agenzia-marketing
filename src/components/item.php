@@ -22,7 +22,9 @@ function show_order_item(ReservationItem $reservation_item){
 
     return '
         <div class="item_box" style="cursor: default;">
-            <img class="ib_image" alt="' . strtoupper($product->name) . '" src="' . $item->image . '">
+            <a href="https://5ailorislibralato.barsanti.edu.it/item.php?id=' . $item->id . '">
+                <img class="ib_image" alt="' . strtoupper($product->name) . '" src="' . $item->image . '">
+            </a>
             <span class="ib_name">' . strtoupper($product->name) . '<br>' . strtoupper('STOCKS: ' . $reservation_item->quantity) . '</span>
         </div>
     ';

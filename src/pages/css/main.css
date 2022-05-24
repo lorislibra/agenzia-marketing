@@ -37,6 +37,7 @@ button {
     font-family: Verdana, sans-serif;
     box-shadow: 8px 0px 34px -14px #000000;
     z-index: 10;
+    overflow: hidden;
 }
 
 .back_img_login{
@@ -173,7 +174,7 @@ button {
     transition: transform 1s;
 }
 
-.ib_image:hover {
+.ib_image:hover{
     transform: scale(1.5);
 }
 

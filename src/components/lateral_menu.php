@@ -1,5 +1,7 @@
 <?php
 
+require_once("src/middleware/session.php");
+
 $lm_links = array(
     "user" => array(
         array("icon_url" => "https://img.icons8.com/wired/344/ffffff/circled-user.png", "link_url" => "/dashboard.php", "link_text" => "Dashboard", "method" => "GET"),
@@ -19,6 +21,7 @@ $lm_links = array(
 function show_lateral_menu(string $opened_section, string $user_type): string
 {
     global $lm_links;
+    global $session;
     
     $lm_html_links = '';
     foreach($lm_links[$user_type] as $lm_link) {
@@ -36,6 +39,7 @@ function show_lateral_menu(string $opened_section, string $user_type): string
             </div>
             <div class=\"lm_body\">
                 $lm_html_links
+                <p class=\"lm_link_text\" style=\"position: absolute; left: 10px; bottom: 10px; font-size: small;\">" . $session->get_user()->email . "</p>
             </div>
         </div>
     ";
