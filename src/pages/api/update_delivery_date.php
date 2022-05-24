@@ -39,7 +39,7 @@ if ($reservation = $reservation_repo->get_by_id($dto->reservation_id)) {
         case OrderStatus::Approved:
             try {
                 update_date_and_status_tx($connection, $dto);
-            } catch (Exception $e) {
+            } catch (Error $e) {
                 $session->add_error("order", $e->getMessage());
             }
             break;

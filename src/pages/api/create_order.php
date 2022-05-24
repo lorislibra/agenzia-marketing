@@ -21,7 +21,7 @@ $connection = DbManager::build_connection_from_env();
 
 try {
     $reservation_id = create_order_tx($connection, $user, $dto);
-} catch (Exception $e) {
+} catch (Error $e) {
     $session->add_error("order", $e->getMessage());
     header("location: /cart.php");
     exit();

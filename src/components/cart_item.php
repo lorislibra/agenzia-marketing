@@ -20,7 +20,12 @@ function show_cart_item(CartItem $cart_item){
 
     return '
         <div class="cart_item">
-            <img class="cart_image" alt="' . strtoupper($product->name) .'" src="' . $product->image . '">
+            <img class="cart_image" alt="' . strtoupper($product->name) .'" src="' . $item->image . '">
+            <form method="POST" action="/api/remove_from_cart.php">
+                <input type="hidden" name="item_id" value="'. $item->id .'">
+                <input type="hidden" name="quantity" value="'. $cart_item->quantity .'">
+                <input type="submit" value="Rimuovi">
+            </form>
             <p class="cart_info" style="top: 10%;">Name: <b>' . $product->name . '</b></p>
             <p class="cart_info" style="top: 22.5%;">Brand: <b>' . $product->brand . '</b></p>
             <p class="cart_info" style="top: 35%;">N. of stocks: <b>' . $cart_item->quantity . '</b></p>

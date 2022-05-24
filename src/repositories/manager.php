@@ -57,7 +57,7 @@ class DbManager
         throw new MissingColumnError();
     }
 
-    function get_first_element(array $list): ?object
+    function get_first_element(array $list): object|array|null
     {
         if (count($list)) {
             return $list[array_key_first($list)];

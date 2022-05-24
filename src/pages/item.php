@@ -45,7 +45,7 @@ $product = $item->product;
     <body>
         <?php echo(show_lateral_menu("Item", "user")); ?>
         <div class="body_main">
-            <img class="order_image" alt="<?php echo strtoupper($product->name); ?>" src="<?php echo $product->image; ?>">
+            <img class="order_image" alt="<?php echo strtoupper($product->name); ?>" src="<?php echo $item->image; ?>">
             <p class="order_info" style="top: 12%;">Name: <b> <?php echo $product->name; ?> </b></p>
             <p class="order_info" style="top: 20%;">Brand: <b> <?php echo $product->brand; ?> </b></p>
             <p class="order_info" style="top: 28%;">Stock price: <b> €<?php echo ($product->price * $item->quantity); ?> </b></p>

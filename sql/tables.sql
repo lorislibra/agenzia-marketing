@@ -116,23 +116,15 @@ FOREIGN KEY (item_id) REFERENCES item(id);
 /* -------------------------------------------------------------- */
 
 INSERT INTO product (sku, brand, category, name, image, price) VALUES 
-("PRN1", "Peroni", "Bevanda", "Peroni", "https://peroni.it/wp-content/uploads/2019/09/peroni-33-feat.jpg", 1.5),
-("PRC1", "Peroni", "Bevanda", "Peroni cruda", "https://peroni.it/wp-content/uploads/2021/04/peroni-cruda-33-feat.jpg", 1.4),
-("PCL1", "Peroni", "Bevanda", "Peroni chill lemon", "https://peroni.it/wp-content/uploads/2019/09/peroni-chill-lemon-feat.jpg", 1.6),
-("PSG1", "Peroni", "Bevanda", "Peroni senza glutine", "https://peroni.it/wp-content/uploads/2019/09/peroni-senza-glutine-feat.jpg", 1.3),
-("PRB1", "Peroni", "Bevanda", "Peroni gr bianca", "https://peroni.it/wp-content/uploads/2021/04/pgr-bianca-feat.jpg", 1.7),
-("PRD1", "Peroni", "Bevanda", "Peroni gr doppio malto", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-doppio-malto-feat.jpg", 1.8),
-("PRR1", "Peroni", "Bevanda", "Peroni gr rossa", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-rossa-feat.jpg", 2.1),
-("PRM1", "Peroni", "Bevanda", "Peroni gr puro malto", "https://peroni.it/wp-content/uploads/2019/09/peroni-gran-riserva-puro-malto-feat.jpg", 1.2),
-("PNC1", "Peroni", "Bevanda", "Peroncino", "https://peroni.it/wp-content/uploads/2019/10/454x626__cGFVLpn.jpg", 3.0);
+("BF1", "Follina", "Birra", "Birra follina", "", 1.50),
+("ICN1", "Ichnusa", "Birra", "Birra Ichnusa", "", 1.30),
+("TN1", "Tennents", "Birra", "Birra Tennents", "", 1),
+("BLL1", "Bellazzi", "Birra", "Birra Bellazzi", "", 2.5),
+("WL1", "Weili", "Birra", "Birra Weili", "", 1.8);
 
-INSERT INTO item (id, product_sku, quantity, stock, image, category) VALUES 
-(1, "PRN1", 30, 100, "", "cartonato"),
-(2, "PRC1", 29, 101, "", "cartonato"),
-(3, "PCL1", 31, 99, "", "cartonato"),
-(4, "PSG1", 28, 102, "", "cartonato"),
-(5, "PRB1", 32, 98, "", "cartonato"),
-(6, "PRD1", 27, 103, "", "cartonato"),
-(7, "PRR1", 33, 97, "", "cartonato"),
-(8, "PRM1", 26, 104, "", "cartonato"),
-(9, "PNC1", 34, 96, "", "cartonato");
+INSERT INTO item (product_sku, quantity, stock, category, image) VALUES 
+("BF1", 9, 20, "cartonato", "https://www.birrafollina-shoponline.it/wp-content/uploads/2020/05/birra-follina-espositore-9-bottiglie.jpg"),
+("ICN1", 60, 4, "legno", "https://www.reclametotale.com/upload/documenti/5/51/_thumbs/design-515.jpg"),
+("TN1", 160, 6, "cartonato", "https://www.espositoritalia.it/wp-content/uploads/2021/02/espositore_in_cartot.jpg" ),
+("BLL1", 10, 20, "cartonato", "https://solutiongroup.it/wp-content/uploads/2021/01/vino.png"),
+("WL1", 7, 15, "frighetto", "https://sc04.alicdn.com/kf/HTB19oTNk25TBuNjSspmq6yDRVXau.jpg");

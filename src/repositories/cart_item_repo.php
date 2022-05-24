@@ -57,7 +57,11 @@ class CartItemRepo extends DbManager
 
         if ($stmt->execute(["user_id" => $user_id, "item_id" => $item_id])) {
             $items = $this->parse_fetch($stmt);
-            return $this->get_first_element($items);
+            $item = $this->get_first_element($items);
+            if ($item) {
+                $item = $this->get_first_element($item);
+            }
+            return $item;
         }
 
         return null;

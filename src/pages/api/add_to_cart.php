@@ -23,7 +23,7 @@ $connection = DbManager::build_connection_from_env();
 
 try {
     add_cart_item_tx($connection, $user->id, $dto);
-} catch (Exception $e) {
+} catch (Error $e) {
     $session->add_error("cart", $e->getMessage());
 }
 
