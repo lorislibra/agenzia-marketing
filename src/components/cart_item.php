@@ -21,16 +21,16 @@ function show_cart_item(CartItem $cart_item){
     return '
         <div class="cart_item">
             <img class="cart_image" alt="' . strtoupper($product->name) .'" src="' . $item->image . '">
-            <form method="POST" action="/api/remove_from_cart.php">
-                <input type="hidden" name="item_id" value="'. $item->id .'">
-                <input type="hidden" name="quantity" value="'. $cart_item->quantity .'">
-                <input type="submit" value="Rimuovi">
-            </form>
             <p class="cart_info" style="top: 10%;">Name: <b>' . $product->name . '</b></p>
             <p class="cart_info" style="top: 22.5%;">Brand: <b>' . $product->brand . '</b></p>
             <p class="cart_info" style="top: 35%;">N. of stocks: <b>' . $cart_item->quantity . '</b></p>
             <p class="cart_info" style="top: 47.5%;">Prod. per stock: <b>' . $item->quantity . '</b></p>
             <p class="cart_info" style="top: 60%;">Cost: <b>€' . number_format($cart_item->quantity * $item->quantity * $product->price, 2) . '</b></p>
+            <form method="POST" action="/api/remove_from_cart.php">
+                <input type="hidden" name="item_id" value="'. $item->id .'">
+                <input type="hidden" name="quantity" value="'. $cart_item->quantity .'">
+                <input class="cart_order_button" style="position: absolute; left: 60%; bottom: 2%; padding: 10px; border-radius: 10px; transform: translateX(-50%);" type="submit" value="REMOVE">
+            </form>
         </div>
     ';
 }
